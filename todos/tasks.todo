@@ -1,0 +1,10 @@
+Vehicles:
+    ☐ Cannot the direction of the given route
+    ☐ Must have 3 different velocities
+    ☐ Must respect safety distance
+    ☐ Must detect other vehicles
+    ☐ Physics to leave the intersection:
+        -> time
+        -> distance
+        -> velocity
+
