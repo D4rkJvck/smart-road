@@ -8,9 +8,9 @@ const TITLE: &str = "SMART-ROAD";
 const WIDTH: u32 = 900;
 const HEIGHT: u32 = 900;
 
-macro_rules! generate {
-    () => {};
-}
+// macro_rules! generate {
+//     () => {};
+// }
 
 pub struct App {
     interface: Interface,
@@ -22,6 +22,7 @@ impl App {
     }
 
     pub fn run(&mut self) -> Result<(), String> {
-        self.interface.render()
+        self.interface.render()?;
+        self.interface.listen()
     }
 }

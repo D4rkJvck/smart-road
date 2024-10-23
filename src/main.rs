@@ -11,7 +11,7 @@ fn main() -> Result<(), String> {
 
     loop {
         if let Err(err) = app.run() {
-            dbg!(err);
+            println!("{}", err);
             process::exit(0)
         }
     }

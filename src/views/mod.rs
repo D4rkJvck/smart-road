@@ -1,4 +1,5 @@
 mod render;
+mod event;
 
 use crate::{HEIGHT, TITLE, WIDTH};
 use sdl2::{render::Canvas, video::Window, EventPump};
