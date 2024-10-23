@@ -8,3 +8,23 @@ Vehicles:
         -> distance
         -> velocity
 
+Commands:
+    ☐ `Up` -> Generate vehicle from South to North
+    ☐ `Down` -> Generate vehicle from North to South
+    ☐ `Right` -> Generate vehicle from West to East
+    ☐ `Left` -> Generate vehicle from East to West
+    ☐ `R` -> Continually generate random vehicle
+    ☐ `Esc` -> Finish the simulation and generate statistics
+
+Statistics:
+    ☐ Max number of vehicles
+    ☐ Fastest speed achieved
+    ☐ Slowest speed reached
+    ☐ Vehicle that took more time to pass the intersection
+    ☐ Vehicle that took less time to pass the intersection
+    ☐ Safety distance violation frequency
+        
+Bonus:
+    ☐ Create your own assets for the animation of the vehicles
+    ☐ Add more statistics
+    ☐ Consider acceleration and deceleration
