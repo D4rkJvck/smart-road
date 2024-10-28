@@ -10,6 +10,8 @@ impl Window {
         self.canvas.set_draw_color(Color::BLACK);
         self.canvas.clear();
 
+        
+
         self.canvas.present();
         thread::sleep(Duration::from_millis(16));
 
