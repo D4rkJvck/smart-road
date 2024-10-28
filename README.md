@@ -1,5 +1,5 @@
 <h1 align=center >
-  <img alt="Rust" src="./assets/rust.svg">
+  <img alt="Rust" src="./assets/ferris.svg">
   <br>
   smart-road
 </h1>
@@ -163,6 +163,14 @@ To open a new window, run the program.
 
 ```rust
 $ cargo run
+   Compiling bitflags v1.3.2
+   Compiling lazy_static v1.5.0
+   Compiling libc v0.2.161
+   Compiling sdl2-sys v0.37.0
+   Compiling sdl2 v0.37.0
+   Compiling smart-road v0.1.0 (/home/student/smart-road)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.20s
+     Running `target/debug/smart-road`
 ```
 
 ## Contributors
