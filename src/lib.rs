@@ -1,8 +1,8 @@
-use views::Interface;
+mod controllers;
+mod models;
+mod views;
 
-pub mod controllers;
-pub mod models;
-pub mod views;
+pub use controllers::App;
 
 const TITLE: &str = "SMART-ROAD";
 const WIDTH: u32 = 900;
@@ -12,17 +12,3 @@ const HEIGHT: u32 = 900;
 //     () => {};
 // }
 
-pub struct App {
-    interface: Interface,
-}
-
-impl App {
-    pub fn new(interface: Interface) -> Result<Self, String> {
-        Ok(Self { interface })
-    }
-
-    pub fn run(&mut self) -> Result<(), String> {
-        self.interface.render()?;
-        self.interface.listen()
-    }
-}

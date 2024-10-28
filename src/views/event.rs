@@ -3,9 +3,9 @@ use sdl2::{
     keyboard::Keycode,
 };
 
-use super::Interface;
+use super::Window;
 
-impl Interface {
+impl Window {
     pub fn listen(&mut self) -> Result<(), String> {
         let events = self.event_pump.poll_iter();
 

@@ -1,4 +1,4 @@
-use smart_road::{views::Interface, App};
+use smart_road::App;
 use std::process;
 
 /// As usual, make sure to minimize
@@ -7,7 +7,7 @@ use std::process;
 /// run the program and exit it when
 /// needed.
 fn main() -> Result<(), String> {
-    let mut app = App::new(Interface::new()?)?;
+    let mut app = App::new()?;
 
     loop {
         if let Err(err) = app.run() {

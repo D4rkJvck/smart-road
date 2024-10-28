@@ -1,8 +1,8 @@
-use super::Interface;
+use super::Window;
 use sdl2::pixels::Color;
 use std::{thread, time::Duration};
 
-impl Interface {
+impl Window {
     /// This function is responsible for rendering
     /// everything that has been drawn on the canvas
     /// by calling the concerned drawing functions.
