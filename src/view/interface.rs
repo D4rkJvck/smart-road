@@ -5,12 +5,12 @@ use sdl2::{render::Canvas, video, EventPump};
 /// and the program.
 /// Holds all the necessary tools
 /// to interact with the user.
-pub struct Window {
+pub struct Interface {
     pub(super) canvas: Canvas<video::Window>,
     pub(super) event_pump: EventPump,
 }
 
-impl Window {
+impl Interface {
     /// This method holds all the logic around the `SDL` implementation.
     /// It initializes the "context" that will be then used to create
     /// a new "window" given a `title` and `dimensions`.

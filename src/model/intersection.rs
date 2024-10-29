@@ -12,7 +12,7 @@ pub struct Intersection {
 
 impl Intersection {
     pub fn new() -> Self {
-        Intersection {
+        Self {
             area: Rect::new(0, 0, 0, 0),
             vehicle_count: 0,
             max_speed: 0,

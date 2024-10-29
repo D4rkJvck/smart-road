@@ -1,5 +1,5 @@
 <h1 align=center >
-  <img alt="Rust" src="./assets/ferris.svg">
+  <img alt="Ferris" src="./assets/ferris.svg">
   <br>
   smart-road
 </h1>
@@ -64,33 +64,70 @@ $ code .
 ```
 
 ### File Structure
+    .
+    |
+    +-- assets/
+    |       |
+    |       +-- ferris.svg
+    |
+    |
+    +----- src/
+    |       |
+    |       +-- controllers/
+    |       |       |
+    |       |       +-- app.rs
+    |       |       |
+    |       |       +-- mod.rs
+    |       |
+    |       |
+    |       +-- models/
+    |       |       |
+    |       |       +-- intersection.rs
+    |       |       |
+    |       |       +-- mod.rs
+    |       |       |
+    |       |       +-- road.rs
+    |       |       |
+    |       |       +-- vehicle.rs
+    |       |
+    |       |
+    |       +--- views/
+    |       |       |
+    |       |       +-- event.rs
+    |       |       |
+    |       |       +-- interface.rs
+    |       |       |
+    |       |       +-- mod.rs
+    |       |       |
+    |       |       +-- render.rs
+    |       |
+    |       |
+    |       +-- lib.rs
+    |       |
+    |       +-- macros.rs
+    |       |
+    |       +-- main.rs
+    |
+    |
+    +--- todos/
+    |       |
+    |       +-- audit.todo
+    |       |
+    |       +-- tasks.todo
+    |
+    |
+    +-- .gitignore
+    |
+    +-- Cargo.lock
+    |
+    +-- Cargo.toml
+    |
+    +-- gitify.sh
+    |
+    +-- LICENSE
+    |
+    +-- README.md
 
-    smart-road/
-    ├── src/
-    ├── Cargo.toml
-    │   ├── main.rs
-    │   ├── lib.rs
-    │   ├── assets/
-    │   │   ├── vehicles/
-    │   │   ├── roads/
-    │   │   └── animations/
-    │   ├── intersection/
-    │   │   ├── mod.rs
-    │   │   ├── intersection.rs
-    │   │   └── traffic_strategy.rs
-    │   ├── vehicles/
-    │   │   ├── mod.rs
-    │   │   ├── vehicle.rs
-    │   │   └── physics.rs
-    │   ├── simulation/
-    │   │   ├── mod.rs
-    │   │   ├── simulator.rs
-    │   │   └── commands.rs
-    │   ├── statistics/
-    │       ├── mod.rs
-    │       └── stats.rs
-    └── assets/
-    
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 
 ### SDL2 Library
