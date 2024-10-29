@@ -1,4 +1,4 @@
-use crate::model::{Road, Vehicle};
+use crate::models::{Road, Vehicle};
 
 use super::Interface;
 use sdl2::pixels::Color;

@@ -1,5 +1,5 @@
 use crate::{
-    model::{Road, Vehicle},
+    models::{Road, Vehicle},
     view::Interface,
 };
 
@@ -21,7 +21,7 @@ impl App {
     pub fn run(&mut self) -> Result<(), String> {
         self.update()?;
         self.window.render(&self.road, &self.vehicles)?;
-        self.window.listen()
+        self.window.listen(&mut self.vehicles)
     }
 
     fn update(&mut self) -> Result<(), String> {

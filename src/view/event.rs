@@ -1,12 +1,16 @@
+use super::Interface;
+use crate::{
+    add_vehicle,
+    models::{Direction, Road},
+    Vehicle,
+};
 use sdl2::{
     event::Event::{KeyDown, Quit},
     keyboard::Keycode,
 };
 
-use super::Interface;
-
 impl Interface {
-    pub fn listen(&mut self) -> Result<(), String> {
+    pub fn listen(&mut self, vehicles: &mut Vec<Vehicle>) -> Result<(), String> {
         let events = self.event_pump.poll_iter();
 
         for event in events {
@@ -16,6 +20,19 @@ impl Interface {
                     keycode: Some(Keycode::ESCAPE),
                     ..
                 } => return Err("Exiting...".to_string()),
+
+                // Generate a vehicle from South to North
+                KeyDown {
+                    keycode: Some(Keycode::UP),
+                    ..
+                } => vehicles.push(add_vehicle!(Direction::North)),
+
+                // Generate a vehicle from random direction
+                KeyDown {
+                    keycode: Some(Keycode::R),
+                    ..
+                } => vehicles.push(add_vehicle!()),
+                
                 _ => {}
             }
         }
