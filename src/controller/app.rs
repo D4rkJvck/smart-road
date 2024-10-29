@@ -25,6 +25,8 @@ impl App {
     }
 
     fn update(&mut self) -> Result<(), String> {
+        self.vehicles.iter_mut().for_each(|vehicle| vehicle.drive());
+
         Ok(())
     }
 }
