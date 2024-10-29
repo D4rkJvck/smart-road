@@ -2,9 +2,9 @@
 macro_rules! import {
     () => {
         use crate::{
-            Direction::*,
-            Route::{self, *},
-            Vehicle, GAP, HEIGHT, MID_WIDTH,
+            Route,
+            Vehicle,
+            utils,
         };
     };
 }
@@ -17,10 +17,7 @@ macro_rules! add_vehicle {
         let direction = Direction::random();
         let route = Route::random();
 
-        let (x, y) = match (&direction, &route) {
-            (North, Right) => (MID_WIDTH + GAP * 2 + 5, HEIGHT - 45),
-            _ => (0, 0),
-        };
+        let (x, y) = utils::position(&direction, &route);
 
         Vehicle::new(x as i32, y as i32, direction, route)
     }};
@@ -30,10 +27,7 @@ macro_rules! add_vehicle {
 
         let route = Route::random();
 
-        let (x, y) = match (&$direction, &route) {
-            (North, Right) => (MID_WIDTH + GAP * 2 + 5, HEIGHT - 45),
-            _ => (0, 0),
-        };
+        let (x, y) = utils::position(&$direction, &route);
 
         Vehicle::new(x as i32, y as i32, $direction, route)
     }};

@@ -4,9 +4,11 @@ mod view;
 
 #[macro_use]
 mod macros;
+mod utils;
 
 pub use controller::App;
 pub use models::{Direction, Route, Vehicle};
+pub use utils::*;
 
 const TITLE: &str = "SMART-ROAD";
 const WIDTH: u32 = 800;
