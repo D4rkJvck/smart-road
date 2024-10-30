@@ -1,7 +1,8 @@
 use rand::{thread_rng, Rng};
 use sdl2::rect::Rect;
+use std::time::Instant;
 
-use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{HEIGHT, VEHICLE_HEIGHT, VEHICLE_WIDTH, WIDTH};
 
 enum Speed {
     Stop,
@@ -58,6 +59,8 @@ pub struct Vehicle {
     speed: Speed,
     direction: Direction,
     route: Route,
+    texture: String,
+    // time_interval: (u64, u64),
     // sensor_range: Rect,
 }
 
@@ -68,14 +71,33 @@ impl Vehicle {
             speed: Speed::Fast,
             direction,
             route,
-            // sensor_range,
+            texture: String::from("./assets/red_car.png"),
+            // time_interval: (0, 0),
+            // sensor_range: Rect::new(0, 0, 10, 10)
         }
     }
 
+    /// This is the function
+    /// responsible for the
+    /// translation by
+    /// updating the position.
     pub fn drive(&mut self) {
         match (&self.direction, &self.speed, &self.route) {
             (Direction::North, Speed::Fast, Route::Straight) => self.area.y -= 3,
             _ => {}
         };
+    }
+
+    pub fn moving(&mut self) {}
+
+    /// This function is crucial when
+    /// it comes to remove vehicule
+    /// as it confirm that the vehicle is
+    /// out of the window...
+    pub fn is_visible(&self) -> bool {
+        self.area.top() < HEIGHT as i32
+            && self.area.left() < WIDTH as i32
+            && self.area.right() > 0
+            && self.area.bottom() > 0
     }
 }

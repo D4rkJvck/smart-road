@@ -21,7 +21,7 @@ impl Interface {
 
         // Charger la texture du véhicule depuis un fichier PNG
         let texture_creator = self.canvas.texture_creator();
-        let vehicle_texture = texture_creator.load_texture("./assets/cars.png")?;
+        let vehicle_texture = texture_creator.load_texture("./assets/red_car.png")?;
 
         // Facteur de mise à l'échelle
         let scale_factor = 0.5; // Réduire la taille à 50%
