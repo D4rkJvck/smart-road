@@ -10,7 +10,7 @@ pub struct Vehicle {
     speed: Speed,
     direction: Direction,
     route: Route,
-    pub texture: String,
+    pub img_path: String,
     // time: ?,
     // distance: ?,
     // velocity: ?,
@@ -24,7 +24,7 @@ impl Vehicle {
             speed: Speed::Fast,
             direction,
             route,
-            texture: String::from("./assets/red_car.png"),
+            img_path: String::from("./assets/red_car.png"),
             // time: (0, 0),
             // sensor_range: Rect::new(0, 0, 10, 10)
         }
@@ -67,6 +67,15 @@ impl Vehicle {
             Speed::Medium => 2,
             Speed::Slow => 1,
             Speed::Stop => 0,
+        }
+    }
+
+    pub fn angle(&self) -> f64 {
+        match self.direction {
+            Direction::North => 0.0,
+            Direction::East => 90.0,
+            Direction::South => 180.0,
+            Direction::West => 270.0,
         }
     }
 
