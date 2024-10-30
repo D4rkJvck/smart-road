@@ -1,4 +1,8 @@
-use crate::{Direction::{self, *}, Route::{self, *}, GAP, HEIGHT, MID_HEIGHT, MID_WIDTH, WIDTH};
+use crate::{
+    Direction::{self, *},
+    Route::{self, *},
+    GAP, HEIGHT, MID_HEIGHT, MID_WIDTH, WIDTH,
+};
 
 pub fn initial_position(direction: &Direction, route: &Route) -> (u32, u32) {
     match (&direction, &route) {

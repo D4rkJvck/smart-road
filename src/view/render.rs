@@ -1,7 +1,7 @@
-use crate::models::{Road, Vehicle};
 use super::Interface;
-use sdl2::pixels::Color;
+use crate::models::{Road, Vehicle};
 use sdl2::image::LoadTexture; // Import pour permettre le chargement des textures
+use sdl2::pixels::Color;
 use std::{thread, time::Duration};
 
 impl Interface {

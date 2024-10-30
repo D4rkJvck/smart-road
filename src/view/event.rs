@@ -1,9 +1,5 @@
 use super::Interface;
-use crate::{
-    add_vehicle,
-    models::{Direction, Road},
-    Vehicle,
-};
+use crate::{add_vehicle, models::Direction, Vehicle};
 use sdl2::{
     event::Event::{KeyDown, Quit},
     keyboard::Keycode,
@@ -20,42 +16,32 @@ impl Interface {
                     keycode: Some(Keycode::ESCAPE),
                     ..
                 } => return Err("Exiting...".to_string()),
-
-                // Generate a vehicle
-                // from South to North
+                //_________________________________________
                 KeyDown {
                     keycode: Some(Keycode::UP),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::North)),
-
-                // Generate a vehicle
-                // from North to South
+                //__________________________________________________
                 KeyDown {
                     keycode: Some(Keycode::DOWN),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::South)),
-
-                // Generate a vehicle
-                // from West to East
+                //__________________________________________________
                 KeyDown {
                     keycode: Some(Keycode::RIGHT),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::East)),
-
-                // Generate a vehicle
-                // from East to West
+                //__________________________________________________
                 KeyDown {
                     keycode: Some(Keycode::LEFT),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::West)),
-
-                // Generate a vehicle
-                // from random direction
+                //__________________________________________________
                 KeyDown {
                     keycode: Some(Keycode::R),
                     ..
                 } => vehicles.push(add_vehicle!()),
-
+                //__________________________________
                 _ => {}
             }
         }

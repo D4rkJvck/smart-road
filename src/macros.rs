@@ -1,11 +1,7 @@
 #[macro_export]
 macro_rules! import {
     () => {
-        use crate::{
-            Route,
-            Vehicle,
-            utils::initial_position,
-        };
+        use crate::{utils::initial_position, Route, Vehicle};
     };
 }
 
@@ -26,7 +22,7 @@ macro_rules! add_vehicle {
 
         let route = Route::random();
         let (x, y) = initial_position(&$direction, &route);
-        
+
         Vehicle::new(x as i32, y as i32, $direction, route)
     }};
 }

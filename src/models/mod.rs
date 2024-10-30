@@ -1,7 +1,7 @@
-mod road;
 mod intersection;
+mod road;
 mod vehicle;
 
-pub use road::Road;
 pub(self) use intersection::Intersection;
-pub use vehicle::{Vehicle, Direction, Route};
+pub use road::Road;
+pub use vehicle::{Direction, Route, Vehicle};

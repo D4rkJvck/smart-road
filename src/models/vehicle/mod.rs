@@ -46,9 +46,7 @@ impl Vehicle {
         }
     }
 
-    fn navigate(&mut self) {
-        
-    }
+    fn navigate(&mut self) {}
 
     fn movement(&mut self) {
         match &self.direction {

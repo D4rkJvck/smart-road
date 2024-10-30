@@ -2,14 +2,18 @@ mod event;
 mod render;
 
 use crate::{HEIGHT, TITLE, WIDTH};
-use sdl2::{render::{Canvas, TextureCreator}, video::{self, Window, WindowContext}, EventPump};
+use sdl2::{
+    render::{Canvas, TextureCreator},
+    video::{Window, WindowContext},
+    EventPump,
+};
 
 /// The Interface between the user
 /// and the program.
 /// Holds all the necessary tools
 /// to interact with the user.
 pub struct Interface {
-    pub(super) canvas: Canvas<video::Window>,
+    pub(super) canvas: Canvas<Window>,
     pub(super) texture_creator: TextureCreator<WindowContext>,
     pub(super) event_pump: EventPump,
 }
@@ -45,6 +49,10 @@ impl Interface {
             .event_pump()
             .unwrap();
 
-        Ok(Self { canvas, texture_creator, event_pump })
+        Ok(Self {
+            canvas,
+            texture_creator,
+            event_pump,
+        })
     }
 }
