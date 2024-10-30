@@ -7,13 +7,13 @@ use crate::{
 pub fn initial_position(direction: &Direction, route: &Route) -> (u32, u32) {
     match (&direction, &route) {
         //
-        (North, Right) => (MID_WIDTH + GAP * 2 + 10, HEIGHT - 85),
-        (North, Straight) => (MID_WIDTH + GAP + 10, HEIGHT - 85),
-        (North, Left) => (MID_WIDTH + 10, HEIGHT - 85),
+        (North, Right) => (MID_WIDTH + GAP * 2 + 5, HEIGHT - 85),
+        (North, Straight) => (MID_WIDTH + GAP + 5, HEIGHT - 85),
+        (North, Left) => (MID_WIDTH + 5, HEIGHT - 85),
         //
-        (South, Right) => (MID_WIDTH - GAP * 2 - 40, 5),
-        (South, Straight) => (MID_WIDTH - GAP - 40, 5),
-        (South, Left) => (MID_WIDTH - 40, 5),
+        (South, Right) => (MID_WIDTH - GAP * 2 - 45, 5),
+        (South, Straight) => (MID_WIDTH - GAP - 45, 5),
+        (South, Left) => (MID_WIDTH - 45, 5),
         //
         (East, Right) => (5, MID_HEIGHT + GAP * 2 + 5),
         (East, Straight) => (5, MID_HEIGHT + GAP + 5),

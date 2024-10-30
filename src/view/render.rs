@@ -22,8 +22,8 @@ impl Interface {
         // Dessiner chaque véhicule en vert et appliquer la texture du véhicule
         self.canvas.set_draw_color(Color::GREEN);
         for vehicle in vehicles {
-            // self.canvas.draw_rect(vehicle.area)?;
-            let vehicle_texture = self.texture_creator.load_texture(&vehicle.img_path)?;
+            self.canvas.draw_rect(vehicle.area)?;
+            let vehicle_texture = self.texture_creator.load_texture(vehicle.img_path)?;
             self.canvas.copy_ex(
                 &vehicle_texture,
                 None,

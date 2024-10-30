@@ -1,5 +1,6 @@
 use sdl2::rect::Rect;
 
+#[derive(Clone, Copy)]
 pub struct Intersection {
     area: Rect,
     vehicle_count: u32,
