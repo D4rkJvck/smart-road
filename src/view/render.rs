@@ -13,13 +13,14 @@ impl Interface {
         self.canvas.set_draw_color(Color::BLACK);
         self.canvas.clear();
 
-        // Dessiner les lignes de la route en blanc
         self.canvas.set_draw_color(Color::WHITE);
         for line in &road.lines {
             self.canvas.draw_line(line.start, line.end)?;
         }
 
-        // Dessiner chaque véhicule en vert et appliquer la texture du véhicule
+        // self.canvas.set_draw_color(Color::BLACK);
+        // self.canvas.fill_rect(road.intersection.area)?;
+
         self.canvas.set_draw_color(Color::GREEN);
         for vehicle in vehicles {
             self.canvas.draw_rect(vehicle.area)?;
@@ -35,7 +36,6 @@ impl Interface {
             )?;
         }
 
-        // Afficher le canvas sur l'écran
         self.canvas.present();
         thread::sleep(Duration::from_millis(16));
 

@@ -1,8 +1,10 @@
 use sdl2::rect::Rect;
 
+use crate::{GAP, MID_HEIGHT, MID_WIDTH};
+
 #[derive(Clone, Copy)]
 pub struct Intersection {
-    area: Rect,
+    pub area: Rect,
     vehicle_count: u32,
     max_speed: u32,
     min_speed: u32,
@@ -14,7 +16,12 @@ pub struct Intersection {
 impl Intersection {
     pub fn new() -> Self {
         Self {
-            area: Rect::new(0, 0, 0, 0),
+            area: Rect::new(
+                (MID_WIDTH - GAP * 3) as i32,
+                (MID_HEIGHT - GAP * 3) as i32,
+                GAP * 6 + 1,
+                GAP * 6 + 1,
+            ),
             vehicle_count: 0,
             max_speed: 0,
             min_speed: 0,
