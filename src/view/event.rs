@@ -21,19 +21,36 @@ impl Interface {
                     ..
                 } => return Err("Exiting...".to_string()),
 
-                // Generate a vehicle from South to North
+                // Generate a vehicle
+                // from South to North
                 KeyDown {
                     keycode: Some(Keycode::UP),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::North)),
 
-                // Generate a vehicle from North to South
+                // Generate a vehicle
+                // from North to South
                 KeyDown {
                     keycode: Some(Keycode::DOWN),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::South)),
 
-                // Generate a vehicle from random direction
+                // Generate a vehicle
+                // from West to East
+                KeyDown {
+                    keycode: Some(Keycode::RIGHT),
+                    ..
+                } => vehicles.push(add_vehicle!(Direction::East)),
+
+                // Generate a vehicle
+                // from East to West
+                KeyDown {
+                    keycode: Some(Keycode::LEFT),
+                    ..
+                } => vehicles.push(add_vehicle!(Direction::West)),
+
+                // Generate a vehicle
+                // from random direction
                 KeyDown {
                     keycode: Some(Keycode::R),
                     ..

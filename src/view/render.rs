@@ -19,14 +19,11 @@ impl Interface {
             self.canvas.draw_line(line.start, line.end)?;
         }
 
-        // Charger la texture du véhicule depuis un fichier PNG
-        let texture_creator = self.canvas.texture_creator();
-                
         // Dessiner chaque véhicule en vert et appliquer la texture du véhicule
         self.canvas.set_draw_color(Color::GREEN);
         for vehicle in vehicles {
             // self.canvas.draw_rect(vehicle.area)?;
-            let vehicle_texture = texture_creator.load_texture(&vehicle.texture)?;
+            let vehicle_texture = self.texture_creator.load_texture(&vehicle.texture)?;
             self.canvas.copy(&vehicle_texture, None, vehicle.area)?;
         }
 
