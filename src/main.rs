@@ -7,11 +7,9 @@ use std::process;
 /// run the program and exit it when
 /// needed.
 fn main() -> Result<(), String> {
-    let mut app = App::new()?;
-
     loop {
-        if let Err(err) = app.run() {
-            println!("{}", err);
+        if let Err(msg) = App::new()?.run() {
+            println!("{}", msg);
             process::exit(0)
         }
     }

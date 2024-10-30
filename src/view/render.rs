@@ -5,9 +5,9 @@ use sdl2::image::LoadTexture; // Import pour permettre le chargement des texture
 use std::{thread, time::Duration};
 
 impl Interface {
-    /// Cette fonction est responsable de rendre
-    /// tout ce qui a été dessiné sur le canvas
-    /// en appelant les fonctions de dessin concernées.
+    /// This function is responsible for rendering
+    /// everything that has been drawn on the canvas
+    /// by calling the concerned drawing functions.
     pub fn render(&mut self, road: &Road, vehicles: &Vec<Vehicle>) -> Result<(), String> {
         // Effacer le canvas avec une couleur de fond noire
         self.canvas.set_draw_color(Color::BLACK);

@@ -4,7 +4,7 @@ macro_rules! import {
         use crate::{
             Route,
             Vehicle,
-            utils,
+            utils::initial_position,
         };
     };
 }
@@ -16,8 +16,7 @@ macro_rules! add_vehicle {
 
         let direction = Direction::random();
         let route = Route::random();
-
-        let (x, y) = utils::position(&direction, &route);
+        let (x, y) = initial_position(&direction, &route);
 
         Vehicle::new(x as i32, y as i32, direction, route)
     }};
@@ -26,9 +25,8 @@ macro_rules! add_vehicle {
         crate::import!();
 
         let route = Route::random();
-
-        let (x, y) = utils::position(&$direction, &route);
-
+        let (x, y) = initial_position(&$direction, &route);
+        
         Vehicle::new(x as i32, y as i32, $direction, route)
     }};
 }

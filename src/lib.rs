@@ -18,4 +18,4 @@ const MID_HEIGHT: u32 = HEIGHT / 2;
 const GAP: u32 = 50;
 const VEHICLE_WIDTH: u32 = 40;
 const VEHICLE_HEIGHT: u32 = 80;
-const SAFETY_DISTANCE: u32 = 100;
+// const SAFETY_DISTANCE: u32 = 100;
