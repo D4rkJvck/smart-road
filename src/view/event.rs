@@ -27,12 +27,18 @@ impl Interface {
                     ..
                 } => vehicles.push(add_vehicle!(Direction::North)),
 
+                // Generate a vehicle from North to South
+                KeyDown {
+                    keycode: Some(Keycode::DOWN),
+                    ..
+                } => vehicles.push(add_vehicle!(Direction::South)),
+
                 // Generate a vehicle from random direction
                 KeyDown {
                     keycode: Some(Keycode::R),
                     ..
                 } => vehicles.push(add_vehicle!()),
-                
+
                 _ => {}
             }
         }

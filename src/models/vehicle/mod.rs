@@ -1,65 +1,16 @@
-use rand::{thread_rng, Rng};
-use sdl2::rect::Rect;
-use std::time::Instant;
+mod navigation;
+
+pub use navigation::*;
 
 use crate::{HEIGHT, VEHICLE_HEIGHT, VEHICLE_WIDTH, WIDTH};
-
-enum Speed {
-    Stop,
-    Slow,
-    Medium,
-    Fast,
-}
-
-//________________________________________________________________
-//
-
-pub enum Route {
-    Right,
-    Left,
-    Straight,
-}
-
-impl Route {
-    pub fn random() -> Self {
-        match thread_rng().gen_range(0..3) {
-            0 => Self::Left,
-            1 => Self::Straight,
-            _ => Self::Right,
-        }
-    }
-}
-
-//________________________________________________________________
-//
-
-pub enum Direction {
-    North,
-    South,
-    East,
-    West,
-}
-
-impl Direction {
-    pub fn random() -> Self {
-        match thread_rng().gen_range(0..4) {
-            0 => Self::North,
-            1 => Self::South,
-            2 => Self::East,
-            _ => Self::West,
-        }
-    }
-}
-
-//________________________________________________________________
-//
+use sdl2::rect::Rect;
 
 pub struct Vehicle {
     pub area: Rect,
     speed: Speed,
     direction: Direction,
     route: Route,
-    texture: String,
+    pub texture: String,
     // time_interval: (u64, u64),
     // sensor_range: Rect,
 }
@@ -82,13 +33,25 @@ impl Vehicle {
     /// translation by
     /// updating the position.
     pub fn drive(&mut self) {
+        use Direction::*;
+        use Route::*;
+        use Speed::*;
+
         match (&self.direction, &self.speed, &self.route) {
-            (Direction::North, Speed::Fast, Route::Straight) => self.area.y -= 3,
+            (North, Fast, Straight) => self.area.y -= 3,
+            (North, Fast, Right) => self.area.y -= 3,
             _ => {}
         };
     }
 
     pub fn moving(&mut self) {}
+
+    // pub fn ajust_speed(&mut self) {
+    //     match true {
+    //         self.is_near_intersection() =>
+    //         _ => {}
+    //     }
+    // }
 
     /// This function is crucial when
     /// it comes to remove vehicule

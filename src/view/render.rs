@@ -21,26 +21,13 @@ impl Interface {
 
         // Charger la texture du véhicule depuis un fichier PNG
         let texture_creator = self.canvas.texture_creator();
-        let vehicle_texture = texture_creator.load_texture("./assets/red_car.png")?;
-
-        // Facteur de mise à l'échelle
-        let scale_factor = 0.5; // Réduire la taille à 50%
-
+                
         // Dessiner chaque véhicule en vert et appliquer la texture du véhicule
         self.canvas.set_draw_color(Color::GREEN);
         for vehicle in vehicles {
-            self.canvas.draw_rect(vehicle.area)?;
-
-            // Calculer le rectangle de destination avec la taille réduite
-            let scaled_area = sdl2::rect::Rect::new(
-                vehicle.area.x + 5,
-                vehicle.area.y + 15,
-                (vehicle.area.width() as f32 * scale_factor) as u32 + 10,
-                (vehicle.area.height() as f32 * scale_factor) as u32,
-            );
-
-            // Appliquer la texture à la zone redimensionnée
-            self.canvas.copy(&vehicle_texture, None, scaled_area)?;
+            // self.canvas.draw_rect(vehicle.area)?;
+            let vehicle_texture = texture_creator.load_texture(&vehicle.texture)?;
+            self.canvas.copy(&vehicle_texture, None, vehicle.area)?;
         }
 
         // Afficher le canvas sur l'écran
