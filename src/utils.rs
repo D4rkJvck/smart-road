@@ -1,5 +1,3 @@
-use sdl2::{render::Canvas, video::Window};
-
 use crate::{Direction::{self, *}, Route::{self, *}, GAP, HEIGHT, MID_WIDTH};
 
 pub fn initial_position(direction: &Direction, route: &Route) -> (u32, u32) {
