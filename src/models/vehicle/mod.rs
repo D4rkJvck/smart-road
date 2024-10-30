@@ -7,7 +7,9 @@ use attributes::*;
 pub use enums::*;
 
 use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
-use sdl2::rect::Rect;
+use sdl2::{rect::Rect, sys::False};
+
+use super::Intersection;
 
 #[derive(Clone, Copy)]
 pub struct Vehicle {
@@ -39,15 +41,16 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self) {
-        self.ajust_speed();
+    pub fn drive(&mut self, intersection: &Intersection) {
+        self.ajust_speed(&intersection.area);
         self.navigate();
         self.movement();
     }
 
-    fn ajust_speed(&mut self) {
-        match true {
-            _ => {}
+    fn ajust_speed(&mut self, area: &Rect) {
+        self.speed = match self.into_intersection(area) {
+            true => Speed::Normal,
+            false => Speed::Fast,
         }
     }
     fn navigate(&mut self) {}

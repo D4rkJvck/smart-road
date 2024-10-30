@@ -5,7 +5,7 @@ use rand::{thread_rng, Rng};
 pub enum Speed {
     Stop,
     Slow,
-    Medium,
+    Normal,
     Fast,
 }
 

@@ -1,3 +1,5 @@
+use sdl2::rect::Rect;
+
 use super::{Direction, Speed, Vehicle};
 use crate::{HEIGHT, SAFETY_DISTANCE, WIDTH};
 
@@ -9,7 +11,7 @@ impl Vehicle {
     pub fn velocity(&self) -> i32 {
         match self.speed {
             Speed::Fast => 3,
-            Speed::Medium => 2,
+            Speed::Normal => 2,
             Speed::Slow => 1,
             Speed::Stop => 0,
         }
@@ -37,6 +39,13 @@ impl Vehicle {
             && self.area.left() < WIDTH as i32
             && self.area.right() > 0
             && self.area.bottom() > 0
+    }
+
+    pub fn into_intersection(&mut self, area: &Rect) -> bool {
+        self.area.right() > area.left()
+            && self.area.left() < area.right()
+            && self.area.top() < area.bottom()
+            && self.area.bottom() > area.top()
     }
 
     pub fn too_close_to(&self, other: &Self) -> bool {

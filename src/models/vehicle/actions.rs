@@ -3,8 +3,8 @@ use super::{Direction, Speed, Vehicle};
 impl Vehicle {
     pub fn slow_down(&mut self) {
         self.speed = match self.speed {
-            Speed::Fast => Speed::Medium,
-            Speed::Medium => Speed::Slow,
+            Speed::Fast => Speed::Normal,
+            Speed::Normal => Speed::Slow,
             _ => Speed::Stop,
         }
     }
@@ -12,7 +12,7 @@ impl Vehicle {
     pub fn speed_up(&mut self) {
         self.speed = match self.speed {
             Speed::Stop => Speed::Slow,
-            Speed::Slow => Speed::Medium,
+            Speed::Slow => Speed::Normal,
             _ => Speed::Fast,
         }
     }
