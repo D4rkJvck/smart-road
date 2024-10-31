@@ -68,6 +68,8 @@ $ code .
     |
     +-- assets/
     |       |
+    |       +-- car_red.png
+    |       |
     |       +-- ferris.svg
     |
     |
@@ -75,27 +77,34 @@ $ code .
     |       |
     |       +-- controllers/
     |       |       |
-    |       |       +-- app.rs
-    |       |       |
     |       |       +-- mod.rs
     |       |
     |       |
     |       +-- models/
+    |       |       |
+    |       |       +-- vehicle/
+    |       |       |       |
+    |       |       |       +-- actions.rs
+    |       |       |       |
+    |       |       |       +-- attributes.rs
+    |       |       |       |
+    |       |       |       +-- enums.rs
+    |       |       |       |
+    |       |       |       +-- mod.rs
+    |       |       |       |
+    |       |       |       +-- state.rs
+    |       |       |
     |       |       |
     |       |       +-- intersection.rs
     |       |       |
     |       |       +-- mod.rs
     |       |       |
     |       |       +-- road.rs
-    |       |       |
-    |       |       +-- vehicle.rs
     |       |
     |       |
     |       +--- views/
     |       |       |
     |       |       +-- event.rs
-    |       |       |
-    |       |       +-- interface.rs
     |       |       |
     |       |       +-- mod.rs
     |       |       |
@@ -107,6 +116,8 @@ $ code .
     |       +-- macros.rs
     |       |
     |       +-- main.rs
+    |       |
+    |       +-- utils.rs
     |
     |
     +--- todos/

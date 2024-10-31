@@ -1,5 +1,4 @@
 use smart_road::App;
-use std::process;
 
 /// As usual, make sure to minimize
 /// the main function's responsibility.
@@ -9,10 +8,9 @@ use std::process;
 fn main() -> Result<(), String> {
     let mut app = App::new()?;
 
-    loop {
-        if let Err(msg) = app.run() {
-            println!("{}", msg);
-            process::exit(0)
-        }
-    }
+    if let Err(msg) = app.run() {
+        println!("{}", msg);
+    };
+
+    Ok(())
 }

@@ -2,7 +2,6 @@ use super::Interface;
 use crate::models::{Road, Vehicle};
 use sdl2::image::LoadTexture; // Import pour permettre le chargement des textures
 use sdl2::pixels::Color;
-use std::{thread, time::Duration};
 
 impl Interface {
     /// This function is responsible for rendering
@@ -36,9 +35,6 @@ impl Interface {
             )?;
         }
 
-        self.canvas.present();
-        thread::sleep(Duration::from_millis(16));
-
-        Ok(())
+        Ok(self.canvas.present())
     }
 }

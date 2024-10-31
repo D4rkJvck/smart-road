@@ -14,7 +14,7 @@ impl Vehicle {
             && self.area.bottom() >= 0
     }
 
-    pub fn into_intersection(&mut self, area: &Rect) -> bool {
+    pub fn into_area(&self, area: &Rect) -> bool {
         self.area.right() > area.left()
             && self.area.left() < area.right()
             && self.area.top() < area.bottom()

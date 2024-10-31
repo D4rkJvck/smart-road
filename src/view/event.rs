@@ -2,7 +2,7 @@ use super::Interface;
 use crate::{add_vehicle, models::Direction, Vehicle};
 use sdl2::{
     event::Event::{KeyDown, Quit},
-    keyboard::Keycode,
+    keyboard::Keycode as k,
 };
 
 impl Interface {
@@ -13,32 +13,32 @@ impl Interface {
             match event {
                 Quit { .. }
                 | KeyDown {
-                    keycode: Some(Keycode::ESCAPE),
+                    keycode: Some(k::ESCAPE),
                     ..
                 } => return Err("Exiting...".to_string()),
                 //_________________________________________
                 KeyDown {
-                    keycode: Some(Keycode::UP),
+                    keycode: Some(k::UP),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::North)),
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(Keycode::DOWN),
+                    keycode: Some(k::DOWN),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::South)),
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(Keycode::RIGHT),
+                    keycode: Some(k::RIGHT),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::East)),
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(Keycode::LEFT),
+                    keycode: Some(k::LEFT),
                     ..
                 } => vehicles.push(add_vehicle!(Direction::West)),
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(Keycode::R),
+                    keycode: Some(k::R),
                     ..
                 } => vehicles.push(add_vehicle!()),
                 //__________________________________

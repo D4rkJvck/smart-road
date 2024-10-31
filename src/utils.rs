@@ -1,26 +1,32 @@
 use crate::{
     Direction::{self, *},
     Route::{self, *},
-    GAP, HEIGHT, MID_HEIGHT, MID_WIDTH, VEHICLE_HEIGHT, VEHICLE_WIDTH, WIDTH,
+    GAP as g,
+    HEIGHT as h,
+    MID_HEIGHT as m_h,
+    MID_WIDTH as m_w,
+    VEHICLE_HEIGHT as v_h,
+    VEHICLE_WIDTH as v_w,
+    WIDTH as w,
 };
 
 pub fn initial_position(direction: &Direction, route: &Route) -> (i32, i32) {
     match (&direction, &route) {
         //
-        (North, Right) => (MID_WIDTH + GAP * 2 + 5, HEIGHT),
-        (North, Straight) => (MID_WIDTH + GAP + 5, HEIGHT),
-        (North, Left) => (MID_WIDTH + 5, HEIGHT),
+        (North, Right) => (m_w + g * 2 + 5, h),
+        (North, Straight) => (m_w + g + 5, h),
+        (North, Left) => (m_w + 5, h),
         //
-        (South, Right) => (MID_WIDTH - GAP * 2 - 45, -VEHICLE_HEIGHT),
-        (South, Straight) => (MID_WIDTH - GAP - 45, -VEHICLE_HEIGHT),
-        (South, Left) => (MID_WIDTH - 45, -VEHICLE_HEIGHT),
+        (South, Right) => (m_w - g * 2 - 45, -v_h),
+        (South, Straight) => (m_w - g - 45, -v_h),
+        (South, Left) => (m_w - 45, -v_h),
         //
-        (East, Right) => (-VEHICLE_WIDTH, MID_HEIGHT + GAP * 2 + 5),
-        (East, Straight) => (-VEHICLE_WIDTH, MID_HEIGHT + GAP + 5),
-        (East, Left) => (-VEHICLE_WIDTH, MID_HEIGHT + 5),
+        (East, Right) => (-v_w, m_h + g * 2 + 5),
+        (East, Straight) => (-v_w, m_h + g + 5),
+        (East, Left) => (-v_w, m_h + 5),
         //
-        (West, Right) => (WIDTH, MID_HEIGHT - GAP * 2 - 45),
-        (West, Straight) => (WIDTH, MID_HEIGHT - GAP - 45),
-        (West, Left) => (WIDTH, MID_HEIGHT - 45),
+        (West, Right) => (w, m_h - g * 2 - 45),
+        (West, Straight) => (w, m_h - g - 45),
+        (West, Left) => (w, m_h - 45),
     }
 }

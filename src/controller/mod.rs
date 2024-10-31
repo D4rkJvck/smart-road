@@ -1,6 +1,9 @@
+use std::{thread, time::Duration};
+
 use crate::{
     models::{Road, Vehicle},
     view::Interface,
+    HEIGHT, TITLE, WIDTH,
 };
 
 pub struct App {
@@ -12,16 +15,20 @@ pub struct App {
 impl App {
     pub fn new() -> Result<Self, String> {
         Ok(Self {
-            window: Interface::new()?,
+            window: Interface::new(TITLE, WIDTH, HEIGHT)?,
             road: Road::new(),
             vehicles: Vec::new(),
         })
     }
 
     pub fn run(&mut self) -> Result<(), String> {
-        self.update()?;
-        self.window.render(&self.road, &self.vehicles)?;
-        self.window.listen(&mut self.vehicles)
+        loop {
+            self.update()?;
+            self.window.render(&self.road, &self.vehicles)?;
+            self.window.listen(&mut self.vehicles)?;
+
+            thread::sleep(Duration::from_millis(8));
+        }
     }
 
     fn update(&mut self) -> Result<(), String> {

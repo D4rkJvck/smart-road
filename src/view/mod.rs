@@ -27,13 +27,13 @@ impl Interface {
     /// to get the `user` input `events`.
     /// For this specific project, it will also initialize road limits.
     /// It finally initializes the instance of the `interface``.
-    pub fn new() -> Result<Self, String> {
+    pub fn new(title: &str, width: i32, height: i32) -> Result<Self, String> {
         // Initialize the SDL.
         let sdl_ctx = sdl2::init()?;
         let video_subsys = sdl_ctx.video()?;
 
         let window = video_subsys // Generate the window from the video subsystem
-            .window(TITLE, WIDTH as u32, HEIGHT as u32)
+            .window(title, width as u32, height as u32)
             .position_centered()
             .build()
             .unwrap();

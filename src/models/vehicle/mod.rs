@@ -3,15 +3,14 @@ mod attributes;
 mod enums;
 mod state;
 
-use actions::*;
-use attributes::*;
+// use actions::*;
+// use attributes::*;
 pub use enums::*;
-use state::*;
-
-use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
-use sdl2::rect::Rect;
+// use state::*;
 
 use super::Intersection;
+use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use sdl2::rect::Rect;
 
 #[derive(Clone, Copy)]
 pub struct Vehicle {
@@ -50,19 +49,9 @@ impl Vehicle {
     }
 
     fn ajust_speed(&mut self, area: &Rect) {
-        self.speed = match self.into_intersection(area) {
-            true => Speed::Normal,
-            false => Speed::Fast,
+        match self.into_area(area) {
+            true => self.slow_down(),
+            false => self.speed_up(),
         }
-    }
-    fn navigate(&mut self) {}
-
-    fn movement(&mut self) {
-        match &self.direction {
-            Direction::North => self.area.y -= self.velocity(),
-            Direction::South => self.area.y += self.velocity(),
-            Direction::East => self.area.x += self.velocity(),
-            Direction::West => self.area.x -= self.velocity(),
-        };
     }
 }
