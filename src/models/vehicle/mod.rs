@@ -27,7 +27,7 @@ pub struct Vehicle {
 impl Vehicle {
     pub fn new(x: i32, y: i32, direction: Direction, route: Route) -> Self {
         Self {
-            area: Rect::new(x, y, VEHICLE_WIDTH, VEHICLE_HEIGHT),
+            area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
             speed: Speed::Fast,
             direction,
             route,

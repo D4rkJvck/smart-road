@@ -17,10 +17,10 @@ impl Intersection {
     pub fn new() -> Self {
         Self {
             area: Rect::new(
-                (MID_WIDTH - GAP * 3) as i32,
-                (MID_HEIGHT - GAP * 3) as i32,
-                GAP * 6 + 1,
-                GAP * 6 + 1,
+                MID_WIDTH - GAP * 3,
+                MID_HEIGHT - GAP * 3,
+                GAP as u32 * 6 + 1,
+                GAP as u32 * 6 + 1,
             ),
             vehicle_count: 0,
             max_speed: 0,

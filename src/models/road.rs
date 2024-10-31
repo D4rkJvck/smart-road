@@ -10,10 +10,10 @@ pub struct Line {
 }
 
 impl Line {
-    pub fn new(x1: u32, y1: u32, x2: u32, y2: u32) -> Self {
+    pub fn new(x1: i32, y1: i32, x2: i32, y2: i32) -> Self {
         Self {
-            start: Point::new(x1 as i32, y1 as i32),
-            end: Point::new(x2 as i32, y2 as i32),
+            start: Point::new(x1, y1),
+            end: Point::new(x2, y2),
         }
     }
 }

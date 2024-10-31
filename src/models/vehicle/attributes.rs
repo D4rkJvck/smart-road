@@ -35,10 +35,10 @@ impl Vehicle {
     /// as it confirm that the
     /// vehicle is out of the window.
     pub fn is_visible(&self) -> bool {
-        self.area.top() < HEIGHT as i32
-            && self.area.left() < WIDTH as i32
-            && self.area.right() > 0
-            && self.area.bottom() > 0
+        self.area.top() <= HEIGHT as i32
+            && self.area.left() <= WIDTH as i32
+            && self.area.right() >= 0
+            && self.area.bottom() >= 0
     }
 
     pub fn into_intersection(&mut self, area: &Rect) -> bool {

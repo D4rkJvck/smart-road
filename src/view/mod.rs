@@ -33,7 +33,7 @@ impl Interface {
         let video_subsys = sdl_ctx.video()?;
 
         let window = video_subsys // Generate the window from the video subsystem
-            .window(TITLE, WIDTH, HEIGHT)
+            .window(TITLE, WIDTH as u32, HEIGHT as u32)
             .position_centered()
             .build()
             .unwrap();
