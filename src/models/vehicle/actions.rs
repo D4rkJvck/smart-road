@@ -17,7 +17,6 @@ impl Vehicle {
         }
     }
 
-        
     fn turn_right(&mut self) {
         self.direction = match self.direction {
             Direction::North => Direction::East,
@@ -35,5 +34,4 @@ impl Vehicle {
             Direction::West => Direction::South,
         }
     }
-
 }

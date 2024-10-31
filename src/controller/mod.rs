@@ -26,7 +26,9 @@ impl App {
 
     fn update(&mut self) -> Result<(), String> {
         self.vehicles.retain(|vehicle| vehicle.is_visible());
-        self.vehicles.iter_mut().for_each(|vehicle| vehicle.drive(&self.road.intersection));
+        self.vehicles
+            .iter_mut()
+            .for_each(|vehicle| vehicle.drive(&self.road.intersection));
 
         Ok(())
     }
