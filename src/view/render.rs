@@ -22,7 +22,7 @@ impl Interface {
 
         self.canvas.set_draw_color(Color::GREEN);
         for vehicle in vehicles {
-            self.canvas.draw_rect(vehicle.area)?;
+            // self.canvas.draw_rect(vehicle.area)?;
             let vehicle_texture = self.texture_creator.load_texture(vehicle.img_path)?;
             self.canvas.copy_ex(
                 &vehicle_texture,

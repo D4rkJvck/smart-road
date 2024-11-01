@@ -19,6 +19,7 @@ pub struct Vehicle {
     direction: Direction,
     route: Route,
     pub img_path: &'static str,
+    pub crossed: bool,
     // time: ?,
     // distance: ?,
     // velocity: ?,
@@ -33,6 +34,7 @@ impl Vehicle {
             direction,
             route,
             img_path: "./assets/car_red.png",
+            crossed: false,
             // time: (0, 0),
             // sensor_range: Rect::new(0, 0, 10, 10)
         }
