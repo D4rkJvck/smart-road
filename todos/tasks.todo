@@ -1,22 +1,55 @@
-Vehicles:
-    ☐ Cannot the direction of the given route
-    ☐ Must have 3 different velocities
-    ☐ Must respect safety distance
-    ☐ Must detect other vehicles
-    ☐ Physics to leave the intersection:
-        -> time
-        -> distance
-        -> velocity
+Controller:
+    ✔ Initialize Application
+    ✔ Implement Simulation Loop
 
-Commands:
-    ✔ `Up` -> Generate vehicle from South to North
-    ✔ `Down` -> Generate vehicle from North to South
-    ✔ `Right` -> Generate vehicle from West to East
-    ✔ `Left` -> Generate vehicle from East to West
-    ✔ `R` -> Continually generate random vehicle
-    ☐ `Esc` -> Stop the simulation and generate statistics
 
-Statistics:
+View:
+    ✔ Initialize Interface
+    ✔ Implement Rendering
+
+    Implement Event Management:
+        Commands:
+            ✔ `Up` -> Generate vehicle from South to North
+            ✔ `Down` -> Generate vehicle from North to South
+            ✔ `Right` -> Generate vehicle from West to East
+            ✔ `Left` -> Generate vehicle from East to West
+            ✔ `R` -> Continually generate random vehicle
+            ☐ `Esc` -> Stop the simulation and generate statistics
+
+
+Models:
+    Road:
+        ✔ Initialize Model
+        ✔ Define Lines to draw
+
+    Intersection:
+        ☐ Initialize Model
+        ☐ Define Sensors (36 squares drawn by the road lines)
+
+    Vehicles:
+        ✔ Initialize Model
+
+        Physics to leave Intersection:
+            ☐ time
+            ☐ distance
+            ☐ velocity
+
+        ! Insert Image
+        ✔ Implement Movement
+        ✔ Implement Velocity Levels (Must have 3 different velocities)
+
+        Route Navigation:
+            ✔ Go Straight
+            ✔ Turn Right
+            ☐ Turn Left
+            ✔ Cannot change the given route
+
+        Handle Collision Detection:
+            ☐ Safety Distance (for vehicle  with same Direction)
+            ☐ Intersection Cross
+
+
+Statistic Window:
     ☐ Max number of vehicles
     ☐ Fastest speed achieved
     ☐ Slowest speed reached
@@ -28,14 +61,3 @@ Bonus:
     ☐ Create your own assets for the animation of the vehicles
     ☐ Add more statistics
     ☐ Consider acceleration and deceleration
-
-Tasks:
-    ✔ Draw road lines
-    ✔ Draw image area
-    ! Insert vehicle images to fit its area
-    ✔ Spawn vehicles from Direction
-    ✔ Move vehicles to Direction
-    ! Ajust Speed before(3), near(2), inside(1) and after(3) intersection
-    ⭘ Handle vehicle route turning condition
-    ☐ Avoid Collision inside intersection
-    ☐ Statistic Window
