@@ -38,15 +38,19 @@ impl Vehicle {
     }
 
     fn turn_right(&mut self) {
+        self.crossed = true;
+
         self.direction = match self.direction {
             Direction::North => Direction::East,
             Direction::East => Direction::South,
             Direction::South => Direction::West,
             Direction::West => Direction::North,
-        }
+        };
     }
 
     fn turn_left(&mut self) {
+        self.crossed = true;
+
         self.direction = match self.direction {
             Direction::North => Direction::West,
             Direction::East => Direction::North,

@@ -51,9 +51,11 @@ impl Vehicle {
     }
 
     fn ajust_speed(&mut self, area: &Rect) {
-        match self.into_area(area) {
-            true => self.slow_down(),
-            false => self.speed_up(),
-        }
+        match (self.into_area(area), self.crossed) {
+            (true, false) => self.slow_down(),
+            (true, true) => self.speed = Speed::Normal,
+            (false, true) => self.speed_up(),
+            _ => {},
+        };
     }
 }
