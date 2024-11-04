@@ -1,13 +1,8 @@
 use crate::{
     Direction::{self, *},
     Route::{self, *},
-    GAP as g,
-    HEIGHT as h,
-    MID_HEIGHT as m_h,
-    MID_WIDTH as m_w,
-    VEHICLE_HEIGHT as v_h,
-    VEHICLE_WIDTH as v_w,
-    WIDTH as w,
+    GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_HEIGHT as v_h,
+    VEHICLE_WIDTH as v_w, WIDTH as w,
 };
 
 pub fn initial_position(direction: &Direction, route: &Route) -> (i32, i32) {

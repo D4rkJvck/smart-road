@@ -1,6 +1,5 @@
 use super::{Direction, Route, Speed, Vehicle};
 
-
 impl Vehicle {
     pub fn movement(&mut self) {
         let speed = self.velocity();

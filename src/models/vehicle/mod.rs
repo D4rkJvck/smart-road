@@ -19,7 +19,7 @@ pub struct Vehicle {
     speed: Speed,
     direction: Direction,
     route: Route,
-    pub img_path: &'static str,
+    pub category: Category,
     pub crossed: bool,
     priority: bool,
     // time: ?,
@@ -29,15 +29,15 @@ pub struct Vehicle {
 }
 
 impl Vehicle {
-    pub fn new(x: i32, y: i32, direction: Direction, route: Route, priority: bool) -> Self {
+    pub fn new(x: i32, y: i32, direction: Direction, route: Route, category: Category) -> Self {
         Self {
             area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
             speed: Speed::Fast,
             direction,
             route,
-            img_path: "./assets/car_red.png",
+            category,
             crossed: false,
-            priority,
+            priority: true,
             // time: (0, 0),
             // sensor_range: Rect::new(0, 0, 10, 10)
         }

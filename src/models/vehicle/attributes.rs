@@ -1,4 +1,4 @@
-use super::{Direction, Speed, Vehicle};
+use super::{Category, Direction, Speed, Vehicle};
 
 impl Vehicle {
     /// The velicity method gives
@@ -24,6 +24,16 @@ impl Vehicle {
             Direction::East => 90.0,
             Direction::South => 180.0,
             Direction::West => 270.0,
+        }
+    }
+
+    pub fn category(&self) -> &'static str {
+        match self.category {
+            Category::Police => "./assets/cars/police.png",
+            Category::Taxi => "./assets/cars/taxi.png",
+            Category::Red => "./assets/cars/red.png",
+            Category::Black => "./assets/cars/black.png",
+
         }
     }
 }

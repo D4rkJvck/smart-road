@@ -7,7 +7,7 @@ mod macros;
 mod utils;
 
 pub use controller::App;
-pub use models::{Direction, Route, Vehicle};
+pub use models::{Category, Direction, Route, Vehicle};
 pub use utils::*;
 
 const TITLE: &str = "SMART-ROAD";
