@@ -13,6 +13,7 @@ use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
 use sdl2::rect::Rect;
 
 #[derive(Clone, Copy)]
+
 pub struct Vehicle {
     pub area: Rect,
     speed: Speed,
@@ -20,6 +21,7 @@ pub struct Vehicle {
     route: Route,
     pub img_path: &'static str,
     pub crossed: bool,
+    priority: bool,
     // time: ?,
     // distance: ?,
     // velocity: ?,
@@ -27,7 +29,7 @@ pub struct Vehicle {
 }
 
 impl Vehicle {
-    pub fn new(x: i32, y: i32, direction: Direction, route: Route) -> Self {
+    pub fn new(x: i32, y: i32, direction: Direction, route: Route, priority: bool) -> Self {
         Self {
             area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
             speed: Speed::Fast,
@@ -35,6 +37,7 @@ impl Vehicle {
             route,
             img_path: "./assets/car_red.png",
             crossed: false,
+            priority,
             // time: (0, 0),
             // sensor_range: Rect::new(0, 0, 10, 10)
         }
@@ -55,7 +58,7 @@ impl Vehicle {
             (true, false) => self.slow_down(),
             (true, true) => self.speed = Speed::Normal,
             (false, true) => self.speed_up(),
-            _ => {},
+            _ => {}
         };
     }
 }

@@ -29,6 +29,19 @@ impl Vehicle {
 
         self.direction == other.direction && distance <= SAFETY_DISTANCE
     }
+    pub fn has_priority_over(&self, other: &Self) -> bool {
+        // Si le véhicule actuel a une priorité plus élevée (numéro plus bas) que l'autre
+        if self.priority < other.priority {
+            return true;
+        }
+
+        // Si les deux véhicules ont la même priorité, on vérifie la distance de sécurité
+        if self.priority == other.priority && !self.too_close_to(other) {
+            return true;
+        }
+
+        false
+    }
 
     pub fn can_turn(&self) -> bool {
         !self.crossed
