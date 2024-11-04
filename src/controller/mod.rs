@@ -1,4 +1,4 @@
-// use std::{thread, time::Duration};
+use std::{thread, time::Duration};
 
 use crate::{
     models::{Road, Vehicle},
@@ -27,12 +27,13 @@ impl App {
             self.window.render(&self.road, &self.vehicles)?;
             self.window.listen(&mut self.vehicles)?;
 
-            // thread::sleep(Duration::from_millis(8));
+            thread::sleep(Duration::from_millis(8));
         }
     }
 
     fn update(&mut self) -> Result<(), String> {
         self.vehicles.retain(|vehicle| vehicle.is_visible());
+
         self.vehicles
             .iter_mut()
             .for_each(|vehicle| vehicle.drive(&self.road.intersection));
