@@ -1,7 +1,6 @@
 mod event;
 mod render;
 
-use crate::{HEIGHT, TITLE, WIDTH};
 use sdl2::{
     render::{Canvas, TextureCreator},
     video::{Window, WindowContext},

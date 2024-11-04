@@ -12,6 +12,9 @@ impl Interface {
         self.canvas.set_draw_color(Color::BLACK);
         self.canvas.clear();
 
+        let road_texture = self.texture_creator.load_texture("./assets/road.jpeg")?;
+        self.canvas.copy(&road_texture, None, None)?;
+
         self.canvas.set_draw_color(Color::WHITE);
         for line in &road.lines {
             self.canvas.draw_line(line.start, line.end)?;
