@@ -1,3 +1,5 @@
+use sdl2::rect::Rect;
+
 use super::{Direction, Route, Speed, Vehicle};
 
 impl Vehicle {
@@ -28,12 +30,20 @@ impl Vehicle {
         }
     }
 
-    pub fn navigate(&mut self) {
-        match (self.can_turn(), self.route) {
-            (true, Route::Right) => self.turn_right(),
-            (true, Route::Left) => self.turn_left(),
-            (false, Route::Straight) => self.speed_up(),
-            _ => {}
+    pub fn navigate(&mut self, sensors: &[[Rect; 6]; 6]) {
+        let turning_point = match self.turning_point(sensors) {
+            Some(point) => point,
+            None => return
+        };
+
+        if self.crossed || self.area.center() != turning_point {
+            return
+        };
+
+        match self.route {
+            Route::Right => self.turn_right(),
+            Route::Left => self.turn_left(),
+            Route::Straight => self.speed_up(),
         }
     }
 

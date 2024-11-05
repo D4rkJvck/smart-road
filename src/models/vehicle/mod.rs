@@ -49,7 +49,7 @@ impl Vehicle {
     /// updating the position.
     pub fn drive(&mut self, intersection: &Intersection) {
         self.ajust_speed(&intersection.area);
-        self.navigate();
+        self.navigate(&intersection.sensors);
         self.movement();
     }
 

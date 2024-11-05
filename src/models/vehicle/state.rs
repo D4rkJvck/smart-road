@@ -1,5 +1,5 @@
-use super::{Direction, Route, Vehicle};
-use crate::{GAP as g, HEIGHT, MID_HEIGHT as m_h, MID_WIDTH as m_w, SAFETY_DISTANCE, WIDTH};
+use super::Vehicle;
+use crate::{HEIGHT, SAFETY_DISTANCE, WIDTH};
 use sdl2::rect::Rect;
 
 impl Vehicle {
@@ -29,6 +29,7 @@ impl Vehicle {
 
         self.direction == other.direction && distance <= SAFETY_DISTANCE
     }
+
     pub fn has_priority_over(&self, other: &Self) -> bool {
         // Si le véhicule actuel a une priorité plus élevée (numéro plus bas) que l'autre
         if self.priority < other.priority {
@@ -41,22 +42,5 @@ impl Vehicle {
         }
 
         false
-    }
-
-    pub fn can_turn(&self) -> bool {
-        !self.crossed
-            && (self.route == Route::Left
-                && (self.direction == Direction::North && self.area.top() == m_h - g + 5
-                    || self.direction == Direction::East && self.area.right() == m_w + g - 5
-                    || self.direction == Direction::South && self.area.bottom() == m_h + g - 5
-                    || self.direction == Direction::West && self.area.left() == m_w - g + 5)
-                || self.route == Route::Right
-                    && (self.direction == Direction::North && self.area.top() == m_h + g * 2 + 5
-                        || self.direction == Direction::East
-                            && self.area.right() == m_w - g * 2 - 5
-                        || self.direction == Direction::South
-                            && self.area.bottom() == m_h - g * 2 - 5
-                        || self.direction == Direction::West
-                            && self.area.left() == m_w + g * 2 + 5))
     }
 }

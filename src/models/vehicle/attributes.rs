@@ -1,4 +1,6 @@
-use super::{Category, Direction, Speed, Vehicle};
+use sdl2::rect::{Point, Rect};
+
+use super::{Category, Direction, Route, Speed, Vehicle};
 
 impl Vehicle {
     /// The velicity method gives
@@ -33,7 +35,20 @@ impl Vehicle {
             Category::Taxi => "./assets/cars/taxi.png",
             Category::Red => "./assets/cars/red.png",
             Category::Black => "./assets/cars/black.png",
+        }
+    }
 
+    pub fn turning_point(&self, sensors: &[[Rect; 6]; 6]) -> Option<Point> {
+        match (self.direction, self.route) {
+            (Direction::North, Route::Right) => Some(sensors[5][5].center()),
+            (Direction::North, Route::Left) => Some(sensors[3][2].center()),
+            (Direction::East, Route::Right) => Some(sensors[0][5].center()),
+            (Direction::East, Route::Left) => Some(sensors[3][3].center()),
+            (Direction::South, Route::Right) => Some(sensors[0][0].center()),
+            (Direction::South, Route::Left) => Some(sensors[2][3].center()),
+            (Direction::West, Route::Right) => Some(sensors[5][0].center()),
+            (Direction::West, Route::Left) => Some(sensors[2][2].center()),
+            _ => None,
         }
     }
 }

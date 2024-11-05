@@ -68,76 +68,58 @@ $ code .
     |
     +-- assets/
     |       |
-    |       +-- car_red.png
+    |       +---- cars/
+    |       |       |
+    |       |       + black.png
+    |       |       + police.png
+    |       |       + red.png
+    |       |       + taxi.png
     |       |
-    |       +-- ferris.svg
-    |
+    |       + ferris.svg
+    |       + road.jpeg    
     |
     +----- src/
     |       |
     |       +-- controllers/
     |       |       |
-    |       |       +-- mod.rs
-    |       |
+    |       |       + mod.rs
     |       |
     |       +-- models/
     |       |       |
     |       |       +-- vehicle/
     |       |       |       |
-    |       |       |       +-- actions.rs
-    |       |       |       |
-    |       |       |       +-- attributes.rs
-    |       |       |       |
-    |       |       |       +-- enums.rs
-    |       |       |       |
-    |       |       |       +-- mod.rs
-    |       |       |       |
-    |       |       |       +-- state.rs
+    |       |       |       + actions.rs
+    |       |       |       + attributes.rs
+    |       |       |       + enums.rs
+    |       |       |       + mod.rs
+    |       |       |       + state.rs
     |       |       |
-    |       |       |
-    |       |       +-- intersection.rs
-    |       |       |
-    |       |       +-- mod.rs
-    |       |       |
-    |       |       +-- road.rs
-    |       |
+    |       |       + intersection.rs
+    |       |       + mod.rs
+    |       |       + road.rs
     |       |
     |       +--- views/
     |       |       |
-    |       |       +-- event.rs
-    |       |       |
-    |       |       +-- mod.rs
-    |       |       |
-    |       |       +-- render.rs
+    |       |       + event.rs
+    |       |       + mod.rs
+    |       |       + render.rs
     |       |
-    |       |
-    |       +-- lib.rs
-    |       |
-    |       +-- macros.rs
-    |       |
-    |       +-- main.rs
-    |       |
-    |       +-- utils.rs
-    |
+    |       + lib.rs
+    |       + macros.rs
+    |       + main.rs
+    |       + utils.rs
     |
     +--- todos/
     |       |
-    |       +-- audit.todo
-    |       |
-    |       +-- tasks.todo
+    |       + audit.todo
+    |       + tasks.todo
     |
-    |
-    +-- .gitignore
-    |
-    +-- Cargo.lock
-    |
-    +-- Cargo.toml
-    |
-    +-- gitify.sh
-    |
-    +-- LICENSE
-    |
-    +-- README.md
+    + .gitignore
+    + Cargo.lock
+    + Cargo.toml
+    + gitify.sh
+    + LICENSE
+    + README.md
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 

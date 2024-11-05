@@ -12,13 +12,19 @@ impl Interface {
         self.canvas.set_draw_color(Color::BLACK);
         self.canvas.clear();
 
-        let road_texture = self.texture_creator.load_texture("./assets/road.jpeg")?;
+        let road_texture = self.texture_creator.load_texture("./assets/road.png")?;
         self.canvas.copy(&road_texture, None, None)?;
 
-        // self.canvas.set_draw_color(Color::WHITE);
+        self.canvas.set_draw_color(Color::WHITE);
         // for line in &road.lines {
         //     self.canvas.draw_line(line.start, line.end)?;
         // }
+
+        road.intersection
+            .sensors
+            .iter()
+            .flat_map(|tab| tab.iter())
+            .for_each(|rect| self.canvas.draw_rect(*rect).unwrap());
 
         // self.canvas.set_draw_color(Color::BLACK);
         // self.canvas.fill_rect(road.intersection.area)?;
