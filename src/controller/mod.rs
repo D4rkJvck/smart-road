@@ -1,10 +1,13 @@
-use std::{thread, time::Duration};
+mod stats;
 
 use crate::{models::Road, view::Interface, HEIGHT, TITLE, WIDTH};
+use stats::Stats;
+use std::{thread, time::Duration};
 
 pub struct App {
     window: Interface,
     road: Road,
+    stats: Stats,
 }
 
 impl App {
@@ -12,6 +15,7 @@ impl App {
         Ok(Self {
             window: Interface::new(TITLE, WIDTH, HEIGHT)?,
             road: Road::new(),
+            stats: Stats::new(),
         })
     }
 

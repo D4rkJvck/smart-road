@@ -41,7 +41,7 @@ Models:
         Route Navigation:
             ✔ Go Straight
             ✔ Turn Right
-            ☐ Turn Left
+            ✔ Turn Left
             ✔ Cannot change the given route
 
         Handle Collision Detection:

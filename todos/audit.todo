@@ -1,23 +1,23 @@
 Functional:
 
     Try and run the application.
-        ☐ Can you see the cross intersection?
-        ☐ If so, is there any image/asset that represents this intersection?
+        ✔ Can you see the cross intersection?
+        ✔ If so, is there any image/asset that represents this intersection?
 
     Try and run the application, then generate a vehicle by pressing the `"Arrow Up"` key.
-        ☐ Was a vehicle generated from the cardinal South?
+        ✔ Was a vehicle generated from the cardinal South?
 
     Try pressing the `"Arrow Down"` key.
-        ☐ Was a vehicle generated from the cardinal North?
+        ✔ Was a vehicle generated from the cardinal North?
 
     Try pressing the `"Arrow Right"` key.
-        ☐ Was a vehicle generated from the cardinal West?
+        ✔ Was a vehicle generated from the cardinal West?
 
     Try pressing the `"Arrow left"` key.
-        ☐ Was a vehicle generated from the cardinal East?
+        ✔ Was a vehicle generated from the cardinal East?
 
     Try pressing the `"R"` key.
-        ☐ Are vehicles generated randomly(random lane and route)?
+        ✔ Are vehicles generated randomly(random lane and route)?
 
     Try to generate tree vehicles in the same lane (do this for all lanes).
         ☐ Did all vehicles pass the intersection without any collision?
@@ -72,13 +72,13 @@ General:
 
     ☐ Is the spam of creation of vehicles prevented (limitation of pressing the arrow keys too many times)?
 
-    ☐ Are vehicles assigned to their own route, and if so do they respect that route? (you can use the lanes to see if they are respected)
+    ✔ Are vehicles assigned to their own route, and if so do they respect that route? (you can use the lanes to see if they are respected)
 
     ☐ Is there a logical safe distance set up for the vehicles(a strictly positive and reasonable distance)?
 
     ☐ Are vehicles kept in a safe distance(do not collide whenever one stops or reduces their velocity)?
 
-    ☐ Do vehicles have at least 3 different velocities?
+    ✔ Do vehicles have at least 3 different velocities?
 
 
 Bonus:

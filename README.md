@@ -69,7 +69,6 @@ $ code .
     +-- assets/
     |       |
     |       +---- cars/
-    |       |       |
     |       |       + black.png
     |       |       + police.png
     |       |       + red.png
@@ -81,25 +80,21 @@ $ code .
     +----- src/
     |       |
     |       +-- controllers/
-    |       |       |
     |       |       + mod.rs
+    |       |       + stats.rs
     |       |
     |       +-- models/
     |       |       |
     |       |       +-- vehicle/
-    |       |       |       |
     |       |       |       + actions.rs
     |       |       |       + attributes.rs
     |       |       |       + enums.rs
     |       |       |       + mod.rs
     |       |       |       + state.rs
     |       |       |
-    |       |       + intersection.rs
     |       |       + mod.rs
-    |       |       + road.rs
     |       |
     |       +--- views/
-    |       |       |
     |       |       + event.rs
     |       |       + mod.rs
     |       |       + render.rs
@@ -110,7 +105,6 @@ $ code .
     |       + utils.rs
     |
     +--- todos/
-    |       |
     |       + audit.todo
     |       + tasks.todo
     |

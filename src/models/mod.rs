@@ -10,12 +10,6 @@ pub struct Road {
     pub intersection: Rect,
     pub sensors: SensorGrid,
     pub vehicles: Vec<Vehicle>,
-    // vehicle_count: u32,
-    // max_speed: u32,
-    // min_speed: u32,
-    // max_time: f32,
-    // min_time: f32,
-    // collision_count: u32,
 }
 
 impl Road {
@@ -44,12 +38,6 @@ impl Road {
             intersection,
             sensors,
             vehicles: Vec::new(),
-            // vehicle_count: 0,
-            // max_speed: 0,
-            // min_speed: 0,
-            // max_time: 0.0,
-            // min_time: 0.0,
-            // collision_count: 0,
         }
     }
 }
