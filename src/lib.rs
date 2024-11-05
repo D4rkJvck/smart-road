@@ -8,7 +8,10 @@ mod utils;
 
 pub use controller::App;
 pub use models::{Category, Direction, Route, Vehicle};
+use sdl2::rect::Rect;
 pub use utils::*;
+
+pub type SensorGrid = [[Rect; 6]; 6];
 
 const TITLE: &str = "SMART-ROAD";
 const WIDTH: i32 = 800;

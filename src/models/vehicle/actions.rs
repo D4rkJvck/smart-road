@@ -1,6 +1,5 @@
-use sdl2::rect::Rect;
-
 use super::{Direction, Route, Speed, Vehicle};
+use crate::SensorGrid;
 
 impl Vehicle {
     pub fn movement(&mut self) {
@@ -30,14 +29,14 @@ impl Vehicle {
         }
     }
 
-    pub fn navigate(&mut self, sensors: &[[Rect; 6]; 6]) {
+    pub fn navigate(&mut self, sensors: &SensorGrid) {
         let turning_point = match self.turning_point(sensors) {
             Some(point) => point,
-            None => return
+            None => return,
         };
 
         if self.crossed || self.area.center() != turning_point {
-            return
+            return;
         };
 
         match self.route {

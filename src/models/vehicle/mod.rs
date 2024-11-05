@@ -3,13 +3,9 @@ mod attributes;
 mod enums;
 mod state;
 
-// use actions::*;
-// use attributes::*;
-pub use enums::*;
-// use state::*;
-
-use super::Intersection;
+use super::SensorGrid;
 use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
+pub use enums::*;
 use sdl2::rect::Rect;
 
 #[derive(Clone, Copy)]
@@ -47,9 +43,9 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, intersection: &Intersection) {
-        self.ajust_speed(&intersection.area);
-        self.navigate(&intersection.sensors);
+    pub fn drive(&mut self, intersection: &Rect, sensors: &SensorGrid) {
+        self.ajust_speed(intersection);
+        self.navigate(sensors);
         self.movement();
     }
 
