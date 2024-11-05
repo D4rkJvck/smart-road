@@ -1,5 +1,5 @@
 use super::{Direction, Route, Speed, Vehicle};
-use crate::SensorGrid;
+use crate::models::SensorGrid;
 
 impl Vehicle {
     pub fn movement(&mut self) {

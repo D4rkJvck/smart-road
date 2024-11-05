@@ -8,7 +8,7 @@ use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::Rect;
 
-#[derive(Clone, Copy)]
+// #[derive(Clone, Copy)]
 
 pub struct Vehicle {
     pub area: Rect,
@@ -16,6 +16,7 @@ pub struct Vehicle {
     direction: Direction,
     route: Route,
     pub category: Category,
+    // texture: Texture<'static>,
     pub crossed: bool,
     priority: bool,
     // time: ?,

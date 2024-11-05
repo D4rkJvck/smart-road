@@ -1,6 +1,6 @@
-use sdl2::rect::{Point, Rect};
-
 use super::{Category, Direction, Route, Speed, Vehicle};
+use crate::models::SensorGrid;
+use sdl2::rect::Point;
 
 impl Vehicle {
     /// The velicity method gives
@@ -38,16 +38,16 @@ impl Vehicle {
         }
     }
 
-    pub fn turning_point(&self, sensors: &[[Rect; 6]; 6]) -> Option<Point> {
+    pub fn turning_point(&self, sensors: &SensorGrid) -> Option<Point> {
         match (self.direction, self.route) {
-            (Direction::North, Route::Right) => Some(sensors[5][5].center()),
-            (Direction::North, Route::Left) => Some(sensors[3][2].center()),
-            (Direction::East, Route::Right) => Some(sensors[0][5].center()),
-            (Direction::East, Route::Left) => Some(sensors[3][3].center()),
-            (Direction::South, Route::Right) => Some(sensors[0][0].center()),
-            (Direction::South, Route::Left) => Some(sensors[2][3].center()),
-            (Direction::West, Route::Right) => Some(sensors[5][0].center()),
-            (Direction::West, Route::Left) => Some(sensors[2][2].center()),
+            (Direction::North, Route::Right) => Some(sensors[5][5]),
+            (Direction::North, Route::Left) => Some(sensors[3][2]),
+            (Direction::East, Route::Right) => Some(sensors[0][5]),
+            (Direction::East, Route::Left) => Some(sensors[3][3]),
+            (Direction::South, Route::Right) => Some(sensors[0][0]),
+            (Direction::South, Route::Left) => Some(sensors[2][3]),
+            (Direction::West, Route::Right) => Some(sensors[5][0]),
+            (Direction::West, Route::Left) => Some(sensors[2][2]),
             _ => None,
         }
     }

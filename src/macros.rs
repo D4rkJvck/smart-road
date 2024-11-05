@@ -5,6 +5,9 @@ macro_rules! import {
     };
 }
 
+//___________________________________________________________________________
+//
+
 #[macro_export]
 macro_rules! add_vehicle {
     () => {{
@@ -28,3 +31,20 @@ macro_rules! add_vehicle {
         Vehicle::new(x as i32, y as i32, $direction, route, category)
     }};
 }
+
+//___________________________________________________________________________
+//
+
+// #[macro_export]
+// macro_rules! texturize {
+//     () => {
+//         let path = match Category::random() {
+//             Category::Police => "./assets/cars/police.png",
+//             Category::Taxi => "./assets/cars/taxi.png",
+//             Category::Black => "./assets/cars/black.png",
+//             Category::Red => "./assets/cars/red.png",
+//         }
+
+//         // let
+//     };
+// }

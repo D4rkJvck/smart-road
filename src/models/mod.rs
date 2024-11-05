@@ -1,10 +1,10 @@
 mod vehicle;
 
 use crate::{GAP, MID_HEIGHT, MID_WIDTH};
-use sdl2::rect::Rect;
+use sdl2::rect::{Point, Rect};
 pub use vehicle::{Category, Direction, Route, Vehicle};
 
-pub type SensorGrid = [[Rect; 6]; 6];
+pub type SensorGrid = [[Point; 6]; 6];
 
 pub struct Road {
     pub intersection: Rect,
@@ -21,7 +21,7 @@ impl Road {
             GAP as u32 * 6 + 1,
         );
 
-        let mut sensors: SensorGrid = [[Rect::new(0, 0, 0, 0); 6]; 6];
+        let mut sensors: SensorGrid = [[Point::new(0, 0); 6]; 6];
 
         for x in 0..6 {
             for y in 0..6 {
@@ -31,6 +31,7 @@ impl Road {
                     GAP as u32,
                     GAP as u32,
                 )
+                .center()
             }
         }
 
