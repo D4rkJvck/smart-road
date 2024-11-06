@@ -51,4 +51,11 @@ impl Vehicle {
             _ => None,
         }
     }
+
+    pub fn distance_from(&self, point: Point) -> i32 {
+        let diff_x = self.area.center().x - point.x;
+        let diff_y = self.area.center().y - point.y;
+
+        diff_x * diff_y
+    }
 }

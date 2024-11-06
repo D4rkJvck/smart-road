@@ -22,14 +22,9 @@ impl Vehicle {
     }
 
     pub fn is_too_close_to(&self, other: &Self) -> bool {
-        let diff_x = self.area.center().x - other.area.center().x;
-        let diff_y = self.area.center().y - other.area.center().y;
-
-        let distance = diff_x * diff_y;
-
         self.direction == other.direction
             && self.route == other.route
-            && distance <= SAFETY_DISTANCE
+            && self.distance_from(other.area.center()) <= SAFETY_DISTANCE
     }
 
     pub fn is_behind(&self, other: &Self) -> bool {
@@ -46,12 +41,10 @@ impl Vehicle {
     }
 
     pub fn has_priority_over(&self, other: &Self) -> bool {
-        // Si le véhicule actuel a une priorité plus élevée (numéro plus bas) que l'autre
         if self.priority < other.priority {
             return true;
         }
 
-        // Si les deux véhicules ont la même priorité, on vérifie la distance de sécurité
         if self.priority == other.priority && !self.is_too_close_to(other) {
             return true;
         }
@@ -59,3 +52,4 @@ impl Vehicle {
         false
     }
 }
+ 

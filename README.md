@@ -6,6 +6,7 @@
 
 ## Table of Contents
 - [Overview](#overview)
+- [Tech Stack](#tech-stack)
 - [Installation](#installation)
     - [Cloning](#cloning)
     - [File structure](#file-structure)
@@ -50,6 +51,17 @@
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 
+## Tech Stack
+
+[![RUST](https://img.shields.io/badge/Rust-black?style=for-the-badge&logo=rust&logoColor=#E57324)](./src/main.rs)
+[![SHELL SCRIPT](https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white)](./gitify.sh)
+[![MARKDOWN](https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white)](#table-of-contents)
+[![GITHUB](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/D4rkJvck/smart-road.git)
+[![WARP](https://img.shields.io/badge/warp-01A4FF?style=for-the-badge&logo=warp&logoColor=white)]()
+[![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)]()
+[![MAC OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)]()
+
+
 ## Installation
 
 ### Cloning
@@ -69,6 +81,7 @@ $ code .
     +-- assets/
     |       |
     |       +---- cars/
+    |       |       |
     |       |       + black.png
     |       |       + police.png
     |       |       + red.png
@@ -80,12 +93,14 @@ $ code .
     +----- src/
     |       |
     |       +-- controllers/
+    |       |       |
     |       |       + mod.rs
     |       |       + stats.rs
     |       |
     |       +-- models/
     |       |       |
     |       |       +-- vehicle/
+    |       |       |       |
     |       |       |       + actions.rs
     |       |       |       + attributes.rs
     |       |       |       + enums.rs
@@ -95,6 +110,7 @@ $ code .
     |       |       + mod.rs
     |       |
     |       +--- views/
+    |       |       |
     |       |       + event.rs
     |       |       + mod.rs
     |       |       + render.rs
@@ -105,6 +121,7 @@ $ code .
     |       + utils.rs
     |
     +--- todos/
+    |       |
     |       + audit.todo
     |       + tasks.todo
     |
