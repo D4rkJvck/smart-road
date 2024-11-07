@@ -1,10 +1,7 @@
 mod controller;
 mod models;
-mod view;
-
-#[macro_use]
-mod macros;
 mod utils;
+mod view;
 
 pub use controller::App;
 pub use models::{Category, Direction, Route, Vehicle};

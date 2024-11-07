@@ -4,7 +4,7 @@ mod enums;
 mod state;
 
 use super::SensorGrid;
-use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::Rect;
 
@@ -51,9 +51,19 @@ impl Vehicle {
     }
 
     fn ajust_speed(&mut self, intersection: &Rect, others: Vec<&Vehicle>) {
+        let too_close = others.iter().any(|other| {
+            self.distance_from(other.area.center()) < SAFETY_DISTANCE && self.is_behind(other)
+        });
+
+        if too_close {
+            self.slow_down();
+        } else {
+            self.speed_up();
+        }
+
         match (self.into_area(intersection), self.crossed) {
             (true, false) => self.slow_down(),
-            (true, true) => self.speed = Speed::Normal,
+            (true, true) => self.speed_up(),
             (false, true) => self.speed_up(),
             _ => {}
         };

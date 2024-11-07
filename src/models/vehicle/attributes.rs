@@ -56,6 +56,6 @@ impl Vehicle {
         let diff_x = self.area.center().x - point.x;
         let diff_y = self.area.center().y - point.y;
 
-        diff_x * diff_y
+        (diff_x - diff_y).abs()
     }
 }

@@ -1,6 +1,6 @@
 mod vehicle;
 
-use crate::{GAP, MID_HEIGHT, MID_WIDTH};
+use crate::{initial_position, GAP, MID_HEIGHT, MID_WIDTH, SAFETY_DISTANCE};
 use sdl2::rect::{Point, Rect};
 pub use vehicle::{Category, Direction, Route, Vehicle};
 
@@ -40,5 +40,22 @@ impl Road {
             sensors,
             vehicles: Vec::new(),
         }
+    }
+
+    pub fn new_vehicle(&mut self, direction: Direction) {
+        let route = Route::random();
+        let category = Category::random();
+        let (x, y) = initial_position(&direction, &route);
+
+        let new_vehicle = Vehicle::new(x, y, direction, route, category);
+
+        let too_close = self.vehicles.iter().any(|other| {
+            new_vehicle.distance_from(other.area.center()) < SAFETY_DISTANCE
+                && new_vehicle.is_behind(other)
+        });
+
+        if !too_close {
+            self.vehicles.push(new_vehicle)
+        };
     }
 }

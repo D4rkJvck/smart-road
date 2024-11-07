@@ -23,7 +23,7 @@ impl App {
         loop {
             self.update()?;
             self.window.render(&self.road)?;
-            self.window.listen(&mut self.road.vehicles)?;
+            self.window.listen(&mut self.road)?;
 
             // thread::sleep(Duration::from_millis(32));
         }

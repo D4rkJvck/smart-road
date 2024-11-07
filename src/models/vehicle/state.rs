@@ -21,11 +21,11 @@ impl Vehicle {
             && self.area.bottom() > area.top()
     }
 
-    pub fn is_too_close_to(&self, other: &Self) -> bool {
-        self.direction == other.direction
-            && self.route == other.route
-            && self.distance_from(other.area.center()) <= SAFETY_DISTANCE
-    }
+    // pub fn is_too_close_to(&self, other: &Self) -> bool {
+    //     self.direction == other.direction
+    //         && self.route == other.route
+    //         && self.distance_from(other.area.center()) <= SAFETY_DISTANCE
+    // }
 
     pub fn is_behind(&self, other: &Self) -> bool {
         if self.direction != other.direction {
@@ -40,15 +40,15 @@ impl Vehicle {
         }
     }
 
-    pub fn has_priority_over(&self, other: &Self) -> bool {
-        if self.priority < other.priority {
-            return true;
-        }
+    // pub fn has_priority_over(&self, other: &Self) -> bool {
+    //     if self.priority < other.priority {
+    //         return true;
+    //     }
 
-        if self.priority == other.priority && !self.is_too_close_to(other) {
-            return true;
-        }
+    //     if self.priority == other.priority && !self.is_too_close_to(other) {
+    //         return true;
+    //     }
 
-        false
-    }
+    //     false
+    // }
 }

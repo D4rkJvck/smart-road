@@ -116,7 +116,6 @@ $ code .
     |       |       + render.rs
     |       |
     |       + lib.rs
-    |       + macros.rs
     |       + main.rs
     |       + utils.rs
     |
