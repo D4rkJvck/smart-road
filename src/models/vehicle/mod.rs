@@ -56,9 +56,9 @@ impl Vehicle {
             self.crossed,
             self.violate_safety_distance(others),
         ) {
-            (true, false, _) | (_, _, true) => self.slow_down(),
-            (true, true, false) | (false, true, false) => self.speed_up(),
-            _ => {}
+            (true, false, false) => self.speed = Speed::Slow,
+            (_, _, true) => self.slow_down(),
+            (_, _, false) => self.speed_up(),
         };
     }
 }

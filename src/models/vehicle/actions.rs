@@ -17,7 +17,7 @@ impl Vehicle {
         self.speed = match self.speed {
             Speed::Fast => Speed::Normal,
             Speed::Normal => Speed::Slow,
-            _ => self.speed,
+            _ => Speed::Stop,
         }
     }
 
