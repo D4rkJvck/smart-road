@@ -9,6 +9,21 @@ pub enum Speed {
     Fast,
 }
 
+impl Speed {
+    /// The velicity method gives
+    /// the amount of number of
+    /// pixels for the vehicle
+    /// to translate.
+    pub fn velocity(&self) -> i32 {
+        match self {
+            Self::Stop => 0,
+            Self::Slow => 1,
+            Self::Normal => 2,
+            Self::Fast => 3,
+        }
+    }
+}
+
 //_____________________________________________
 //
 

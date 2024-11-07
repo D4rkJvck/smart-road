@@ -45,7 +45,7 @@ Models:
             ✔ Cannot change the given route
 
         Handle Collision Detection:
-            ☐ Safety Distance (for vehicle  with same Direction)
+            ✔ Safety Distance (for vehicle  with same Direction)
             ☐ Intersection Cross
 
 

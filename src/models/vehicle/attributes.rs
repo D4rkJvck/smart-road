@@ -1,21 +1,9 @@
-use super::{Category, Direction, Route, Speed, Vehicle};
+use super::{Category, Direction, Route, Vehicle};
 use crate::models::SensorGrid;
 use sdl2::rect::Point;
+use std::time::Duration;
 
 impl Vehicle {
-    /// The velicity method gives
-    /// the amount of number of
-    /// pixels for the vehicle
-    /// to translate.
-    pub fn velocity(&self) -> i32 {
-        match self.speed {
-            Speed::Fast => 3,
-            Speed::Normal => 2,
-            Speed::Slow => 1,
-            Speed::Stop => 0,
-        }
-    }
-
     /// This method returns the
     /// rotation angle of the
     /// vehicle's picture
@@ -57,5 +45,9 @@ impl Vehicle {
         let diff_y = self.area.center().y - point.y;
 
         (diff_x - diff_y).abs()
+    }
+
+    pub fn time(&self) -> Duration {
+        self.time_interval.1 - self.time_interval.0
     }
 }

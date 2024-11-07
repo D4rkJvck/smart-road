@@ -3,7 +3,7 @@ use crate::models::SensorGrid;
 
 impl Vehicle {
     pub fn movement(&mut self) {
-        let speed = self.velocity();
+        let speed = Speed::velocity(&self.speed);
 
         match &self.direction {
             Direction::North => self.area.y -= speed,

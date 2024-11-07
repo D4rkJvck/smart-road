@@ -76,7 +76,7 @@ General:
 
     ☐ Is there a logical safe distance set up for the vehicles(a strictly positive and reasonable distance)?
 
-    ☐ Are vehicles kept in a safe distance(do not collide whenever one stops or reduces their velocity)?
+    ✔ Are vehicles kept in a safe distance(do not collide whenever one stops or reduces their velocity)?
 
     ✔ Do vehicles have at least 3 different velocities?
 

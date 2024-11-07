@@ -3,8 +3,10 @@ mod attributes;
 mod enums;
 mod state;
 
+use std::time::Instant;
+
 use super::SensorGrid;
-use crate::{SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::Rect;
 
@@ -19,10 +21,9 @@ pub struct Vehicle {
     // texture: Texture<'static>,
     pub crossed: bool,
     priority: bool,
-    // time: ?,
+    time_interval: (Instant, Instant),
     // distance: ?,
     // velocity: ?,
-    // sensor_range: Rect,
 }
 
 impl Vehicle {
@@ -35,8 +36,7 @@ impl Vehicle {
             category,
             crossed: false,
             priority: true,
-            // time: (0, 0),
-            // sensor_range: Rect::new(0, 0, 10, 10)
+            time_interval: (Instant::now(), Instant::now()),
         }
     }
 

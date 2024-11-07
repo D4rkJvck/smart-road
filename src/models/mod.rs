@@ -1,6 +1,6 @@
 mod vehicle;
 
-use crate::{initial_position, GAP, MID_HEIGHT, MID_WIDTH, SAFETY_DISTANCE};
+use crate::{initial_position, GAP, MID_HEIGHT, MID_WIDTH};
 use sdl2::rect::{Point, Rect};
 pub use vehicle::{Category, Direction, Route, Vehicle};
 
