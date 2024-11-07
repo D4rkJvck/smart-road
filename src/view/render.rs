@@ -24,6 +24,7 @@ impl Interface {
         let vehicle_texture = self
             .texture_creator
             .load_texture("./assets/cars/taxi.png")?;
+
         for vehicle in &road.vehicles {
             self.canvas.copy_ex(
                 &vehicle_texture,

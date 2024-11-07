@@ -8,7 +8,7 @@ use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::Rect;
 
-// #[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 
 pub struct Vehicle {
     pub area: Rect,
@@ -44,14 +44,14 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, intersection: &Rect, sensors: &SensorGrid) {
-        self.ajust_speed(intersection);
+    pub fn drive(&mut self, intersection: &Rect, sensors: &SensorGrid, others: Vec<&Vehicle>) {
+        self.ajust_speed(intersection, others);
         self.navigate(sensors);
         self.movement();
     }
 
-    fn ajust_speed(&mut self, area: &Rect) {
-        match (self.into_area(area), self.crossed) {
+    fn ajust_speed(&mut self, intersection: &Rect, others: Vec<&Vehicle>) {
+        match (self.into_area(intersection), self.crossed) {
             (true, false) => self.slow_down(),
             (true, true) => self.speed = Speed::Normal,
             (false, true) => self.speed_up(),

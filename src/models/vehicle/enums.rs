@@ -1,6 +1,6 @@
 use rand::{thread_rng, Rng};
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 
 pub enum Speed {
     Stop,
@@ -54,7 +54,7 @@ impl Route {
 //_____________________________________________
 //
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq)]
 pub enum Category {
     Police,
     Taxi,

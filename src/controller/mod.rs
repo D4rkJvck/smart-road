@@ -1,6 +1,6 @@
 mod stats;
 
-use crate::{models::Road, view::Interface, HEIGHT, TITLE, WIDTH};
+use crate::{models::Road, view::Interface, Vehicle, HEIGHT, TITLE, WIDTH};
 use stats::Stats;
 // use std::{thread, time::Duration};
 
@@ -32,10 +32,15 @@ impl App {
     fn update(&mut self) -> Result<(), String> {
         self.road.vehicles.retain(|vehicle| vehicle.is_visible());
 
-        self.road
-            .vehicles
-            .iter_mut()
-            .for_each(|vehicle| vehicle.drive(&self.road.intersection, &self.road.sensors));
+        let cloned_vehicles = self.road.vehicles.clone();
+
+        self.road.vehicles.iter_mut().for_each(|vehicle| {
+            let others: Vec<&Vehicle> = cloned_vehicles
+                .iter()
+                .filter(|other| *other != vehicle)
+                .collect();
+            vehicle.drive(&self.road.intersection, &self.road.sensors, others)
+        });
 
         Ok(())
     }
