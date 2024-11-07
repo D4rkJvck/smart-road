@@ -49,12 +49,7 @@ impl Road {
 
         let new_vehicle = Vehicle::new(x, y, direction, route, category);
 
-        let too_close = self.vehicles.iter().any(|other| {
-            new_vehicle.distance_from(other.area.center()) < SAFETY_DISTANCE
-                && new_vehicle.is_behind(other)
-        });
-
-        if !too_close {
+        if !new_vehicle.violate_safety_distance(self.vehicles.iter().collect()) {
             self.vehicles.push(new_vehicle)
         };
     }

@@ -25,7 +25,7 @@ impl App {
             self.window.render(&self.road)?;
             self.window.listen(&mut self.road)?;
 
-            // thread::sleep(Duration::from_millis(32));
+            // thread::sleep(Duration::from_millis(16));
         }
     }
 

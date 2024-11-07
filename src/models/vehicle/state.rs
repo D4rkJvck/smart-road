@@ -21,14 +21,14 @@ impl Vehicle {
             && self.area.bottom() > area.top()
     }
 
-    // pub fn is_too_close_to(&self, other: &Self) -> bool {
-    //     self.direction == other.direction
-    //         && self.route == other.route
-    //         && self.distance_from(other.area.center()) <= SAFETY_DISTANCE
-    // }
+    pub fn violate_safety_distance(&self, others: Vec<&Self>) -> bool {
+        others.iter().any(|other| {
+            self.distance_from(other.area.center()) < SAFETY_DISTANCE && self.is_behind(other)
+        })
+    }
 
     pub fn is_behind(&self, other: &Self) -> bool {
-        if self.direction != other.direction {
+        if self.direction != other.direction || self.route != other.route {
             return false;
         }
 
@@ -45,7 +45,7 @@ impl Vehicle {
     //         return true;
     //     }
 
-    //     if self.priority == other.priority && !self.is_too_close_to(other) {
+    //     if self.priority == other.priority && !self.violate_safety_distance(other) {
     //         return true;
     //     }
 

@@ -43,9 +43,9 @@ pub enum Route {
 
 impl Route {
     pub fn random() -> Self {
-        match thread_rng().gen_range(0..5) {
+        match thread_rng().gen_range(0..3) {
             0 => Self::Left,
-            1 | 2 => Self::Straight,
+            1 => Self::Straight,
             _ => Self::Right,
         }
     }

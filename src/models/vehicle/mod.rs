@@ -51,20 +51,13 @@ impl Vehicle {
     }
 
     fn ajust_speed(&mut self, intersection: &Rect, others: Vec<&Vehicle>) {
-        let too_close = others.iter().any(|other| {
-            self.distance_from(other.area.center()) < SAFETY_DISTANCE && self.is_behind(other)
-        });
-
-        if too_close {
-            self.slow_down();
-        } else {
-            self.speed_up();
-        }
-
-        match (self.into_area(intersection), self.crossed) {
-            (true, false) => self.slow_down(),
-            (true, true) => self.speed_up(),
-            (false, true) => self.speed_up(),
+        match (
+            self.into_area(intersection),
+            self.crossed,
+            self.violate_safety_distance(others),
+        ) {
+            (true, false, _) | (_, _, true) => self.slow_down(),
+            (true, true, false) | (false, true, false) => self.speed_up(),
             _ => {}
         };
     }
