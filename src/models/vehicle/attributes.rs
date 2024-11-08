@@ -29,13 +29,37 @@ impl Vehicle {
     pub fn collidable_sensors(&self, sensors: &SensorGrid) -> Vec<Point> {
         match (self.direction, self.route) {
             (dir::North, Route::Straight) => vec![sensors[4][4], sensors[4][2], sensors[4][1]],
-            (dir::North, Route::Left) => vec![sensors[3][4], sensors[3][3], sensors[3][2]],
+            (dir::North, Route::Left) => vec![
+                sensors[3][4],
+                sensors[3][3],
+                sensors[3][2],
+                sensors[2][2],
+                sensors[1][2],
+            ],
             (dir::East, Route::Straight) => vec![sensors[1][4], sensors[3][4], sensors[4][4]],
-            (dir::East, Route::Left) => vec![sensors[1][3], sensors[2][3], sensors[3][3]],
+            (dir::East, Route::Left) => vec![
+                sensors[1][3],
+                sensors[2][3],
+                sensors[3][3],
+                sensors[3][2],
+                sensors[3][1],
+            ],
             (dir::South, Route::Straight) => vec![sensors[1][1], sensors[1][3], sensors[1][4]],
-            (dir::South, Route::Left) => vec![sensors[2][1], sensors[2][2], sensors[2][3]],
+            (dir::South, Route::Left) => vec![
+                sensors[2][1],
+                sensors[2][2],
+                sensors[2][3],
+                sensors[3][3],
+                sensors[3][4],
+            ],
             (dir::West, Route::Straight) => vec![sensors[4][1], sensors[2][1], sensors[1][1]],
-            (dir::West, Route::Left) => vec![sensors[4][2], sensors[3][2], sensors[2][2]],
+            (dir::West, Route::Left) => vec![
+                sensors[4][2],
+                sensors[3][2],
+                sensors[2][2],
+                sensors[2][3],
+                sensors[2][4],
+            ],
             _ => vec![],
         }
     }

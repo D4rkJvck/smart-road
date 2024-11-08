@@ -1,9 +1,9 @@
-mod vehicle;
 mod utils;
+mod vehicle;
 
-use utils::initial_position;
 use crate::{GAP, MID_HEIGHT, MID_WIDTH};
 use sdl2::rect::{Point, Rect};
+use utils::initial_position;
 pub use vehicle::{Category, Direction, Route, Vehicle};
 
 pub type SensorGrid = [[Point; 6]; 6];
