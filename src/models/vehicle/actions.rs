@@ -1,4 +1,4 @@
-use super::{Direction, Route, Speed, Vehicle};
+use super::{Direction as dir, Route, Speed, Vehicle};
 use crate::models::SensorGrid;
 
 impl Vehicle {
@@ -6,10 +6,10 @@ impl Vehicle {
         let speed = Speed::velocity(&self.speed);
 
         match &self.direction {
-            Direction::North => self.area.y -= speed,
-            Direction::South => self.area.y += speed,
-            Direction::East => self.area.x += speed,
-            Direction::West => self.area.x -= speed,
+            dir::North => self.area.y -= speed,
+            dir::South => self.area.y += speed,
+            dir::East => self.area.x += speed,
+            dir::West => self.area.x -= speed,
         };
     }
 
@@ -50,10 +50,10 @@ impl Vehicle {
         self.crossed = true;
 
         self.direction = match self.direction {
-            Direction::North => Direction::East,
-            Direction::East => Direction::South,
-            Direction::South => Direction::West,
-            Direction::West => Direction::North,
+            dir::North => dir::East,
+            dir::East => dir::South,
+            dir::South => dir::West,
+            dir::West => dir::North,
         };
     }
 
@@ -61,10 +61,10 @@ impl Vehicle {
         self.crossed = true;
 
         self.direction = match self.direction {
-            Direction::North => Direction::West,
-            Direction::East => Direction::North,
-            Direction::South => Direction::East,
-            Direction::West => Direction::South,
+            dir::North => dir::West,
+            dir::East => dir::North,
+            dir::South => dir::East,
+            dir::West => dir::South,
         };
     }
 }

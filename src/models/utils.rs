@@ -1,6 +1,8 @@
-use crate::{
+use super::{
     Direction::{self, *},
     Route::{self, *},
+};
+use crate::{
     GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_HEIGHT as v_h,
     VEHICLE_WIDTH as v_w, WIDTH as w,
 };

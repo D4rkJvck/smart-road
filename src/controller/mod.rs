@@ -1,6 +1,6 @@
 mod stats;
 
-use crate::{models::Road, view::Interface, Vehicle, HEIGHT, TITLE, WIDTH};
+use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
 use stats::Stats;
 // use std::{thread, time::Duration};
 

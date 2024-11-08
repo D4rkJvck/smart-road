@@ -108,6 +108,7 @@ $ code .
     |       |       |       + state.rs
     |       |       |
     |       |       + mod.rs
+    |       |       + utils.rs
     |       |
     |       +--- views/
     |       |       |
@@ -117,7 +118,23 @@ $ code .
     |       |
     |       + lib.rs
     |       + main.rs
-    |       + utils.rs
+    |
+    +--- tests/
+    |       |
+    |       +-- integration/
+    |       |
+    |       +---- unit/
+    |               |
+    |               +-- vehicle/
+    |                       |
+    |                       +-- attributes/
+    |                       |       |
+    |                       |       +-- ...
+    |                       |
+    |                       +--- state/
+    |                               |
+    |                               + into_area_tests.rs
+    |                               + is_visible_tests.rs
     |
     +--- todos/
     |       |
