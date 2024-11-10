@@ -5,10 +5,11 @@ use smart_road::App;
 /// In this case, the main will just
 /// run the program and exit it when
 /// needed.
-fn main() -> Result<(), String> {
+#[tokio::main]
+async fn main() -> Result<(), String> {
     let mut app = App::new()?;
 
-    if let Err(msg) = app.run() {
+    if let Err(msg) = app.run().await {
         println!("{}", msg);
     };
 

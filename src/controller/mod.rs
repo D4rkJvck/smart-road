@@ -19,7 +19,7 @@ impl App {
         })
     }
 
-    pub fn run(&mut self) -> Result<(), String> {
+    pub async fn run(&mut self) -> Result<(), String> {
         loop {
             self.update()?;
             self.window.render(&self.road)?;
