@@ -45,20 +45,23 @@ impl Vehicle {
     /// translation by
     /// updating the position.
     pub fn drive(&mut self, intersection: &Rect, sensors: &SensorGrid, others: Vec<&Vehicle>) {
-        self.ajust_speed(intersection, others);
+        self.ajust_speed(sensors, others);
         self.navigate(sensors);
         self.movement();
     }
 
-    fn ajust_speed(&mut self, intersection: &Rect, others: Vec<&Vehicle>) {
-        match (
-            self.into_area(intersection),
-            self.crossed,
-            self.violate_safety_distance(others),
-        ) {
-            (true, false, false) => self.speed = Speed::Slow,
-            (_, _, true) => self.slow_down(),
-            (_, _, false) => self.speed_up(),
-        };
+    fn ajust_speed(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
+        if self.violate_safety_distance(others) {
+            self.slow_down();
+        } else {
+            match self.turning_point(sensors) {
+                None => {}
+                Some(point) => match (self.crossed, self.distance_from(point)) {
+                    (false, 1..=50) => self.speed = Speed::Slow,
+                    (false, 51..=100) => self.speed = Speed::Normal,
+                    _ => self.speed_up(),
+                },
+            };
+        }
     }
 }

@@ -2,7 +2,7 @@ mod stats;
 
 use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
 use stats::Stats;
-// use std::{thread, time::Duration};
+use std::{thread, time::Duration};
 
 pub struct App {
     window: Interface,
@@ -25,7 +25,7 @@ impl App {
             self.window.render(&self.road)?;
             self.window.listen(&mut self.road)?;
 
-            // thread::sleep(Duration::from_millis(16));
+            thread::sleep(Duration::from_millis(1));
         }
     }
 
