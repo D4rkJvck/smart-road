@@ -44,9 +44,10 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, intersection: &Rect, sensors: &SensorGrid, others: Vec<&Vehicle>) {
-        self.ajust_speed(sensors, others);
+    pub fn drive(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
+        self.ajust_speed(sensors, others.clone());
         self.navigate(sensors);
+        self.avoid_collision(others, sensors);
         self.movement();
     }
 
@@ -63,5 +64,9 @@ impl Vehicle {
                 },
             };
         }
+    }
+
+    fn avoid_collision(&mut self, others: Vec<&Vehicle>, sensors: &SensorGrid) {
+        
     }
 }

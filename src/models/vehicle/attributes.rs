@@ -64,6 +64,19 @@ impl Vehicle {
         }
     }
 
+    pub fn collidable_vehicles<'a>(&'a self, others: Vec<&'a Self>, sensors: &SensorGrid) -> Vec<&Self> {
+        others
+            .iter()
+            .filter(|other| {
+                other
+                    .collidable_sensors(sensors)
+                    .iter()
+                    .any(|sensor| self.collidable_sensors(sensors).contains(sensor))
+            })
+            .copied()
+            .collect()
+    }
+
     pub fn turning_point(&self, sensors: &SensorGrid) -> Option<Point> {
         match (self.direction, self.route) {
             (dir::North, Route::Right) => Some(sensors[5][5]),

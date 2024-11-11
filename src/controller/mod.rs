@@ -39,7 +39,8 @@ impl App {
                 .iter()
                 .filter(|other| *other != vehicle)
                 .collect();
-            vehicle.drive(&self.road.intersection, &self.road.sensors, others)
+            vehicle.drive(&self.road.sensors, others)
+            
         });
 
         Ok(())

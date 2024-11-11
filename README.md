@@ -19,7 +19,7 @@
     - [Window](#window)
     - [Events](#events)
     - [About](#about)
-- [Interface](#interface)
+- [Simulation](#simulation)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -214,7 +214,17 @@ For more in-depth information, refer to the [official SDL2 documentation](https:
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
 
-## Interface
+## Simulation
+
+The simulation begin with an empty road intersection with `3` lanes for each road.  
+Then whenever the user press the dedicated keyboard key, a vehicle spawns from a direction to a direction depending on the pressed key as follows:
+- `UP`: from **South** (`bottom`) to **North** (`top`).
+- `RIGHT`: from **West** (`left`) to **East** (`right`).
+- `DOWN`: from **North** (`top`) to **South** (`bottom`).
+- `LEFT`: from **East** (`right`) to **West** (`left`).
+- `R`: from a **Random** direction to the opposite direction.
+
+
 
 To open a new window, run the program.
 
@@ -232,7 +242,21 @@ $ cargo run
 
 ## Contributors
 
+### Collaborators
 [![jefaye](https://shields.io/badge/jefaye-Zone01-blue)](http://learn.zone01dakar.sn/git/jefaye)
+[![masamba](https://shields.io/badge/masamba-Zone01-blue)](http://learn.zone01dakar.sn/git/masamba)
+[![npouille](https://shields.io/badge/npouille-Zone01-blue)](http://learn.zone01dakar.sn/git/npouille)
+[![papebsow](https://shields.io/badge/papebsow-Zone01-blue)](http://learn.zone01dakar.sn/git/papebsow)
+
+### Peers
+
+[![preydedy](https://shields.io/badge/preydedy-Zone01-green)](http://learn.zone01dakar.sn/git/preydedy)
+[![eibounda](https://shields.io/badge/eibounda-Zone01-green)](http://learn.zone01dakar.sn/git/eibounda)
+
+### Testers
+
+[![mandaw](https://shields.io/badge/mandaw-Zone01-red)](http://learn.zone01dakar.sn/git/mandaw)
+[![nmbengue](https://shields.io/badge/nmbengue-Zone01-red)](http://learn.zone01dakar.sn/git/nmbengue)
 
 ## License
 
