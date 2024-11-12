@@ -26,6 +26,8 @@ impl Interface {
             .load_texture("./assets/cars/taxi.png")?;
 
         for vehicle in &road.vehicles {
+            self.canvas.draw_rect(vehicle.sensor_range())?;
+
             self.canvas.copy_ex(
                 &vehicle_texture,
                 None,

@@ -47,7 +47,7 @@ impl Vehicle {
     pub fn drive(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
         self.ajust_speed(sensors, others.clone());
         self.navigate(sensors);
-        self.avoid_collision(others, sensors);
+        self.detect_collision(others, sensors);
         self.movement();
     }
 
@@ -65,8 +65,16 @@ impl Vehicle {
             };
         }
     }
-
-    fn avoid_collision(&mut self, others: Vec<&Vehicle>, sensors: &SensorGrid) {
-        
+    pub fn detect_collision(&self, others: Vec<&Vehicle>, sensors: &SensorGrid) -> bool {
+        let collidable_vehicles = self.collidable_vehicles(others, sensors);
+        for other in &collidable_vehicles {
+           
+            if other.into_area(&self.sensor_range()) {
+                println!("Collision detected with vehicle at area {:?}", other.area);
+                return true;
+            }
+        }
+        // println!("No collision detected for vehicle at area {:?}", self.area);
+        false
     }
 }

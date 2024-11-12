@@ -1,6 +1,6 @@
 use super::{Category, Direction as dir, Route, Vehicle};
-use crate::models::SensorGrid;
-use sdl2::rect::Point;
+use crate::{models::SensorGrid, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use sdl2::rect::{Point, Rect};
 use std::time::Duration;
 
 impl Vehicle {
@@ -23,6 +23,15 @@ impl Vehicle {
             Category::Taxi => "./assets/cars/taxi.png",
             Category::Red => "./assets/cars/red.png",
             Category::Black => "./assets/cars/black.png",
+        }
+    }
+
+    pub fn sensor_range(&self) -> Rect {
+        match self.direction {
+            dir::North => Rect::new(self.area.x - 5, self.area.y - 150 + VEHICLE_HEIGHT, 50, 150),
+            dir::East => Rect::new(self.area.x, self.area.y - 5, 150, 50),
+            dir::South => Rect::new(self.area.x - 5, self.area.y, 50, 150),
+            dir::West => Rect::new(self.area.x - 150 + VEHICLE_WIDTH, self.area.y - 5, 150, 50),
         }
     }
 
@@ -64,7 +73,11 @@ impl Vehicle {
         }
     }
 
-    pub fn collidable_vehicles<'a>(&'a self, others: Vec<&'a Self>, sensors: &SensorGrid) -> Vec<&Self> {
+    pub fn collidable_vehicles<'a>(
+        &'a self,
+        others: Vec<&'a Self>,
+        sensors: &SensorGrid,
+    ) -> Vec<&Self> {
         others
             .iter()
             .filter(|other| {
