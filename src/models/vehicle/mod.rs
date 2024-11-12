@@ -46,9 +46,12 @@ impl Vehicle {
     /// updating the position.
     pub fn drive(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
         self.ajust_speed(sensors, others.clone());
-        self.navigate(sensors);
-        self.detect_collision(others, sensors);
-        self.movement();
+        if !self.detect_collision(others, sensors) {
+            self.navigate(sensors); 
+            self.movement();        
+        } else {
+            println!("Collision detected, vehicle is stopping.");
+        }
     }
 
     fn ajust_speed(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
