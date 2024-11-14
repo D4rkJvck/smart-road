@@ -1,5 +1,6 @@
 use super::Interface;
 use crate::models::Road;
+use crate::Route;
 use sdl2::image::LoadTexture;
 use sdl2::pixels::Color;
 
@@ -26,7 +27,9 @@ impl Interface {
             .load_texture("./assets/cars/taxi.png")?;
 
         for vehicle in &road.vehicles {
-            self.canvas.draw_rect(vehicle.sensor_range())?;
+            if vehicle.into_area(&road.intersection) && vehicle.route != Route::Right {
+                self.canvas.draw_rect(vehicle.sensor_range())?;
+            }
 
             self.canvas.copy_ex(
                 &vehicle_texture,

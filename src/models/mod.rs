@@ -51,7 +51,7 @@ impl Road {
 
         let new_vehicle = Vehicle::new(x, y, direction, route, category);
 
-        if !new_vehicle.violate_safety_distance(self.vehicles.iter().collect()) {
+        if !new_vehicle.violate_safety_distance(&self.vehicles.iter().collect()) {
             self.vehicles.push(new_vehicle)
         };
     }

@@ -1,4 +1,4 @@
-use super::{Direction, Vehicle};
+use super::{Direction as dir, Vehicle};
 use crate::{HEIGHT, SAFETY_DISTANCE, WIDTH};
 use sdl2::rect::Rect;
 
@@ -21,7 +21,7 @@ impl Vehicle {
             && self.area.bottom() > area.top()
     }
 
-    pub fn violate_safety_distance(&self, others: Vec<&Self>) -> bool {
+    pub fn violate_safety_distance(&self, others: &Vec<&Self>) -> bool {
         others.iter().any(|other| {
             self.distance_from(other.area.center()) < SAFETY_DISTANCE && self.is_behind(other)
         })
@@ -33,22 +33,19 @@ impl Vehicle {
         }
 
         match self.direction {
-            Direction::North => self.area.y > other.area.y,
-            Direction::East => self.area.x < other.area.x,
-            Direction::South => self.area.y < other.area.y,
-            Direction::West => self.area.x > other.area.x,
+            dir::North => self.area.y > other.area.y,
+            dir::East => self.area.x < other.area.x,
+            dir::South => self.area.y < other.area.y,
+            dir::West => self.area.x > other.area.x,
         }
     }
 
-    // pub fn has_priority_over(&self, other: &Self) -> bool {
-    //     if self.priority < other.priority {
-    //         return true;
-    //     }
-
-    //     if self.priority == other.priority && !self.violate_safety_distance(other) {
-    //         return true;
-    //     }
-
-    //     false
-    // }
+    pub fn has_priority_over(&self, other: &Self) -> bool {
+        match self.direction {
+            dir::North => other.direction == dir::West,
+            dir::East => other.direction == dir::North,
+            dir::South => other.direction == dir::East,
+            dir::West => other.direction == dir::South,
+        }
+    }
 }

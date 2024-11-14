@@ -3,31 +3,31 @@ use crate::models::SensorGrid;
 
 impl Vehicle {
     pub fn movement(&mut self) {
-        let speed = Speed::velocity(&self.speed);
+        // let speed = Speed::velocity(&self.speed);
 
         match &self.direction {
-            dir::North => self.area.y -= speed,
-            dir::South => self.area.y += speed,
-            dir::East => self.area.x += speed,
-            dir::West => self.area.x -= speed,
+            dir::North => self.area.y -= self.speed,
+            dir::South => self.area.y += self.speed,
+            dir::East => self.area.x += self.speed,
+            dir::West => self.area.x -= self.speed,
         };
     }
 
-    pub fn slow_down(&mut self) {
-        self.speed = match self.speed {
-            Speed::Fast => Speed::Normal,
-            Speed::Normal => Speed::Slow,
-            _ => Speed::Stop,
-        }
-    }
+    // pub fn slow_down(&mut self) {
+    //     self.speed = match self.speed {
+    //         Speed::Fast => Speed::Normal,
+    //         Speed::Normal => Speed::Slow,
+    //         _ => Speed::Stop,
+    //     }
+    // }
 
-    pub fn speed_up(&mut self) {
-        self.speed = match self.speed {
-            Speed::Stop => Speed::Slow,
-            Speed::Slow => Speed::Normal,
-            _ => Speed::Fast,
-        }
-    }
+    // pub fn speed_up(&mut self) {
+    //     self.speed = match self.speed {
+    //         Speed::Stop => Speed::Slow,
+    //         Speed::Slow => Speed::Normal,
+    //         _ => Speed::Fast,
+    //     }
+    // }
 
     pub fn navigate(&mut self, sensors: &SensorGrid) {
         let turning_point = match self.turning_point(sensors) {
@@ -42,7 +42,7 @@ impl Vehicle {
         match self.route {
             Route::Right => self.turn_right(),
             Route::Left => self.turn_left(),
-            Route::Straight => self.speed_up(),
+            Route::Straight => {},
         }
     }
 

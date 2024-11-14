@@ -1,5 +1,5 @@
 use super::{Category, Direction as dir, Route, Vehicle};
-use crate::{models::SensorGrid, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{models::SensorGrid, SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 use sdl2::rect::{Point, Rect};
 use std::time::Duration;
 
@@ -28,54 +28,66 @@ impl Vehicle {
 
     pub fn sensor_range(&self) -> Rect {
         match self.direction {
-            dir::North => Rect::new(self.area.x - 5, self.area.y - 150 + VEHICLE_HEIGHT, 50, 150),
-            dir::East => Rect::new(self.area.x, self.area.y - 5, 150, 50),
-            dir::South => Rect::new(self.area.x - 5, self.area.y, 50, 150),
-            dir::West => Rect::new(self.area.x - 150 + VEHICLE_WIDTH, self.area.y - 5, 150, 50),
+            dir::North => Rect::new(
+                self.area.x,
+                self.area.y - SAFETY_DISTANCE,
+                40,
+                SAFETY_DISTANCE as u32,
+            ),
+            dir::East => Rect::new(
+                self.area.x + VEHICLE_WIDTH,
+                self.area.y,
+                SAFETY_DISTANCE as u32,
+                40,
+            ),
+            dir::South => Rect::new(
+                self.area.x,
+                self.area.y + VEHICLE_HEIGHT,
+                40,
+                SAFETY_DISTANCE as u32,
+            ),
+            dir::West => Rect::new(
+                self.area.x - SAFETY_DISTANCE,
+                self.area.y,
+                SAFETY_DISTANCE as u32,
+                40,
+            ),
         }
     }
 
     pub fn collidable_sensors(&self, sensors: &SensorGrid) -> Vec<Point> {
         match (self.direction, self.route) {
-            (dir::North, Route::Straight) => vec![sensors[4][4], sensors[4][2], sensors[4][1]],
-            (dir::North, Route::Left) => vec![
-                sensors[3][4],
-                sensors[3][3],
-                sensors[3][2],
-                sensors[2][2],
-                sensors[1][2],
-            ],
-            (dir::East, Route::Straight) => vec![sensors[1][4], sensors[3][4], sensors[4][4]],
-            (dir::East, Route::Left) => vec![
-                sensors[1][3],
-                sensors[2][3],
-                sensors[3][3],
-                sensors[3][2],
-                sensors[3][1],
-            ],
-            (dir::South, Route::Straight) => vec![sensors[1][1], sensors[1][3], sensors[1][4]],
-            (dir::South, Route::Left) => vec![
-                sensors[2][1],
-                sensors[2][2],
-                sensors[2][3],
-                sensors[3][3],
-                sensors[3][4],
-            ],
-            (dir::West, Route::Straight) => vec![sensors[4][1], sensors[2][1], sensors[1][1]],
-            (dir::West, Route::Left) => vec![
-                sensors[4][2],
-                sensors[3][2],
-                sensors[2][2],
-                sensors[2][3],
-                sensors[2][4],
-            ],
+            (dir::North, Route::Straight) => {
+                vec![sensors[4][4], sensors[4][3], sensors[4][2], sensors[4][1]]
+            }
+            (dir::North, Route::Left) => {
+                vec![sensors[3][4], sensors[3][3], sensors[3][2], sensors[3][1]]
+            }
+            (dir::East, Route::Straight) => {
+                vec![sensors[1][4], sensors[2][4], sensors[3][4], sensors[4][4]]
+            }
+            (dir::East, Route::Left) => {
+                vec![sensors[1][3], sensors[2][3], sensors[3][3], sensors[4][3]]
+            }
+            (dir::South, Route::Straight) => {
+                vec![sensors[1][1], sensors[1][2], sensors[1][3], sensors[1][4]]
+            }
+            (dir::South, Route::Left) => {
+                vec![sensors[2][1], sensors[2][2], sensors[2][3], sensors[2][4]]
+            }
+            (dir::West, Route::Straight) => {
+                vec![sensors[4][1], sensors[3][1], sensors[2][1], sensors[1][1]]
+            }
+            (dir::West, Route::Left) => {
+                vec![sensors[4][2], sensors[3][2], sensors[2][2], sensors[1][2]]
+            }
             _ => vec![],
         }
     }
 
     pub fn collidable_vehicles<'a>(
         &'a self,
-        others: Vec<&'a Self>,
+        others: &Vec<&'a Self>,
         sensors: &SensorGrid,
     ) -> Vec<&Self> {
         others
