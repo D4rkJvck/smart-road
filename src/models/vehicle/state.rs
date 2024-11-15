@@ -1,6 +1,6 @@
-use super::{Direction as dir, Vehicle};
+use super::{Direction as dir, Route, Vehicle};
 use crate::{HEIGHT, SAFETY_DISTANCE, WIDTH};
-use sdl2::rect::Rect;
+use sdl2::rect::{Point, Rect};
 
 impl Vehicle {
     /// This function is crucial when
@@ -22,7 +22,7 @@ impl Vehicle {
     }
 
     pub(in crate::models) fn too_close_to(&self, other: &Self) -> bool {
-        self.is_behind(other) && self.distance_from(other.area.center()) < SAFETY_DISTANCE / 2
+        self.is_behind(other) && self.distance_from(other.area.center()) < SAFETY_DISTANCE
     }
 
     pub(super) fn is_behind(&self, other: &Self) -> bool {
@@ -42,6 +42,22 @@ impl Vehicle {
             dir::East => other.direction == dir::North,
             dir::South => other.direction == dir::East,
             dir::West => other.direction == dir::South,
+        }
+    }
+
+    pub(super) fn passed_sensor(&self, sensor: Point) -> bool {
+        let center = self.area.center();
+
+        match (self.direction, self.route) {
+            (dir::North, Route::Straight) => center.y < sensor.y,
+            (dir::North, Route::Left) => center.y < sensor.y || center.x < sensor.x,
+            (dir::East, Route::Straight) => center.x > sensor.x,
+            (dir::East, Route::Left) => center.x > sensor.x || center.y < sensor.y,
+            (dir::South, Route::Straight) => center.y > sensor.y,
+            (dir::South, Route::Left) => center.y > sensor.y || center.x > sensor.x,
+            (dir::West, Route::Straight) => center.x < sensor.x,
+            (dir::West, Route::Left) => center.x < sensor.x || center.y > sensor.y,
+            _ => false,
         }
     }
 }

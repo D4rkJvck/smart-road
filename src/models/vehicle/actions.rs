@@ -35,6 +35,16 @@ impl Vehicle {
         };
     }
 
+    pub(super) fn pass_sensor(&mut self) {
+        if let Some(next) = self.shared_sensors.first() {
+            if self.passed_sensor(*next) {
+                self.shared_sensors.reverse();
+                let _ = self.shared_sensors.pop();
+                self.shared_sensors.reverse();
+            }
+        };
+    }
+
     pub(super) fn navigate(&mut self) {
         let turning_point = match self.turn_sensor {
             Some(point) => point,
@@ -49,7 +59,9 @@ impl Vehicle {
             Route::Right => self.turn_right(),
             Route::Left => self.turn_left(),
             Route::Straight => {}
-        }
+        };
+
+        self.pass_sensor();
     }
 
     fn turn_right(&mut self) {

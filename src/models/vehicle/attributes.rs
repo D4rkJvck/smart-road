@@ -1,4 +1,4 @@
-use super::{Direction as dir, Vehicle};
+use super::{Direction as dir, Route, Vehicle};
 use crate::{SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 use sdl2::rect::{Point, Rect};
 
@@ -24,31 +24,17 @@ impl Vehicle {
     }
 
     pub fn sensor_range(&self) -> Rect {
+        let range = match self.route {
+            Route::Left => SAFETY_DISTANCE + 50,
+            Route::Straight => SAFETY_DISTANCE + 100,
+            _ => 0,
+        };
+
         match self.direction {
-            dir::North => Rect::new(
-                self.area.x,
-                self.area.y - SAFETY_DISTANCE,
-                40,
-                SAFETY_DISTANCE as u32,
-            ),
-            dir::East => Rect::new(
-                self.area.x + VEHICLE_WIDTH,
-                self.area.y,
-                SAFETY_DISTANCE as u32,
-                40,
-            ),
-            dir::South => Rect::new(
-                self.area.x,
-                self.area.y + VEHICLE_HEIGHT,
-                40,
-                SAFETY_DISTANCE as u32,
-            ),
-            dir::West => Rect::new(
-                self.area.x - SAFETY_DISTANCE,
-                self.area.y,
-                SAFETY_DISTANCE as u32,
-                40,
-            ),
+            dir::North => Rect::new(self.area.x, self.area.y - range, 40, range as u32),
+            dir::East => Rect::new(self.area.x + VEHICLE_WIDTH, self.area.y, range as u32, 40),
+            dir::South => Rect::new(self.area.x, self.area.y + VEHICLE_HEIGHT, 40, range as u32),
+            dir::West => Rect::new(self.area.x - range, self.area.y, range as u32, 40),
         }
     }
 
