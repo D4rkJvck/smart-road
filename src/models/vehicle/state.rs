@@ -21,23 +21,19 @@ impl Vehicle {
             && self.area.bottom() > area.top()
     }
 
-    pub fn violate_safety_distance(&self, others: &Vec<&Self>) -> bool {
-        others.iter().any(|other| {
-            self.distance_from(other.area.center()) < SAFETY_DISTANCE && self.is_behind(other)
-        })
+    pub fn too_close_to(&self, other: &Self) -> bool {
+        self.is_behind(other) && self.distance_from(other.area.center()) < SAFETY_DISTANCE
     }
 
     pub fn is_behind(&self, other: &Self) -> bool {
-        if self.direction != other.direction || self.route != other.route {
-            return false;
-        }
-
-        match self.direction {
-            dir::North => self.area.y > other.area.y,
-            dir::East => self.area.x < other.area.x,
-            dir::South => self.area.y < other.area.y,
-            dir::West => self.area.x > other.area.x,
-        }
+        self.direction == other.direction
+            && self.route == other.route
+            && match self.direction {
+                dir::North => self.area.y > other.area.y,
+                dir::East => self.area.x < other.area.x,
+                dir::South => self.area.y < other.area.y,
+                dir::West => self.area.x > other.area.x,
+            }
     }
 
     pub fn has_priority_over(&self, other: &Self) -> bool {

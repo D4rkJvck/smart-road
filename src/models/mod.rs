@@ -6,11 +6,12 @@ use sdl2::rect::{Point, Rect};
 use utils::initial_position;
 pub use vehicle::{Category, Direction, Route, Vehicle};
 
-pub type SensorGrid = [[Point; 6]; 6];
+pub type Sensors = [[Point; 6]; 6];
 
 pub struct Road {
     pub intersection: Rect,
-    pub sensors: SensorGrid,
+    pub collision_area: Rect,
+    pub sensors: Sensors,
     pub vehicles: Vec<Vehicle>,
 }
 
@@ -23,7 +24,14 @@ impl Road {
             GAP as u32 * 6 + 1,
         );
 
-        let mut sensors: SensorGrid = [[Point::new(0, 0); 6]; 6];
+        let collision_area = Rect::new(
+            intersection.x + GAP,
+            intersection.y + GAP,
+            intersection.width() - GAP as u32 * 2,
+            intersection.height() - GAP as u32 * 2,
+        );
+
+        let mut sensors: Sensors = [[Point::new(0, 0); 6]; 6];
 
         for x in 0..6 {
             for y in 0..6 {
@@ -39,6 +47,7 @@ impl Road {
 
         Self {
             intersection,
+            collision_area,
             sensors,
             vehicles: Vec::new(),
         }
@@ -51,8 +60,14 @@ impl Road {
 
         let new_vehicle = Vehicle::new(x, y, direction, route, category);
 
-        if !new_vehicle.violate_safety_distance(&self.vehicles.iter().collect()) {
-            self.vehicles.push(new_vehicle)
-        };
+        if self
+            .vehicles
+            .iter()
+            .any(|other| new_vehicle.too_close_to(other))
+        {
+            return;
+        }
+
+        self.vehicles.push(new_vehicle);
     }
 }

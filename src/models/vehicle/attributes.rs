@@ -1,5 +1,5 @@
 use super::{Category, Direction as dir, Route, Vehicle};
-use crate::{models::SensorGrid, SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{models::Sensors, SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 use sdl2::rect::{Point, Rect};
 use std::time::Duration;
 
@@ -55,7 +55,7 @@ impl Vehicle {
         }
     }
 
-    pub fn collidable_sensors(&self, sensors: &SensorGrid) -> Vec<Point> {
+    pub fn collidable_sensors(&self, sensors: &Sensors) -> Vec<Point> {
         match (self.direction, self.route) {
             (dir::North, Route::Straight) => {
                 vec![sensors[4][4], sensors[4][3], sensors[4][2], sensors[4][1]]
@@ -88,7 +88,7 @@ impl Vehicle {
     pub fn collidable_vehicles<'a>(
         &'a self,
         others: &Vec<&'a Self>,
-        sensors: &SensorGrid,
+        sensors: &Sensors,
     ) -> Vec<&Self> {
         others
             .iter()
@@ -102,7 +102,7 @@ impl Vehicle {
             .collect()
     }
 
-    pub fn turning_point(&self, sensors: &SensorGrid) -> Option<Point> {
+    pub fn turning_point(&self, sensors: &Sensors) -> Option<Point> {
         match (self.direction, self.route) {
             (dir::North, Route::Right) => Some(sensors[5][5]),
             (dir::North, Route::Left) => Some(sensors[3][2]),

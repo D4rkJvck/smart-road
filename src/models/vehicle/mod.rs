@@ -3,8 +3,8 @@ mod attributes;
 mod enums;
 mod state;
 
-use super::SensorGrid;
-use crate::{TIME, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use super::Sensors;
+use crate::{GAP, MID_HEIGHT, MID_WIDTH, TIME, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::Rect;
 use std::time::Instant;
@@ -16,12 +16,10 @@ pub struct Vehicle {
     direction: Direction,
     pub route: Route,
     pub category: Category,
-    // texture: Texture<'static>,
     pub crossed: bool,
     priority: bool,
     time_interval: (Instant, Instant),
     distance: i32,
-    // velocity: ?,
 }
 
 impl Vehicle {
@@ -49,23 +47,19 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
-        self.ajust_speed(sensors, others);
-        // if !self.detect_collision(others, sensors) {
+    pub fn drive(&mut self, collision_area: &Rect, sensors: &Sensors, others: Vec<&Vehicle>) {
+        self.ajust_speed(collision_area, sensors, others);
         self.navigate(sensors);
         self.movement();
-        // } else {
-        //     println!("Collision detected, vehicle is stopping.");
-        // }
     }
 
-    fn ajust_speed(&mut self, sensors: &SensorGrid, others: Vec<&Vehicle>) {
-        if self.violate_safety_distance(&others) {
+    fn ajust_speed(&mut self, collision_area: &Rect, sensors: &Sensors, others: Vec<&Vehicle>) {
+        if others.iter().any(|other| self.too_close_to(other)) {
             self.speed = 0;
-            return
+            return;
         }
-        
-        if let Some(v) = self.detect_collision(&others, sensors) {
+
+        if let Some(v) = self.detect_collision(collision_area, sensors, others) {
             self.speed = self.distance_from(v.area.center()) / TIME;
             return;
         };
@@ -82,9 +76,14 @@ impl Vehicle {
         };
     }
 
-    pub fn detect_collision<'a>(&'a self, others: &'a Vec<&Vehicle>, sensors: &SensorGrid) -> Option<&Vehicle> {
-        if self.route == Route::Right {
-            return None
+    pub fn detect_collision<'a>(
+        &'a self,
+        collision_area: &Rect,
+        sensors: &Sensors,
+        others: Vec<&'a Vehicle>,
+    ) -> Option<&Vehicle> {
+        if self.route == Route::Right || !self.into_area(collision_area) {
+            return None;
         };
 
         let mut collidable_vehicles = self.collidable_vehicles(&others, sensors);
@@ -92,11 +91,10 @@ impl Vehicle {
 
         for other in collidable_vehicles {
             if other.into_area(&self.sensor_range()) {
-                println!("Collision detected with vehicle at area {:?}", other.area.center());
                 return Some(other);
             }
         }
-        // println!("No collision detected for vehicle at area {:?}", self.area);
+
         None
     }
 }

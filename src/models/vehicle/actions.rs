@@ -1,5 +1,5 @@
-use super::{Direction as dir, Route, Speed, Vehicle};
-use crate::models::SensorGrid;
+use super::{Direction as dir, Route, Vehicle};
+use crate::models::Sensors;
 
 impl Vehicle {
     pub fn movement(&mut self) {
@@ -29,7 +29,7 @@ impl Vehicle {
     //     }
     // }
 
-    pub fn navigate(&mut self, sensors: &SensorGrid) {
+    pub fn navigate(&mut self, sensors: &Sensors) {
         let turning_point = match self.turning_point(sensors) {
             Some(point) => point,
             None => return,
@@ -42,7 +42,7 @@ impl Vehicle {
         match self.route {
             Route::Right => self.turn_right(),
             Route::Left => self.turn_left(),
-            Route::Straight => {},
+            Route::Straight => {}
         }
     }
 
