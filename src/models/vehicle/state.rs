@@ -21,11 +21,11 @@ impl Vehicle {
             && self.area.bottom() > area.top()
     }
 
-    pub fn too_close_to(&self, other: &Self) -> bool {
-        self.is_behind(other) && self.distance_from(other.area.center()) < SAFETY_DISTANCE
+    pub(in crate::models) fn too_close_to(&self, other: &Self) -> bool {
+        self.is_behind(other) && self.distance_from(other.area.center()) < SAFETY_DISTANCE / 2
     }
 
-    pub fn is_behind(&self, other: &Self) -> bool {
+    pub(super) fn is_behind(&self, other: &Self) -> bool {
         self.direction == other.direction
             && self.route == other.route
             && match self.direction {
@@ -36,7 +36,7 @@ impl Vehicle {
             }
     }
 
-    pub fn has_priority_over(&self, other: &Self) -> bool {
+    pub(super) fn has_priority_over(&self, other: &Self) -> bool {
         match self.direction {
             dir::North => other.direction == dir::West,
             dir::East => other.direction == dir::North,

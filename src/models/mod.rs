@@ -3,8 +3,9 @@ mod vehicle;
 
 use crate::{GAP, MID_HEIGHT, MID_WIDTH};
 use sdl2::rect::{Point, Rect};
-use utils::{get_initial_position, get_shared_sensors, get_turn_sensor};
-pub use vehicle::{Direction, Route, Vehicle};
+use utils::{get_shared_sensors, get_turn_sensor};
+use vehicle::Route;
+pub use vehicle::{Direction, Vehicle};
 
 pub type Sensors = [[Point; 6]; 6];
 
@@ -55,12 +56,11 @@ impl Road {
 
     pub fn new_vehicle(&mut self, direction: Direction) {
         let route = Route::random();
-        let (x, y, distance) = get_initial_position(&direction, &route);
 
         if self
             .vehicles
             .iter()
-            .any(|other| Vehicle::new(x, y, direction, route, vec![], None, 0).too_close_to(other))
+            .any(|other| Vehicle::new(direction, route, vec![], None).too_close_to(other))
         {
             return;
         };
@@ -68,14 +68,7 @@ impl Road {
         let shared_sensors = get_shared_sensors(&direction, &route, &self.sensors);
         let turn_sensor = get_turn_sensor(&direction, &route, &self.sensors);
 
-        self.vehicles.push(Vehicle::new(
-            x,
-            y,
-            direction,
-            route,
-            shared_sensors,
-            turn_sensor,
-            distance,
-        ));
+        self.vehicles
+            .push(Vehicle::new(direction, route, shared_sensors, turn_sensor));
     }
 }

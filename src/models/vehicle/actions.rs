@@ -1,7 +1,9 @@
 use super::{Direction as dir, Route, Vehicle};
+use crate::TIME;
+use sdl2::rect::Rect;
 
 impl Vehicle {
-    pub fn movement(&mut self) {
+    pub(super) fn movement(&mut self) {
         // let speed = Speed::velocity(&self.speed);
         match &self.direction {
             dir::North => self.area.y -= self.speed,
@@ -11,7 +13,29 @@ impl Vehicle {
         };
     }
 
-    pub fn navigate(&mut self) {
+    pub(super) fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
+        if others.iter().any(|other| self.too_close_to(other)) {
+            self.speed = 0;
+            return;
+        }
+
+        if let Some(v) = self.detect_collision(collision_area, others) {
+            self.speed = self.distance_from(v.area.center()) / TIME;
+            return;
+        };
+
+        match self.turn_sensor {
+            None => self.speed = self.distance / TIME,
+            Some(point) => {
+                self.speed = match (self.turned, self.distance_from(point)) {
+                    (false, 1..=20) => 1,
+                    _ => self.distance / TIME,
+                }
+            }
+        };
+    }
+
+    pub(super) fn navigate(&mut self) {
         let turning_point = match self.turn_sensor {
             Some(point) => point,
             None => return,

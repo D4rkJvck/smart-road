@@ -16,6 +16,13 @@ impl Vehicle {
         }
     }
 
+    pub(super) fn distance_from(&self, point: Point) -> i32 {
+        let diff_x = self.area.center().x - point.x;
+        let diff_y = self.area.center().y - point.y;
+
+        (diff_x - diff_y).abs()
+    }
+
     pub fn sensor_range(&self) -> Rect {
         match self.direction {
             dir::North => Rect::new(
@@ -45,7 +52,7 @@ impl Vehicle {
         }
     }
 
-    pub fn collidable_vehicles<'a>(&'a self, others: &Vec<&'a Self>) -> Vec<&Self> {
+    pub(super) fn collidable_vehicles<'a>(&'a self, others: &Vec<&'a Self>) -> Vec<&Self> {
         others
             .iter()
             .filter(|other| {
@@ -58,10 +65,24 @@ impl Vehicle {
             .collect()
     }
 
-    pub fn distance_from(&self, point: Point) -> i32 {
-        let diff_x = self.area.center().x - point.x;
-        let diff_y = self.area.center().y - point.y;
+    pub(super) fn detect_collision<'a>(
+        &'a self,
+        collision_area: &Rect,
+        others: Vec<&'a Vehicle>,
+    ) -> Option<&Vehicle> {
+        if !self.into_area(collision_area) {
+            return None;
+        };
 
-        (diff_x - diff_y).abs()
+        let mut collidable_vehicles = self.collidable_vehicles(&others);
+        collidable_vehicles.sort_by_key(|v| self.distance_from(v.area.center()));
+
+        for other in collidable_vehicles {
+            if other.into_area(&self.sensor_range()) {
+                return Some(other);
+            }
+        }
+
+        None
     }
 }

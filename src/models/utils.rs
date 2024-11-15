@@ -1,16 +1,17 @@
-use sdl2::rect::Point;
-
 use super::{
-    Direction::{self, *},
-    Route::{self, *},
+    vehicle::{
+        Direction::{self, *},
+        Route::{self, *},
+    },
     Sensors,
 };
 use crate::{
     GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_HEIGHT as v_h,
     VEHICLE_WIDTH as v_w, WIDTH as w,
 };
+use sdl2::rect::Point;
 
-pub fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, i32) {
+pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, i32) {
     match (&direction, &route) {
         //
         (North, Right) => (m_w + g * 2 + 5, h, 300),
@@ -34,7 +35,11 @@ pub fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, 
 //____________________________________________________________________________________________________________
 //
 
-pub fn get_shared_sensors(direction: &Direction, route: &Route, sensors: &Sensors) -> Vec<Point> {
+pub(super) fn get_shared_sensors(
+    direction: &Direction,
+    route: &Route,
+    sensors: &Sensors,
+) -> Vec<Point> {
     match (direction, route) {
         (North, Straight) => vec![sensors[4][4], sensors[4][3], sensors[4][2], sensors[4][1]],
         (North, Left) => vec![
@@ -75,7 +80,11 @@ pub fn get_shared_sensors(direction: &Direction, route: &Route, sensors: &Sensor
 //____________________________________________________________________________________________________________
 //
 
-pub fn get_turn_sensor(direction: &Direction, route: &Route, sensors: &Sensors) -> Option<Point> {
+pub(super) fn get_turn_sensor(
+    direction: &Direction,
+    route: &Route,
+    sensors: &Sensors,
+) -> Option<Point> {
     match (direction, route) {
         (North, Right) => Some(sensors[5][5]),
         (North, Left) => Some(sensors[3][2]),

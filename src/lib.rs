@@ -3,7 +3,7 @@ mod models;
 mod view;
 
 pub use controller::App;
-pub use models::{Direction, Route, Vehicle};
+pub use models::{Direction, Vehicle};
 
 const TITLE: &str = "SMART-ROAD";
 const WIDTH: i32 = 800;
@@ -13,5 +13,5 @@ const MID_HEIGHT: i32 = HEIGHT / 2;
 const GAP: i32 = 50;
 const VEHICLE_WIDTH: i32 = 40;
 const VEHICLE_HEIGHT: i32 = 40;
-const SAFETY_DISTANCE: i32 = 160;
+const SAFETY_DISTANCE: i32 = 200;
 const TIME: i32 = 300;
