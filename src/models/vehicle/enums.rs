@@ -65,25 +65,3 @@ impl Route {
         }
     }
 }
-
-//_____________________________________________
-//
-
-#[derive(Clone, Copy, PartialEq)]
-pub enum Category {
-    Police,
-    Taxi,
-    Red,
-    Black,
-}
-
-impl Category {
-    pub fn random() -> Self {
-        match thread_rng().gen_range(0..11) {
-            0 => Self::Police,
-            1..=5 => Self::Taxi,
-            6..=8 => Self::Black,
-            _ => Self::Red,
-        }
-    }
-}

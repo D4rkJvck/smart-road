@@ -20,11 +20,6 @@ View:
 Models:
     Road:
         ✔ Initialize Model
-        ✔ Define Lines to draw
-
-    Intersection:
-        ☐ Initialize Model
-        ☐ Define Sensors (36 squares drawn by the road lines)
 
     Vehicles:
         ✔ Initialize Model
@@ -34,7 +29,7 @@ Models:
             ☐ distance
             ☐ velocity
 
-        ! Insert Image
+        ✔ Insert Image
         ✔ Implement Movement
         ✔ Implement Velocity Levels (Must have 3 different velocities)
 

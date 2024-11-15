@@ -3,7 +3,7 @@ mod models;
 mod view;
 
 pub use controller::App;
-pub use models::{Category, Direction, Route, Vehicle};
+pub use models::{Direction, Route, Vehicle};
 
 const TITLE: &str = "SMART-ROAD";
 const WIDTH: i32 = 800;

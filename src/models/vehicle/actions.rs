@@ -1,10 +1,8 @@
 use super::{Direction as dir, Route, Vehicle};
-use crate::models::Sensors;
 
 impl Vehicle {
     pub fn movement(&mut self) {
         // let speed = Speed::velocity(&self.speed);
-
         match &self.direction {
             dir::North => self.area.y -= self.speed,
             dir::South => self.area.y += self.speed,
@@ -13,29 +11,13 @@ impl Vehicle {
         };
     }
 
-    // pub fn slow_down(&mut self) {
-    //     self.speed = match self.speed {
-    //         Speed::Fast => Speed::Normal,
-    //         Speed::Normal => Speed::Slow,
-    //         _ => Speed::Stop,
-    //     }
-    // }
-
-    // pub fn speed_up(&mut self) {
-    //     self.speed = match self.speed {
-    //         Speed::Stop => Speed::Slow,
-    //         Speed::Slow => Speed::Normal,
-    //         _ => Speed::Fast,
-    //     }
-    // }
-
-    pub fn navigate(&mut self, sensors: &Sensors) {
-        let turning_point = match self.turning_point(sensors) {
+    pub fn navigate(&mut self) {
+        let turning_point = match self.turn_sensor {
             Some(point) => point,
             None => return,
         };
 
-        if self.crossed || self.area.center() != turning_point {
+        if self.turned || self.area.center() != turning_point {
             return;
         };
 
@@ -47,7 +29,7 @@ impl Vehicle {
     }
 
     fn turn_right(&mut self) {
-        self.crossed = true;
+        self.turned = true;
 
         self.direction = match self.direction {
             dir::North => dir::East,
@@ -58,7 +40,7 @@ impl Vehicle {
     }
 
     fn turn_left(&mut self) {
-        self.crossed = true;
+        self.turned = true;
 
         self.direction = match self.direction {
             dir::North => dir::West,

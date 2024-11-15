@@ -3,42 +3,40 @@ mod attributes;
 mod enums;
 mod state;
 
-use super::Sensors;
-use crate::{GAP, MID_HEIGHT, MID_WIDTH, TIME, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{TIME, VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
-use sdl2::rect::Rect;
-use std::time::Instant;
+use sdl2::rect::{Point, Rect};
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, PartialEq)]
 pub struct Vehicle {
     pub area: Rect,
     speed: i32,
     direction: Direction,
-    pub route: Route,
-    pub category: Category,
-    pub crossed: bool,
-    priority: bool,
-    time_interval: (Instant, Instant),
+    route: Route,
+    shared_sensors: Vec<Point>,
+    turn_sensor: Option<Point>,
+    turned: bool,
     distance: i32,
 }
 
 impl Vehicle {
-    pub fn new(x: i32, y: i32, direction: Direction, route: Route, category: Category) -> Self {
-        let distance = match route {
-            Route::Straight => 550,
-            Route::Right => 300,
-            Route::Left => 600,
-        };
-
+    pub fn new(
+        x: i32,
+        y: i32,
+        direction: Direction,
+        route: Route,
+        shared_sensors: Vec<Point>,
+        turn_sensor: Option<Point>,
+        distance: i32,
+    ) -> Self {
         Self {
             area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
             speed: distance / TIME,
             direction,
             route,
-            category,
-            crossed: false,
-            priority: true,
-            time_interval: (Instant::now(), Instant::now()),
+            shared_sensors,
+            turn_sensor,
+            turned: false,
             distance,
         }
     }
@@ -47,27 +45,27 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, collision_area: &Rect, sensors: &Sensors, others: Vec<&Vehicle>) {
-        self.ajust_speed(collision_area, sensors, others);
-        self.navigate(sensors);
+    pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
+        self.ajust_speed(collision_area, others);
+        self.navigate();
         self.movement();
     }
 
-    fn ajust_speed(&mut self, collision_area: &Rect, sensors: &Sensors, others: Vec<&Vehicle>) {
+    fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
         if others.iter().any(|other| self.too_close_to(other)) {
             self.speed = 0;
             return;
         }
 
-        if let Some(v) = self.detect_collision(collision_area, sensors, others) {
+        if let Some(v) = self.detect_collision(collision_area, others) {
             self.speed = self.distance_from(v.area.center()) / TIME;
             return;
         };
 
-        match self.turning_point(sensors) {
+        match self.turn_sensor {
             None => self.speed = self.distance / TIME,
             Some(point) => {
-                self.speed = match (self.crossed, self.distance_from(point)) {
+                self.speed = match (self.turned, self.distance_from(point)) {
                     (false, 1..=20) => 1,
                     // (false, 4..=20) => ,
                     _ => self.distance / TIME,
@@ -79,14 +77,13 @@ impl Vehicle {
     pub fn detect_collision<'a>(
         &'a self,
         collision_area: &Rect,
-        sensors: &Sensors,
         others: Vec<&'a Vehicle>,
     ) -> Option<&Vehicle> {
         if self.route == Route::Right || !self.into_area(collision_area) {
             return None;
         };
 
-        let mut collidable_vehicles = self.collidable_vehicles(&others, sensors);
+        let mut collidable_vehicles = self.collidable_vehicles(&others);
         collidable_vehicles.sort_by_key(|v| self.distance_from(v.area.center()));
 
         for other in collidable_vehicles {

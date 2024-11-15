@@ -1,9 +1,7 @@
 use super::Interface;
 use crate::models::Road;
-use crate::{Route, GAP, MID_HEIGHT, MID_WIDTH};
 use sdl2::image::LoadTexture;
 use sdl2::pixels::Color;
-use sdl2::rect::Rect;
 
 impl Interface {
     /// This function is responsible for rendering
@@ -28,13 +26,7 @@ impl Interface {
             .load_texture("./assets/cars/taxi.png")?;
 
         for vehicle in &road.vehicles {
-            if vehicle.into_area(&Rect::new(
-                MID_WIDTH - GAP * 2,
-                MID_HEIGHT - GAP * 2,
-                200,
-                200,
-            )) && vehicle.route != Route::Right
-            {
+            if vehicle.into_area(&road.collision_area) {
                 self.canvas.draw_rect(vehicle.sensor_range())?;
             }
 
