@@ -20,37 +20,37 @@ Functional:
         ✔ Are vehicles generated randomly(random lane and route)?
 
     Try to generate tree vehicles in the same lane (do this for all lanes).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate four vehicles at the same time, one using the `"Right"` key
     and the others using the `"Left"` key (repeat this operation until there is a collision route).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate four vehicles at the same time, one using the `"Up"` key
     and the other using the `"Left"` key (repeat this operation until there is a collision route).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate four vehicles at the same time, one using the `"Up"` key
     and the other using the `"Right"` key (repeat this operation until there is a collision route).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate four vehicles at the same time, one using the `"Down"` key
     and the other using the `"Left"` key (repeat this operation until there is a collision route).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate four vehicles at the same time, one using the `"Down"` key
     and the other using the `"Right"` key (repeat this operation until there is a collision route).
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate five vehicles using the `"Up"` key, at the same time generate two vehicles using the key `"Right"`.
-        ☐ Did all vehicles pass the intersection without any collision?
+        ✔ Did all vehicles pass the intersection without any collision?
 
     Try to generate three vehicles that are supposed to collide (vehicles in the collision lane) fo this at least 3 times.
-        ☐ Did one of the vehicles tried to avoid the collision, by reducing their velocity?
+        ✔ Did one of the vehicles tried to avoid the collision, by reducing their velocity?
 
     Try to generate vehicles randomly using the `"R"` key. Then wait for at least 1 min.
-        ☐ Did all vehicles pass the intersection without any collision?
-        ☐ Did the traffic congestion remained low while running the application? (ex: high traffic congestion can be 8 or more vehicles stuck in the same lane)?
+        ✔ Did all vehicles pass the intersection without any collision?
+        ✔ Did the traffic congestion remained low while running the application? (ex: high traffic congestion can be 8 or more vehicles stuck in the same lane)?
 
     Try to generate four vehicles using the `"UP"` key to generate two and the `"Right"` key to generate the other two.
     Then when the vehicles finish passing the intersection, exit the application by using the `"Esc"` key.
@@ -70,11 +70,11 @@ Functional:
 
 General:
 
-    ☐ Is the spam of creation of vehicles prevented (limitation of pressing the arrow keys too many times)?
+    ✔ Is the spam of creation of vehicles prevented (limitation of pressing the arrow keys too many times)?
 
     ✔ Are vehicles assigned to their own route, and if so do they respect that route? (you can use the lanes to see if they are respected)
 
-    ☐ Is there a logical safe distance set up for the vehicles(a strictly positive and reasonable distance)?
+    ✔ Is there a logical safe distance set up for the vehicles(a strictly positive and reasonable distance)?
 
     ✔ Are vehicles kept in a safe distance(do not collide whenever one stops or reduces their velocity)?
 

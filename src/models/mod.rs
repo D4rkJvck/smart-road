@@ -21,8 +21,8 @@ impl Road {
         let intersection = Rect::new(
             MID_WIDTH - GAP * 3,
             MID_HEIGHT - GAP * 3,
-            GAP as u32 * 6 + 1,
-            GAP as u32 * 6 + 1,
+            GAP as u32 * 6,
+            GAP as u32 * 6,
         );
 
         let collision_area = Rect::new(

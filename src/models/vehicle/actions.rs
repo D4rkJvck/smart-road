@@ -19,10 +19,27 @@ impl Vehicle {
             return;
         }
 
-        if let Some(_) = self.detect_collision(collision_area, others) {
+        if others
+            .iter()
+            .any(|other| self.detect_vehicle(collision_area, other))
+        {
             self.speed = Speed::Stop;
             return;
-        };
+        }
+
+        // others.iter().for_each(|other| {
+        //     if self.detect_vehicle(collision_area, other) {
+        //         self.speed = match (
+        //             other.detect_vehicle(collision_area, &self),
+        //             self.has_priority_over(other),
+        //         ) {
+        //             (true, true) => Speed::Slow,
+        //             _ => Speed::Stop,
+        //         };
+
+        //         return;
+        //     }
+        // });
 
         match self.turn_sensor {
             None => self.speed = Speed::Fast,
@@ -42,7 +59,7 @@ impl Vehicle {
 
     pub(super) fn pass_sensor(&mut self) {
         if let Some(next) = self.shared_sensors.first() {
-            if self.passed_sensor(*next) {
+            if self.has_passed_sensor(*next) {
                 self.shared_sensors.reverse();
                 let _ = self.shared_sensors.pop();
                 self.shared_sensors.reverse();
@@ -51,6 +68,8 @@ impl Vehicle {
     }
 
     pub(super) fn navigate(&mut self) {
+        self.pass_sensor();
+
         let turning_point = match self.turn_sensor {
             Some(point) => point,
             None => return,
@@ -65,8 +84,6 @@ impl Vehicle {
             Route::Left => self.turn_left(),
             Route::Straight => {}
         };
-
-        self.pass_sensor();
     }
 
     fn turn_right(&mut self) {

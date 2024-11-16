@@ -14,4 +14,3 @@ const GAP: i32 = 50;
 const VEHICLE_WIDTH: i32 = 40;
 const VEHICLE_HEIGHT: i32 = 40;
 const SAFETY_DISTANCE: i32 = 100;
-const TIME: i32 = 300;

@@ -1,5 +1,5 @@
 use super::{Direction as dir, Route, Vehicle};
-use crate::{SAFETY_DISTANCE, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{SAFETY_DISTANCE as s_d, VEHICLE_HEIGHT as v_h, VEHICLE_WIDTH as v_w};
 use sdl2::rect::{Point, Rect};
 
 impl Vehicle {
@@ -25,50 +25,16 @@ impl Vehicle {
 
     pub fn sensor_range(&self) -> Rect {
         let range = match self.route {
-            Route::Left => SAFETY_DISTANCE + 50,
-            Route::Straight => SAFETY_DISTANCE + 100,
+            Route::Left => s_d + 10,
+            Route::Straight => s_d + 60,
             _ => 0,
         };
 
         match self.direction {
-            dir::North => Rect::new(self.area.x, self.area.y - range, 40, range as u32),
-            dir::East => Rect::new(self.area.x + VEHICLE_WIDTH, self.area.y, range as u32, 40),
-            dir::South => Rect::new(self.area.x, self.area.y + VEHICLE_HEIGHT, 40, range as u32),
-            dir::West => Rect::new(self.area.x - range, self.area.y, range as u32, 40),
+            dir::North => Rect::new(self.area.x, self.area.y - range, v_w as u32, range as u32),
+            dir::East => Rect::new(self.area.x + v_w, self.area.y, range as u32, v_h as u32),
+            dir::South => Rect::new(self.area.x, self.area.y + v_h, v_w as u32, range as u32),
+            dir::West => Rect::new(self.area.x - range, self.area.y, range as u32, v_h as u32),
         }
-    }
-
-    pub(super) fn collidable_vehicles<'a>(&'a self, others: &Vec<&'a Self>) -> Vec<&Self> {
-        others
-            .iter()
-            .filter(|other| {
-                other
-                    .shared_sensors
-                    .iter()
-                    .any(|sensor| self.shared_sensors.contains(sensor))
-            })
-            .copied()
-            .collect()
-    }
-
-    pub(super) fn detect_collision<'a>(
-        &'a self,
-        collision_area: &Rect,
-        others: Vec<&'a Vehicle>,
-    ) -> Option<&Vehicle> {
-        if !self.into_area(collision_area) {
-            return None;
-        };
-
-        let mut collidable_vehicles = self.collidable_vehicles(&others);
-        collidable_vehicles.sort_by_key(|v| self.distance_from(v.area.center()));
-
-        for other in collidable_vehicles {
-            if other.into_area(&self.sensor_range()) {
-                return Some(other);
-            }
-        }
-
-        None
     }
 }

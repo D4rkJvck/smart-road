@@ -36,6 +36,10 @@ impl Vehicle {
             }
     }
 
+    pub(super) fn detect_vehicle(&self, collision_area: &Rect, other: &Self) -> bool {
+        self.into_area(collision_area) && other.into_area(&self.sensor_range())
+    }
+
     pub(super) fn has_priority_over(&self, other: &Self) -> bool {
         match self.direction {
             dir::North => other.direction == dir::West,
@@ -45,18 +49,18 @@ impl Vehicle {
         }
     }
 
-    pub(super) fn passed_sensor(&self, sensor: Point) -> bool {
+    pub(super) fn has_passed_sensor(&self, sensor: Point) -> bool {
         let center = self.area.center();
 
         match (self.direction, self.route) {
-            (dir::North, Route::Straight) => center.y < sensor.y,
-            (dir::North, Route::Left) => center.y < sensor.y || center.x < sensor.x,
-            (dir::East, Route::Straight) => center.x > sensor.x,
-            (dir::East, Route::Left) => center.x > sensor.x || center.y < sensor.y,
-            (dir::South, Route::Straight) => center.y > sensor.y,
-            (dir::South, Route::Left) => center.y > sensor.y || center.x > sensor.x,
-            (dir::West, Route::Straight) => center.x < sensor.x,
-            (dir::West, Route::Left) => center.x < sensor.x || center.y > sensor.y,
+            (dir::North, Route::Straight) => center.y < sensor.y - 50,
+            (dir::North, Route::Left) => center.y < sensor.y - 50 || center.x < sensor.x - 50,
+            (dir::East, Route::Straight) => center.x > sensor.x + 50,
+            (dir::East, Route::Left) => center.x > sensor.x + 50 || center.y < sensor.y - 50,
+            (dir::South, Route::Straight) => center.y > sensor.y + 50,
+            (dir::South, Route::Left) => center.y > sensor.y + 50 || center.x > sensor.x + 50,
+            (dir::West, Route::Straight) => center.x < sensor.x - 50,
+            (dir::West, Route::Left) => center.x < sensor.x - 50 || center.y > sensor.y + 50,
             _ => false,
         }
     }

@@ -35,10 +35,17 @@ impl App {
         let cloned_vehicles = self.road.vehicles.clone();
 
         self.road.vehicles.iter_mut().for_each(|vehicle| {
-            let others: Vec<&Vehicle> = cloned_vehicles
+            let others = cloned_vehicles
                 .iter()
-                .filter(|other| *other != vehicle)
+                .filter(|other| {
+                    *other != vehicle
+                        && vehicle
+                            .shared_sensors
+                            .iter()
+                            .any(|sensor| other.shared_sensors.contains(sensor))
+                })
                 .collect();
+
             vehicle.drive(&self.road.collision_area, others)
         });
 

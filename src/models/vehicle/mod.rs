@@ -14,7 +14,7 @@ pub struct Vehicle {
     speed: Speed,
     direction: Direction,
     route: Route,
-    shared_sensors: Vec<Point>,
+    pub shared_sensors: Vec<Point>,
     turn_sensor: Option<Point>,
     turned: bool,
     distance: i32,
@@ -45,7 +45,7 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
+    pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Self>) {
         self.ajust_speed(collision_area, others);
         self.navigate();
         self.movement();
