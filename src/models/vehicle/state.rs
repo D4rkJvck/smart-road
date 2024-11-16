@@ -1,6 +1,6 @@
-use super::{Direction as dir, Route, Vehicle};
+use super::{Direction as dir, Vehicle};
 use crate::{HEIGHT, SAFETY_DISTANCE, WIDTH};
-use sdl2::rect::{Point, Rect};
+use sdl2::rect::Rect;
 
 impl Vehicle {
     /// This function is crucial when
@@ -46,22 +46,6 @@ impl Vehicle {
             dir::East => other.direction == dir::North,
             dir::South => other.direction == dir::East,
             dir::West => other.direction == dir::South,
-        }
-    }
-
-    pub(super) fn has_passed_sensor(&self, sensor: Point) -> bool {
-        let center = self.area.center();
-
-        match (self.direction, self.route) {
-            (dir::North, Route::Straight) => center.y < sensor.y - 50,
-            (dir::North, Route::Left) => center.y < sensor.y - 50 || center.x < sensor.x - 50,
-            (dir::East, Route::Straight) => center.x > sensor.x + 50,
-            (dir::East, Route::Left) => center.x > sensor.x + 50 || center.y < sensor.y - 50,
-            (dir::South, Route::Straight) => center.y > sensor.y + 50,
-            (dir::South, Route::Left) => center.y > sensor.y + 50 || center.x > sensor.x + 50,
-            (dir::West, Route::Straight) => center.x < sensor.x - 50,
-            (dir::West, Route::Left) => center.x < sensor.x - 50 || center.y > sensor.y + 50,
-            _ => false,
         }
     }
 }

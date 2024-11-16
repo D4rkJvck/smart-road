@@ -17,29 +17,7 @@ impl Vehicle {
         if others.iter().any(|other| self.too_close_to(other)) {
             self.speed = Speed::Stop;
             return;
-        }
-
-        if others
-            .iter()
-            .any(|other| self.detect_vehicle(collision_area, other))
-        {
-            self.speed = Speed::Stop;
-            return;
-        }
-
-        // others.iter().for_each(|other| {
-        //     if self.detect_vehicle(collision_area, other) {
-        //         self.speed = match (
-        //             other.detect_vehicle(collision_area, &self),
-        //             self.has_priority_over(other),
-        //         ) {
-        //             (true, true) => Speed::Slow,
-        //             _ => Speed::Stop,
-        //         };
-
-        //         return;
-        //     }
-        // });
+        };
 
         match self.turn_sensor {
             None => self.speed = Speed::Fast,
@@ -55,40 +33,40 @@ impl Vehicle {
                 }
             }
         };
-    }
 
-    pub(super) fn pass_sensor(&mut self) {
-        if let Some(next) = self.shared_sensors.first() {
-            if self.has_passed_sensor(*next) {
-                self.shared_sensors.reverse();
-                let _ = self.shared_sensors.pop();
-                self.shared_sensors.reverse();
+        others.iter().for_each(|other| {
+            if self.detect_vehicle(collision_area, other) {
+                match (
+                    other.detect_vehicle(collision_area, &self),
+                    self.has_priority_over(other),
+                ) {
+                    (true, true) => {
+                        println!("Priority");
+                        self.speed = Speed::Slow;
+                    }
+                    _ => self.speed = Speed::Stop,
+                };
             }
-        };
+        });
     }
 
     pub(super) fn navigate(&mut self) {
-        self.pass_sensor();
+        if let Some(turning_point) = self.turn_sensor {
+            if self.turned || self.area.center() != turning_point {
+                return;
+            }
 
-        let turning_point = match self.turn_sensor {
-            Some(point) => point,
-            None => return,
-        };
+            self.turned = true;
 
-        if self.turned || self.area.center() != turning_point {
-            return;
-        };
-
-        match self.route {
-            Route::Right => self.turn_right(),
-            Route::Left => self.turn_left(),
-            Route::Straight => {}
-        };
+            match self.route {
+                Route::Right => self.turn_right(),
+                Route::Left => self.turn_left(),
+                Route::Straight => {}
+            }
+        }
     }
 
     fn turn_right(&mut self) {
-        self.turned = true;
-
         self.direction = match self.direction {
             dir::North => dir::East,
             dir::East => dir::South,
@@ -98,8 +76,6 @@ impl Vehicle {
     }
 
     fn turn_left(&mut self) {
-        self.turned = true;
-
         self.direction = match self.direction {
             dir::North => dir::West,
             dir::East => dir::North,
