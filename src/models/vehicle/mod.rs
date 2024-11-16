@@ -4,14 +4,14 @@ mod enums;
 mod state;
 
 use super::utils::get_initial_position;
-use crate::{TIME, VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
 pub use enums::*;
 use sdl2::rect::{Point, Rect};
 
 #[derive(Clone, PartialEq)]
 pub struct Vehicle {
     pub area: Rect,
-    speed: i32,
+    speed: Speed,
     direction: Direction,
     route: Route,
     shared_sensors: Vec<Point>,
@@ -31,7 +31,7 @@ impl Vehicle {
 
         Self {
             area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
-            speed: distance / TIME,
+            speed: Speed::Fast,
             direction,
             route,
             shared_sensors,

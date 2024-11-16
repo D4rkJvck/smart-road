@@ -14,21 +14,21 @@ use sdl2::rect::Point;
 pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, i32) {
     match (&direction, &route) {
         //
-        (North, Right) => (m_w + g * 2 + 5, h, 300),
-        (North, Straight) => (m_w + g + 5, h, 550),
-        (North, Left) => (m_w + 5, h, 600),
+        (North, Right) => (m_w + g * 2 + 5, h, 900),
+        (North, Straight) => (m_w + g + 5, h, 300),
+        (North, Left) => (m_w + 5, h, 300),
         //
-        (South, Right) => (m_w - g * 2 - 45, -v_h, 300),
-        (South, Straight) => (m_w - g - 45, -v_h, 550),
-        (South, Left) => (m_w - 45, -v_h, 600),
+        (South, Right) => (m_w - g * 2 - 45, -v_h, 900),
+        (South, Straight) => (m_w - g - 45, -v_h, 300),
+        (South, Left) => (m_w - 45, -v_h, 300),
         //
-        (East, Right) => (-v_w, m_h + g * 2 + 5, 300),
-        (East, Straight) => (-v_w, m_h + g + 5, 550),
-        (East, Left) => (-v_w, m_h + 5, 600),
+        (East, Right) => (-v_w, m_h + g * 2 + 5, 900),
+        (East, Straight) => (-v_w, m_h + g + 5, 300),
+        (East, Left) => (-v_w, m_h + 5, 300),
         //
-        (West, Right) => (w, m_h - g * 2 - 45, 300),
-        (West, Straight) => (w, m_h - g - 45, 550),
-        (West, Left) => (w, m_h - 45, 600),
+        (West, Right) => (w, m_h - g * 2 - 45, 900),
+        (West, Straight) => (w, m_h - g - 45, 300),
+        (West, Left) => (w, m_h - 45, 300),
     }
 }
 

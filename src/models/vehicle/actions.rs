@@ -1,35 +1,40 @@
-use super::{Direction as dir, Route, Vehicle};
-use crate::TIME;
+use super::{Direction as dir, Route, Speed, Vehicle};
 use sdl2::rect::Rect;
 
 impl Vehicle {
     pub(super) fn movement(&mut self) {
-        // let speed = Speed::velocity(&self.speed);
+        let speed = Speed::velocity(&self.speed);
+
         match &self.direction {
-            dir::North => self.area.y -= self.speed,
-            dir::South => self.area.y += self.speed,
-            dir::East => self.area.x += self.speed,
-            dir::West => self.area.x -= self.speed,
+            dir::North => self.area.y -= speed,
+            dir::South => self.area.y += speed,
+            dir::East => self.area.x += speed,
+            dir::West => self.area.x -= speed,
         };
     }
 
     pub(super) fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
         if others.iter().any(|other| self.too_close_to(other)) {
-            self.speed = 0;
+            self.speed = Speed::Stop;
             return;
         }
 
-        if let Some(v) = self.detect_collision(collision_area, others) {
-            self.speed = self.distance_from(v.area.center()) / TIME;
+        if let Some(_) = self.detect_collision(collision_area, others) {
+            self.speed = Speed::Stop;
             return;
         };
 
         match self.turn_sensor {
-            None => self.speed = self.distance / TIME,
+            None => self.speed = Speed::Fast,
             Some(point) => {
-                self.speed = match (self.turned, self.distance_from(point)) {
-                    (false, 1..=20) => 1,
-                    _ => self.distance / TIME,
+                self.speed = match (
+                    self.into_area(collision_area),
+                    self.turned,
+                    self.distance_from(point),
+                ) {
+                    (_, false, 1..=20) => Speed::Slow,
+                    (_, false, 21..=100) => Speed::Normal,
+                    _ => Speed::Fast,
                 }
             }
         };
