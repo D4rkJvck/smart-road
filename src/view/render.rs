@@ -26,9 +26,9 @@ impl Interface {
             .load_texture("./assets/cars/taxi.png")?;
 
         for vehicle in &road.vehicles {
-            // if vehicle.into_area(&road.collision_area) {
-            //     self.canvas.draw_rect(vehicle.sensor_range())?;
-            // }
+            if road.sensor_visibility && vehicle.into_area(&road.collision_area) {
+                self.canvas.draw_rect(vehicle.sensor_range())?;
+            };
 
             self.canvas.copy_ex(
                 &vehicle_texture,

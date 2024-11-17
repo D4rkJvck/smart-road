@@ -32,6 +32,10 @@ impl App {
     fn update(&mut self) -> Result<(), String> {
         self.road.vehicles.retain(|vehicle| vehicle.is_visible());
 
+        if self.road.auto_spawn {
+            self.road.new_vehicle(Direction::random());
+        }
+
         let cloned_vehicles = self.road.vehicles.clone();
 
         self.road.vehicles.iter_mut().for_each(|vehicle| {

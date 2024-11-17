@@ -14,6 +14,8 @@ pub struct Road {
     pub collision_area: Rect,
     pub sensors: Sensors,
     pub vehicles: Vec<Vehicle>,
+    pub sensor_visibility: bool,
+    pub auto_spawn: bool,
 }
 
 impl Road {
@@ -51,6 +53,8 @@ impl Road {
             collision_area,
             sensors,
             vehicles: Vec::new(),
+            sensor_visibility: false,
+            auto_spawn: false,
         }
     }
 

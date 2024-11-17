@@ -41,6 +41,16 @@ impl Interface {
                     keycode: Some(k::R),
                     ..
                 } => road.new_vehicle(Direction::random()),
+                //__________________________________________________
+                KeyDown {
+                    keycode: Some(k::S),
+                    ..
+                } => road.sensor_visibility = !road.sensor_visibility,
+                //__________________________________________________
+                KeyDown {
+                    keycode: Some(k::A),
+                    ..
+                } => road.auto_spawn = !road.auto_spawn,
                 //__________________________________
                 _ => {}
             }
