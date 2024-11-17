@@ -6,8 +6,7 @@ use super::{
     Sensors,
 };
 use crate::{
-    GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_HEIGHT as v_h,
-    VEHICLE_WIDTH as v_w, WIDTH as w,
+    GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_SIZE as size, WIDTH as w,
 };
 use sdl2::rect::Point;
 
@@ -18,13 +17,13 @@ pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32
         (North, Straight) => (m_w + g + 5, h, 300),
         (North, Left) => (m_w + 5, h, 300),
         //
-        (South, Right) => (m_w - g * 2 - 45, -v_h, 900),
-        (South, Straight) => (m_w - g - 45, -v_h, 300),
-        (South, Left) => (m_w - 45, -v_h, 300),
+        (South, Right) => (m_w - g * 2 - 45, -size, 900),
+        (South, Straight) => (m_w - g - 45, -size, 300),
+        (South, Left) => (m_w - 45, -size, 300),
         //
-        (East, Right) => (-v_w, m_h + g * 2 + 5, 900),
-        (East, Straight) => (-v_w, m_h + g + 5, 300),
-        (East, Left) => (-v_w, m_h + 5, 300),
+        (East, Right) => (-size, m_h + g * 2 + 5, 900),
+        (East, Straight) => (-size, m_h + g + 5, 300),
+        (East, Left) => (-size, m_h + 5, 300),
         //
         (West, Right) => (w, m_h - g * 2 - 45, 900),
         (West, Straight) => (w, m_h - g - 45, 300),

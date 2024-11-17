@@ -36,15 +36,12 @@ impl Vehicle {
 
         others.iter().for_each(|other| {
             if self.detect_vehicle(collision_area, other) {
-                match (
+                self.speed = match (
                     other.detect_vehicle(collision_area, &self),
                     self.has_priority_over(other),
                 ) {
-                    (true, true) => {
-                        println!("Priority");
-                        self.speed = Speed::Slow;
-                    }
-                    _ => self.speed = Speed::Stop,
+                    (true, true) => Speed::Slow,
+                    _ => Speed::Stop,
                 };
             }
         });

@@ -4,7 +4,7 @@ mod enums;
 mod state;
 
 use super::utils::get_initial_position;
-use crate::{VEHICLE_HEIGHT, VEHICLE_WIDTH};
+use crate::VEHICLE_SIZE;
 pub use enums::*;
 use sdl2::rect::{Point, Rect};
 
@@ -30,7 +30,7 @@ impl Vehicle {
         let (x, y, distance) = get_initial_position(&direction, &route);
 
         Self {
-            area: Rect::new(x, y, VEHICLE_WIDTH as u32, VEHICLE_HEIGHT as u32),
+            area: Rect::new(x, y, VEHICLE_SIZE as u32, VEHICLE_SIZE as u32),
             speed: Speed::Fast,
             direction,
             route,
