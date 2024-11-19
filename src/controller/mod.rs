@@ -20,13 +20,25 @@ impl App {
     }
 
     pub async fn run(&mut self) -> Result<(), String> {
-        loop {
+        'simulation: loop {
             self.update()?;
             self.window.render(&self.intersection)?;
-            self.window.listen(&mut self.intersection)?;
-
-            thread::sleep(Duration::from_millis(1));
+            if let Err(_) = self.window.listen(&mut self.intersection) {
+                break 'simulation;
+            }
         }
+
+        thread::sleep(Duration::from_millis(100));
+
+        self.window.display_stats();
+
+        'stats: loop {
+            if let Err(_) = self.window.listen(&mut self.intersection) {
+                break 'stats;
+            }
+        }
+
+        Ok(())
     }
 
     fn update(&mut self) -> Result<(), String> {

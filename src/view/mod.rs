@@ -1,11 +1,13 @@
 mod event;
 mod render;
+mod utils;
 
 use sdl2::{
     render::{Canvas, TextureCreator},
     video::{Window, WindowContext},
     EventPump,
 };
+use utils::new_window;
 
 /// The Interface between the user
 /// and the program.
@@ -13,6 +15,7 @@ use sdl2::{
 /// to interact with the user.
 pub struct Interface {
     pub(super) canvas: Canvas<Window>,
+    pub(super) stats_canvas: Canvas<Window>,
     pub(super) texture_creator: TextureCreator<WindowContext>,
     pub(super) event_pump: EventPump,
 }
@@ -29,18 +32,12 @@ impl Interface {
     pub fn new(title: &str, width: i32, height: i32) -> Result<Self, String> {
         // Initialize the SDL.
         let sdl_ctx = sdl2::init()?;
-        let video_subsys = sdl_ctx.video()?;
+        let mut video_subsys = sdl_ctx.video()?;
 
-        let window = video_subsys // Generate the window from the video subsystem
-            .window(title, width as u32, height as u32)
-            .position_centered()
-            .build()
-            .unwrap();
+        let mut stats_canvas = new_window(&mut video_subsys, title, width / 2, height / 2)?;
+        stats_canvas.window_mut().hide();
 
-        let canvas = window // Turn the window into a canvas
-            .into_canvas()
-            .build()
-            .unwrap();
+        let canvas = new_window(&mut video_subsys, title, width, height)?; // Generate a window from the video subsystem
 
         let texture_creator = canvas.texture_creator();
 
@@ -50,8 +47,13 @@ impl Interface {
 
         Ok(Self {
             canvas,
+            stats_canvas,
             texture_creator,
             event_pump,
         })
+    }
+
+    pub fn display_stats(&mut self) {
+        self.stats_canvas.window_mut().show();
     }
 }
