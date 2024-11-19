@@ -1,44 +1,46 @@
-mod stats;
+mod statistics;
 
 use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
-use stats::Stats;
+use statistics::Statistics;
 use std::{thread, time::Duration};
 
 pub struct App {
     window: Interface,
-    road: Road,
-    stats: Stats,
+    intersection: Intersection,
+    statistics: Statistics,
 }
 
 impl App {
     pub fn new() -> Result<Self, String> {
         Ok(Self {
             window: Interface::new(TITLE, WIDTH, HEIGHT)?,
-            road: Road::new(),
-            stats: Stats::new(),
+            intersection: Intersection::new(),
+            statistics: Statistics::new(),
         })
     }
 
     pub async fn run(&mut self) -> Result<(), String> {
         loop {
             self.update()?;
-            self.window.render(&self.road)?;
-            self.window.listen(&mut self.road)?;
+            self.window.render(&self.intersection)?;
+            self.window.listen(&mut self.intersection)?;
 
             thread::sleep(Duration::from_millis(1));
         }
     }
 
     fn update(&mut self) -> Result<(), String> {
-        self.road.vehicles.retain(|vehicle| vehicle.is_visible());
+        self.intersection
+            .vehicles
+            .retain(|vehicle| vehicle.is_visible());
 
-        if self.road.auto_spawn {
-            self.road.new_vehicle(Direction::random());
+        if self.intersection.auto_spawn {
+            self.intersection.new_vehicle(Direction::random());
         }
 
-        let cloned_vehicles = self.road.vehicles.clone();
+        let cloned_vehicles = self.intersection.vehicles.clone();
 
-        self.road.vehicles.iter_mut().for_each(|vehicle| {
+        self.intersection.vehicles.iter_mut().for_each(|vehicle| {
             let others = cloned_vehicles
                 .iter()
                 .filter(|other| {
@@ -50,7 +52,7 @@ impl App {
                 })
                 .collect();
 
-            vehicle.drive(&self.road.collision_area, others)
+            vehicle.drive(&self.intersection.collision_area, others)
         });
 
         Ok(())

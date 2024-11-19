@@ -1,4 +1,4 @@
-pub struct Stats {
+pub struct Statistics {
     vehicle_count: u32,
     max_speed: u32,
     min_speed: u32,
@@ -7,7 +7,7 @@ pub struct Stats {
     collision_count: u32,
 }
 
-impl Stats {
+impl Statistics {
     pub fn new() -> Self {
         Self {
             vehicle_count: 0,

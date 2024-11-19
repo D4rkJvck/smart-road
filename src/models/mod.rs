@@ -9,8 +9,8 @@ pub use vehicle::{Direction, Vehicle};
 
 pub type Sensors = [[Point; 6]; 6];
 
-pub struct Road {
-    pub intersection: Rect,
+pub struct Intersection {
+    pub center: Rect,
     pub collision_area: Rect,
     pub sensors: Sensors,
     pub vehicles: Vec<Vehicle>,
@@ -18,9 +18,9 @@ pub struct Road {
     pub auto_spawn: bool,
 }
 
-impl Road {
+impl Intersection {
     pub fn new() -> Self {
-        let intersection = Rect::new(
+        let center = Rect::new(
             MID_WIDTH - GAP * 3,
             MID_HEIGHT - GAP * 3,
             GAP as u32 * 6,
@@ -28,10 +28,10 @@ impl Road {
         );
 
         let collision_area = Rect::new(
-            intersection.x + GAP,
-            intersection.y + GAP,
-            intersection.width() - GAP as u32 * 2,
-            intersection.height() - GAP as u32 * 2,
+            center.x + GAP,
+            center.y + GAP,
+            center.width() - GAP as u32 * 2,
+            center.height() - GAP as u32 * 2,
         );
 
         let mut sensors: Sensors = [[Point::new(0, 0); 6]; 6];
@@ -39,8 +39,8 @@ impl Road {
         for x in 0..6 {
             for y in 0..6 {
                 sensors[x][y] = Rect::new(
-                    intersection.x + GAP * x as i32,
-                    intersection.y + GAP * y as i32,
+                    center.x + GAP * x as i32,
+                    center.y + GAP * y as i32,
                     GAP as u32,
                     GAP as u32,
                 )
@@ -49,7 +49,7 @@ impl Road {
         }
 
         Self {
-            intersection,
+            center,
             collision_area,
             sensors,
             vehicles: Vec::new(),

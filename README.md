@@ -88,14 +88,14 @@ $ code .
     |       |       + taxi.png
     |       |
     |       + ferris.svg
-    |       + road.jpeg    
+    |       + intersection.jpeg    
     |
     +----- src/
     |       |
     |       +-- controllers/
     |       |       |
     |       |       + mod.rs
-    |       |       + stats.rs
+    |       |       + statistics.rs
     |       |
     |       +-- models/
     |       |       |

@@ -24,7 +24,7 @@ impl Interface {
     /// Afterwards it turns the window to a "canvas".
     /// It also initializes a "event pump" from the context
     /// to get the `user` input `events`.
-    /// For this specific project, it will also initialize road limits.
+    /// For this specific project, it will also initialize intersection limits.
     /// It finally initializes the instance of the `interface``.
     pub fn new(title: &str, width: i32, height: i32) -> Result<Self, String> {
         // Initialize the SDL.

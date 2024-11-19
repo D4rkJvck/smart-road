@@ -1,12 +1,12 @@
 use super::Interface;
-use crate::models::{Direction, Road};
+use crate::models::{Direction, Intersection};
 use sdl2::{
     event::Event::{KeyDown, Quit},
     keyboard::Keycode as k,
 };
 
 impl Interface {
-    pub fn listen(&mut self, road: &mut Road) -> Result<(), String> {
+    pub fn listen(&mut self, intersection: &mut Intersection) -> Result<(), String> {
         let events = self.event_pump.poll_iter();
 
         for event in events {
@@ -20,37 +20,37 @@ impl Interface {
                 KeyDown {
                     keycode: Some(k::UP),
                     ..
-                } => road.new_vehicle(Direction::North),
+                } => intersection.new_vehicle(Direction::North),
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::DOWN),
                     ..
-                } => road.new_vehicle(Direction::South),
+                } => intersection.new_vehicle(Direction::South),
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::RIGHT),
                     ..
-                } => road.new_vehicle(Direction::East),
+                } => intersection.new_vehicle(Direction::East),
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::LEFT),
                     ..
-                } => road.new_vehicle(Direction::West),
+                } => intersection.new_vehicle(Direction::West),
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::R),
                     ..
-                } => road.new_vehicle(Direction::random()),
+                } => intersection.new_vehicle(Direction::random()),
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::S),
                     ..
-                } => road.sensor_visibility = !road.sensor_visibility,
+                } => intersection.sensor_visibility = !intersection.sensor_visibility,
                 //__________________________________________________
                 KeyDown {
                     keycode: Some(k::A),
                     ..
-                } => road.auto_spawn = !road.auto_spawn,
+                } => intersection.auto_spawn = !intersection.auto_spawn,
                 //__________________________________
                 _ => {}
             }
