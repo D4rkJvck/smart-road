@@ -27,8 +27,8 @@ impl Vehicle {
                     self.turned,
                     self.distance_from(point),
                 ) {
-                    (_, false, 1..=20) => Speed::Slow,
-                    (_, false, 21..=100) => Speed::Normal,
+                    (_, false, 1..=3) => Speed::Slow,
+                    // (_, false, 21..=100) => Speed::Normal,
                     _ => Speed::Fast,
                 }
             }

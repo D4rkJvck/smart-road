@@ -13,7 +13,7 @@ impl Interface {
 
         let intersection_texture = self
             .texture_creator
-            .load_texture("./assets/intersection.png")?;
+            .load_texture("./assets/img/intersection.png")?;
         self.canvas.copy(&intersection_texture, None, None)?;
 
         self.canvas.set_draw_color(Color::GREEN);
@@ -26,7 +26,7 @@ impl Interface {
 
         let vehicle_texture = self
             .texture_creator
-            .load_texture("./assets/cars/taxi.png")?;
+            .load_texture("./assets/img/vehicle.png")?;
 
         for vehicle in &intersection.vehicles {
             if intersection.sensor_visibility && vehicle.into_area(&intersection.collision_area) {
