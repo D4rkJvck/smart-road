@@ -1,5 +1,7 @@
 use sdl2::{render::Canvas, video::Window, VideoSubsystem};
 
+use crate::controller::Statistics;
+
 pub fn new_window(
     video_subsys: &mut VideoSubsystem,
     title: &str,

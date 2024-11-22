@@ -1,4 +1,5 @@
 use super::Interface;
+use crate::controller::Statistics;
 use crate::models::Intersection;
 use sdl2::image::LoadTexture;
 use sdl2::pixels::Color;
@@ -45,5 +46,13 @@ impl Interface {
         }
 
         Ok(self.canvas.present())
+    }
+
+    pub fn display_stats(&mut self, statistics: &Statistics) {
+        let stats = statistics.get();
+
+        for stat in stats {}
+
+        self.stats_canvas.window_mut().show();
     }
 }

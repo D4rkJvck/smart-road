@@ -1,7 +1,7 @@
 mod statistics;
 
 use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
-use statistics::Statistics;
+pub use statistics::Statistics;
 use std::{thread, time::Duration};
 
 pub struct App {
@@ -28,9 +28,9 @@ impl App {
             }
         }
 
-        thread::sleep(Duration::from_millis(100));
+        thread::sleep(Duration::from_millis(250));
 
-        self.window.display_stats();
+        self.window.display_stats(&self.statistics);
 
         'stats: loop {
             if let Err(_) = self.window.listen(&mut self.intersection) {

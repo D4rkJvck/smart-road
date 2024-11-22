@@ -2,6 +2,7 @@ mod utils;
 mod vehicle;
 
 use crate::{GAP, MID_HEIGHT, MID_WIDTH};
+use rand::Rng;
 use sdl2::rect::{Point, Rect};
 use utils::{get_shared_sensors, get_turn_sensor};
 use vehicle::Route;
