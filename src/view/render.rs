@@ -1,10 +1,9 @@
-use std::path::Path;
-
 use super::Interface;
 use crate::models::Intersection;
 use sdl2::image::LoadTexture;
 use sdl2::pixels::Color;
 use sdl2::rect::Rect;
+use std::path::Path;
 
 impl Interface {
     /// This function is responsible for rendering
@@ -62,8 +61,6 @@ impl Interface {
         self.canvas.set_draw_color(Color::WHITE);
 
         for stat in stats {
-            // let font = get_font(ttf_ctx)?;
-
             let surface = font
                 .render(&stat)
                 .blended(Color::WHITE)

@@ -1,11 +1,7 @@
-use std::path::Path;
-
-use sdl2::{pixels::Color, rect::Rect, ttf};
-
-use crate::{view::Interface, HEIGHT, TITLE, WIDTH};
+use super::Vehicle;
 
 pub struct Stats {
-    vehicle_count: u32,
+    vehicle_count: usize,
     max_speed: u32,
     min_speed: u32,
     max_time: f32,
@@ -37,5 +33,14 @@ impl Stats {
             format!("Close call: {}", self.close_calls),
             format!("Collisions: {}", self.collisions),
         ]
+    }
+
+    pub fn update(&mut self, vehicles: &Vec<Vehicle>) {
+        let vehicles: Vec<&Vehicle> = vehicles
+            .iter()
+            .filter(|vehicle| !vehicle.is_visible())
+            .collect();
+
+        self.vehicle_count += vehicles.iter().count();
     }
 }

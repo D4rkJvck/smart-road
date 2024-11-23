@@ -1,5 +1,5 @@
 use super::App;
-use crate::{models::Direction, view::Interface};
+use crate::models::Direction;
 use sdl2::{
     event::Event::{KeyDown, Quit},
     keyboard::Keycode as k,

@@ -3,7 +3,6 @@ mod stats;
 
 use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
 pub use stats::Stats;
-use std::{thread, time::Duration};
 
 pub struct App {
     window: Interface,
@@ -28,8 +27,6 @@ impl App {
                 break 'simulation;
             }
         }
-
-        thread::sleep(Duration::from_millis(250));
 
         self.window
             .canvas
@@ -70,6 +67,6 @@ impl App {
             vehicle.drive(&self.intersection.collision_area, others)
         });
 
-        Ok(())
+        Ok(self.stats.update(&self.intersection.vehicles))
     }
 }
