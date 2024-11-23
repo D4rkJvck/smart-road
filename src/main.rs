@@ -10,8 +10,8 @@ async fn main() -> Result<(), String> {
     let mut app = App::new()?;
 
     if let Err(msg) = app.run().await {
-        println!("{}", msg);
-    };
+        dbg!(msg);
+    }
 
     Ok(())
 }

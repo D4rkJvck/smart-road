@@ -1,13 +1,14 @@
-mod statistics;
+mod event;
+mod stats;
 
 use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
-pub use statistics::Statistics;
+pub use stats::Stats;
 use std::{thread, time::Duration};
 
 pub struct App {
     window: Interface,
     intersection: Intersection,
-    statistics: Statistics,
+    stats: Stats,
 }
 
 impl App {
@@ -15,7 +16,7 @@ impl App {
         Ok(Self {
             window: Interface::new(TITLE, WIDTH, HEIGHT)?,
             intersection: Intersection::new(),
-            statistics: Statistics::new(),
+            stats: Stats::new(),
         })
     }
 
@@ -23,22 +24,24 @@ impl App {
         'simulation: loop {
             self.update()?;
             self.window.render(&self.intersection)?;
-            if let Err(_) = self.window.listen(&mut self.intersection) {
+            if let Err(_) = self.listen() {
                 break 'simulation;
             }
         }
 
         thread::sleep(Duration::from_millis(250));
 
-        self.window.display_stats(&self.statistics);
+        self.window
+            .canvas
+            .window_mut()
+            .set_size(WIDTH as u32 / 2, HEIGHT as u32 / 2)
+            .map_err(|err| format!("Resize! -> {}", err))?;
 
-        'stats: loop {
-            if let Err(_) = self.window.listen(&mut self.intersection) {
-                break 'stats;
-            }
+        self.window.display_stats(self.stats.get())?;
+
+        loop {
+            self.listen()?;
         }
-
-        Ok(())
     }
 
     fn update(&mut self) -> Result<(), String> {

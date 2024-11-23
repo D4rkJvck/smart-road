@@ -1,5 +1,5 @@
 <h1 align=center >
-  <img alt="Ferris" src="./assets/ferris.svg">
+  <img alt="Ferris" src="./assets/img/ferris.svg">
   <br>
   smart-road
 </h1>

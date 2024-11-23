@@ -1,6 +1,10 @@
-use std::u32;
+use std::path::Path;
 
-pub struct Statistics {
+use sdl2::{pixels::Color, rect::Rect, ttf};
+
+use crate::{view::Interface, HEIGHT, TITLE, WIDTH};
+
+pub struct Stats {
     vehicle_count: u32,
     max_speed: u32,
     min_speed: u32,
@@ -10,7 +14,7 @@ pub struct Statistics {
     close_calls: u32,
 }
 
-impl Statistics {
+impl Stats {
     pub fn new() -> Self {
         Self {
             vehicle_count: 0,
