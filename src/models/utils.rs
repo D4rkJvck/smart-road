@@ -10,7 +10,7 @@ use crate::{
 };
 use sdl2::rect::Point;
 
-pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, i32) {
+pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, u32) {
     match (&direction, &route) {
         //
         (North, Right) => (m_w + g * 2 + 5, h, 900),

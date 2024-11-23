@@ -3,6 +3,8 @@ mod attributes;
 mod enums;
 mod state;
 
+use std::time::Instant;
+
 use super::utils::get_initial_position;
 use crate::VEHICLE_SIZE;
 pub use enums::*;
@@ -17,7 +19,8 @@ pub struct Vehicle {
     pub shared_sensors: Vec<Point>,
     turn_sensor: Option<Point>,
     turned: bool,
-    distance: i32,
+    distance: u32,
+    pub time: Instant,
 }
 
 impl Vehicle {
@@ -38,6 +41,7 @@ impl Vehicle {
             turn_sensor,
             turned: false,
             distance,
+            time: Instant::now(),
         }
     }
 
