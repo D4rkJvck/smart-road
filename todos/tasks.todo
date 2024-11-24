@@ -45,14 +45,14 @@ Models:
 
 
 Statistic Window:
-    ☐ Max number of vehicles
-    ☐ Fastest speed achieved
-    ☐ Slowest speed reached
-    ☐ Vehicle that took more time to pass the intersection
-    ☐ Vehicle that took less time to pass the intersection
+    ✔ Max number of vehicles
+    ✔ Fastest speed achieved
+    ✔ Slowest speed reached
+    ✔ Vehicle that took more time to pass the intersection
+    ✔ Vehicle that took less time to pass the intersection
     ☐ Safety distance violation frequency
         
 Bonus:
     ☐ Create your own assets for the animation of the vehicles
-    ☐ Add more statistics
+    ✔ Add more statistics
     ☐ Consider acceleration and deceleration

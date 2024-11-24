@@ -54,18 +54,18 @@ Functional:
 
     Try to generate four vehicles using the `"UP"` key to generate two and the `"Right"` key to generate the other two.
     Then when the vehicles finish passing the intersection, exit the application by using the `"Esc"` key.
-        ☐ Did the application display a window with statistics of the simulation?
-        ☐ And if so, did it display the "Max number of vehicles that passed the intersection" as 4?
-        ☐ Did it also display the "Collisions" as 0?
-        ☐ Did it also display the "Max velocity" and the "Min velocity"?
-        ☐ Did it also display the "Max time that took the vehicle to pass the intersection"?
-        ☐ Did it also display the "Min time that took the vehicle to pass the intersection"?
+        ✔ Did the application display a window with statistics of the simulation?
+        ✔ And if so, did it display the "Max number of vehicles that passed the intersection" as 4?
+        ✔ Did it also display the "Collisions" as 0?
+        ✔ Did it also display the "Max velocity" and the "Min velocity"?
+        ✔ Did it also display the "Max time that took the vehicle to pass the intersection"?
+        ✔ Did it also display the "Min time that took the vehicle to pass the intersection"?
         ☐ Did it also display the "Close calls", if there were any?
 
     Try to generate one vehicle and see how much time the vehicle takes to leave the intersection,
     then exit the application and compare the time statistics.
-        ☐ Is the max time equal to the min time?
-        ☐ And if so, is the time correct compared from the time you counted?
+        ✔ Is the max time equal to the min time?
+        ✔ And if so, is the time correct compared from the time you counted?
 
 
 General:
@@ -83,10 +83,10 @@ General:
 
 Bonus:
 
-    ☐ Does the application present more statistics besides the ones stated in the subject?
+    ✔ Does the application present more statistics besides the ones stated in the subject?
 
     ☐ Did the student create their own assets?
 
-    ☐ Do cars have the component of acceleration, or do they change velocity automatically?
+    ✔ Do cars have the component of acceleration, or do they change velocity automatically?
 
-    ☐ In your opinion, is this algorithm implementable for real life situations?
+    ✔ In your opinion, is this algorithm implementable for real life situations?

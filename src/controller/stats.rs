@@ -30,14 +30,8 @@ impl Stats {
         vec![
             String::from("STATISTICS"),
             format!("Vehicle Passed:    {}", self.vehicle_count),
-            format!(
-                "Max Velocity:      {} m/s",
-                (self.max_speed * 10.0).round() / 100.0
-            ),
-            format!(
-                "Min Velocity:      {} m/s",
-                (self.min_speed * 10.0).round() / 100.0
-            ),
+            format!("Max Velocity:      {:.2} m/s", self.max_speed / 10.0),
+            format!("Min Velocity:      {:.2} m/s", self.min_speed / 10.0),
             format!("Max Time:          {:.2} s", self.max_time.as_secs_f32()),
             format!("Min Time:          {:.2} s", self.min_time.as_secs_f32()),
             format!("Collisions:        {}", self.collisions),
