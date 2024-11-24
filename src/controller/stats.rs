@@ -1,10 +1,10 @@
 use super::Vehicle;
-use std::{time::Duration, u32, u64};
+use std::time::Duration;
 
 pub struct Stats {
     vehicle_count: usize,
-    max_speed: u64,
-    min_speed: u64,
+    max_speed: f32,
+    min_speed: f32,
     max_time: Duration,
     min_time: Duration,
     pub collisions: u32,
@@ -16,10 +16,10 @@ impl Stats {
     pub fn new() -> Self {
         Self {
             vehicle_count: 0,
-            max_speed: 0,
-            min_speed: u64::MAX,
-            max_time: Duration::from_secs(0),
-            min_time: Duration::from_secs(u64::MAX),
+            max_speed: 0.0,
+            min_speed: 0.0,
+            max_time: Duration::from_secs_f32(0.0),
+            min_time: Duration::from_secs_f32(0.0),
             collisions: 0,
             close_calls: 0,
             priority_calls: 0,
@@ -29,14 +29,20 @@ impl Stats {
     pub fn get(&self) -> Vec<String> {
         vec![
             String::from("STATISTICS"),
-            format!("Vehicle Passed: {}", self.vehicle_count),
-            format!("Max Velocity: {} pixels/second", self.max_speed),
-            format!("Min Velocity: {} pixels/second", self.min_speed),
-            format!("Max Time: {:.2} seconds", self.max_time.as_secs()),
-            format!("Min Time: {:.2} seconds", self.min_time.as_secs()),
-            format!("Collisions: {}", self.collisions),
-            format!("Close calls: {}", self.close_calls),
-            format!("Priority calls: {}", self.priority_calls),
+            format!("Vehicle Passed:    {}", self.vehicle_count),
+            format!(
+                "Max Velocity:      {} m/s",
+                (self.max_speed * 10.0).round() / 100.0
+            ),
+            format!(
+                "Min Velocity:      {} m/s",
+                (self.min_speed * 10.0).round() / 100.0
+            ),
+            format!("Max Time:          {:.2} s", self.max_time.as_secs_f32()),
+            format!("Min Time:          {:.2} s", self.min_time.as_secs_f32()),
+            format!("Collisions:        {}", self.collisions),
+            format!("Close calls:       {}", self.close_calls),
+            format!("Priority calls:    {}", self.priority_calls),
         ]
     }
 
@@ -50,13 +56,13 @@ impl Stats {
 
         for vehicle in vehicles {
             let elapsed = vehicle.time.elapsed();
-            let speed = vehicle.distance / elapsed.as_secs();
+            let speed = vehicle.distance / elapsed.as_secs_f32();
 
             if elapsed > self.max_time {
                 self.max_time = elapsed;
             }
 
-            if elapsed < self.min_time {
+            if self.min_time == Duration::from_secs_f32(0.0) || elapsed < self.min_time {
                 self.min_time = elapsed;
             }
 
@@ -64,7 +70,7 @@ impl Stats {
                 self.max_speed = speed;
             }
 
-            if speed < self.min_speed {
+            if self.min_speed == 0.0 || speed < self.min_speed {
                 self.min_speed = speed;
             }
         }

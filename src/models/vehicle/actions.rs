@@ -15,7 +15,12 @@ impl Vehicle {
         };
     }
 
-    pub(super) fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>, stats: &mut Stats) {
+    pub(super) fn ajust_speed(
+        &mut self,
+        collision_area: &Rect,
+        others: Vec<&Vehicle>,
+        stats: &mut Stats,
+    ) {
         if others.iter().any(|other| self.too_close_to(other)) {
             stats.close_calls += 1;
             self.speed = Speed::Stop;

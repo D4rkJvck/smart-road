@@ -28,7 +28,7 @@ impl Interface {
                 .map_err(|err| format!("Texture! -> {}", err))?;
 
             let txt_query = texture.query();
-            let area = Rect::new(40, vertical_offset, txt_query.width, txt_query.height);
+            let area = Rect::new(60, vertical_offset, txt_query.width, txt_query.height);
 
             self.canvas.copy(&texture, None, Some(area))?;
 

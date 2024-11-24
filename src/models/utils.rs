@@ -10,24 +10,24 @@ use crate::{
 };
 use sdl2::rect::Point;
 
-pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, u64) {
+pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, f32) {
     match (&direction, &route) {
         //
-        (North, Right) => (m_w + g * 2 + 5, h, 550),
-        (North, Straight) => (m_w + g + 5, h, 800),
-        (North, Left) => (m_w + 5, h, 850),
+        (North, Right) => (m_w + g * 2 + 5, h, 550.0),
+        (North, Straight) => (m_w + g + 5, h, 800.0),
+        (North, Left) => (m_w + 5, h, 850.0),
         //
-        (South, Right) => (m_w - g * 2 - 45, -size, 550),
-        (South, Straight) => (m_w - g - 45, -size, 800),
-        (South, Left) => (m_w - 45, -size, 850),
+        (South, Right) => (m_w - g * 2 - 45, -size, 550.0),
+        (South, Straight) => (m_w - g - 45, -size, 800.0),
+        (South, Left) => (m_w - 45, -size, 850.0),
         //
-        (East, Right) => (-size, m_h + g * 2 + 5, 550),
-        (East, Straight) => (-size, m_h + g + 5, 800),
-        (East, Left) => (-size, m_h + 5, 850),
+        (East, Right) => (-size, m_h + g * 2 + 5, 550.0),
+        (East, Straight) => (-size, m_h + g + 5, 800.0),
+        (East, Left) => (-size, m_h + 5, 850.0),
         //
-        (West, Right) => (w, m_h - g * 2 - 45, 550),
-        (West, Straight) => (w, m_h - g - 45, 800),
-        (West, Left) => (w, m_h - 45, 850),
+        (West, Right) => (w, m_h - g * 2 - 45, 550.0),
+        (West, Straight) => (w, m_h - g - 45, 800.0),
+        (West, Left) => (w, m_h - 45, 850.0),
     }
 }
 

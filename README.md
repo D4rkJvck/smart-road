@@ -26,6 +26,12 @@
 
 ## Overview
 
+The **smart-road** is a traffic control strategy's simulation without traffic light, but a smart **intersection** with **sensors** distributed over its entire surface.
+Those sensors are there to be scan by a **robotaxi** sensor.
+[**Robotaxis**](https://en.wikipedia.org/wiki/Self-driving_car) are a promising solution to traffic accidents that might be publicly available in the next decade, and thus traffic issues related to autonomous vehicles are also being extensively investigated.
+In this project, **robotaxis** have to pass an intersection without any collisions and with a minimum of traffic congestion.
+
+
                    |   |   |   |   |   |   |
                    |   |   |   |   |   |   |
                    |   |   |   |   |   |   |
@@ -71,7 +77,7 @@ To clone the repository, use the following command:
 ```shell
 $ git clone https://github.com/Zone01Dakar/smart-road.git
 $ cd smart-road
-$ tree
+$ tree --dirsfirst
 $ code .
 ```
 
@@ -180,7 +186,7 @@ To use SDL2 in a Rust project, the `sdl2` dependency needs to be added to the `C
 
 ```toml
 [dependencies]
-sdl2 = "0.34" // Check for later verions
+sdl2 = "0.37.0" // Check for later verions
 ```
 
 ###### [_Table of Contents ⤴️_](#table-of-contents)
