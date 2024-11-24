@@ -58,7 +58,7 @@ impl App {
                 })
                 .collect();
 
-            vehicle.drive(&self.intersection.collision_area, others)
+            vehicle.drive(&self.intersection.collision_area, others, &mut self.stats)
         });
 
         Ok(self.stats.update(&self.intersection.vehicles))

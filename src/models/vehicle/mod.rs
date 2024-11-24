@@ -6,7 +6,7 @@ mod state;
 use std::time::Instant;
 
 use super::utils::get_initial_position;
-use crate::VEHICLE_SIZE;
+use crate::{controller::Stats, VEHICLE_SIZE};
 pub use enums::*;
 use sdl2::rect::{Point, Rect};
 
@@ -49,8 +49,8 @@ impl Vehicle {
     /// responsible for the
     /// translation by
     /// updating the position.
-    pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Self>) {
-        self.ajust_speed(collision_area, others);
+    pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Self>, stats: &mut Stats) {
+        self.ajust_speed(collision_area, others, stats);
         self.navigate();
         self.movement();
     }

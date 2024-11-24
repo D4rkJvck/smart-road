@@ -7,9 +7,9 @@ pub struct Stats {
     min_speed: u64,
     max_time: Duration,
     min_time: Duration,
-    collisions: u32,
-    close_calls: u32,
-    priority_calls: u32,
+    pub collisions: u32,
+    pub close_calls: u32,
+    pub priority_calls: u32,
 }
 
 impl Stats {

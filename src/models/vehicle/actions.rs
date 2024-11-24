@@ -1,3 +1,5 @@
+use crate::controller::Stats;
+
 use super::{Direction as dir, Route, Speed, Vehicle};
 use sdl2::rect::Rect;
 
@@ -13,8 +15,9 @@ impl Vehicle {
         };
     }
 
-    pub(super) fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>) {
+    pub(super) fn ajust_speed(&mut self, collision_area: &Rect, others: Vec<&Vehicle>, stats: &mut Stats) {
         if others.iter().any(|other| self.too_close_to(other)) {
+            stats.close_calls += 1;
             self.speed = Speed::Stop;
             return;
         };
@@ -32,12 +35,15 @@ impl Vehicle {
 
         others.iter().for_each(|other| {
             if self.detect_vehicle(collision_area, other) {
-                self.speed = match (
+                match (
                     other.detect_vehicle(collision_area, &self),
                     self.has_priority_over(other),
                 ) {
-                    (true, true) => Speed::Slow,
-                    _ => Speed::Stop,
+                    (true, true) => {
+                        stats.priority_calls += 1;
+                        self.speed = Speed::Slow;
+                    }
+                    _ => self.speed = Speed::Stop,
                 };
             }
         });

@@ -10,7 +10,7 @@ pub use vehicle::{Direction, Vehicle};
 pub type Sensors = [[Point; 6]; 6];
 
 pub struct Intersection {
-    pub center: Rect,
+    // pub center: Rect,
     pub collision_area: Rect,
     pub sensors: Sensors,
     pub vehicles: Vec<Vehicle>,
@@ -49,7 +49,7 @@ impl Intersection {
         }
 
         Self {
-            center,
+            // center,
             collision_area,
             sensors,
             vehicles: Vec::new(),
