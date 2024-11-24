@@ -1,18 +1,15 @@
-use std::{
-    time::{Duration, Instant},
-    u32, u64,
-};
-
 use super::Vehicle;
+use std::{time::Duration, u32, u64};
 
 pub struct Stats {
     vehicle_count: usize,
-    max_speed: u32,
-    min_speed: u32,
+    max_speed: u64,
+    min_speed: u64,
     max_time: Duration,
     min_time: Duration,
     collisions: u32,
     close_calls: u32,
+    priority_calls: u32,
 }
 
 impl Stats {
@@ -20,23 +17,26 @@ impl Stats {
         Self {
             vehicle_count: 0,
             max_speed: 0,
-            min_speed: u32::MAX,
+            min_speed: u64::MAX,
             max_time: Duration::from_secs(0),
             min_time: Duration::from_secs(u64::MAX),
             collisions: 0,
             close_calls: 0,
+            priority_calls: 0,
         }
     }
 
     pub fn get(&self) -> Vec<String> {
         vec![
+            String::from("STATISTICS"),
             format!("Vehicle Passed: {}", self.vehicle_count),
-            format!("Max Velocity: {}", self.max_speed),
-            format!("Min Velocity: {}", self.min_speed),
+            format!("Max Velocity: {} pixels/second", self.max_speed),
+            format!("Min Velocity: {} pixels/second", self.min_speed),
             format!("Max Time: {:.2} seconds", self.max_time.as_secs()),
             format!("Min Time: {:.2} seconds", self.min_time.as_secs()),
-            format!("Close call: {}", self.close_calls),
             format!("Collisions: {}", self.collisions),
+            format!("Close calls: {}", self.close_calls),
+            format!("Priority calls: {}", self.priority_calls),
         ]
     }
 
@@ -50,6 +50,7 @@ impl Stats {
 
         for vehicle in vehicles {
             let elapsed = vehicle.time.elapsed();
+            let speed = vehicle.distance / elapsed.as_secs();
 
             if elapsed > self.max_time {
                 self.max_time = elapsed;
@@ -57,6 +58,14 @@ impl Stats {
 
             if elapsed < self.min_time {
                 self.min_time = elapsed;
+            }
+
+            if speed > self.max_speed {
+                self.max_speed = speed;
+            }
+
+            if speed < self.min_speed {
+                self.min_speed = speed;
             }
         }
     }

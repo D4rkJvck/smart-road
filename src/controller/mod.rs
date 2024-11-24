@@ -28,12 +28,6 @@ impl App {
             }
         }
 
-        self.window
-            .canvas
-            .window_mut()
-            .set_size(WIDTH as u32 / 2, HEIGHT as u32 / 2)
-            .map_err(|err| format!("Resize! -> {}", err))?;
-
         self.window.display_stats(self.stats.get())?;
 
         loop {

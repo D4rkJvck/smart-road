@@ -22,13 +22,9 @@ impl Vehicle {
         match self.turn_sensor {
             None => self.speed = Speed::Fast,
             Some(point) => {
-                self.speed = match (
-                    self.into_area(collision_area),
-                    self.turned,
-                    self.distance_from(point),
-                ) {
-                    (_, false, 1..=3) => Speed::Slow,
-                    // (_, false, 21..=100) => Speed::Normal,
+                self.speed = match self.distance_from(point) {
+                    1..=3 => Speed::Slow,
+                    4..=50 => Speed::Normal,
                     _ => Speed::Fast,
                 }
             }

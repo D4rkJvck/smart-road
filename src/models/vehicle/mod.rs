@@ -19,7 +19,7 @@ pub struct Vehicle {
     pub shared_sensors: Vec<Point>,
     turn_sensor: Option<Point>,
     turned: bool,
-    distance: u32,
+    pub distance: u64,
     pub time: Instant,
 }
 

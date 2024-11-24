@@ -1,4 +1,5 @@
 mod render;
+mod stats;
 
 use sdl2::{
     render::{Canvas, TextureCreator},

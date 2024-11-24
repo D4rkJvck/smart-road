@@ -37,9 +37,7 @@ impl Vehicle {
     }
 
     pub(super) fn detect_vehicle(&self, collision_area: &Rect, other: &Self) -> bool {
-        self.direction != other.direction
-            && self.into_area(collision_area)
-            && other.into_area(&self.sensor_range())
+        self.into_area(collision_area) && other.into_area(&self.sensor_range())
     }
 
     pub(super) fn has_priority_over(&self, other: &Self) -> bool {

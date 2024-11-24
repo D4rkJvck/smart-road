@@ -5,20 +5,21 @@
 </h1>
 
 ## Table of Contents
+
 - [Overview](#overview)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
-    - [Cloning](#cloning)
-    - [File structure](#file-structure)
-    - [Blueprint](#blueprint)
-    - [SDL2 library](#sdl2-library)
-        - [Description](#description)
-        - [Installing](#installing)
+  - [Cloning](#cloning)
+  - [File structure](#file-structure)
+  - [Blueprint](#blueprint)
+  - [SDL2 library](#sdl2-library)
+    - [Description](#description)
+    - [Installing](#installing)
 - [Usage](#usage)
-    - [Initialization](#initialization)
-    - [Window](#window)
-    - [Events](#events)
-    - [About](#about)
+  - [Initialization](#initialization)
+  - [Window](#window)
+  - [Events](#events)
+  - [About](#about)
 - [Simulation](#simulation)
 - [Contributors](#contributors)
 - [License](#license)
@@ -61,7 +62,6 @@
 [![LINUX](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)]()
 [![MAC OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)]()
 
-
 ## Installation
 
 ### Cloning
@@ -76,24 +76,26 @@ $ code .
 ```
 
 ### File Structure
+
     .
     |
     +-- assets/
     |       |
-    |       +---- cars/
+    |       +--- fonts/
     |       |       |
-    |       |       + black.png
-    |       |       + police.png
-    |       |       + red.png
-    |       |       + taxi.png
+    |       |       + Doto-Bold.ttf
     |       |
-    |       + ferris.svg
-    |       + intersection.jpeg    
+    |       +---- img/
+    |               |
+    |               + ferris.svg
+    |               + intersection.png
+    |               + vehicle.png
     |
     +----- src/
     |       |
     |       +-- controllers/
     |       |       |
+    |       |       + event.rs
     |       |       + mod.rs
     |       |       + statistics.rs
     |       |
@@ -112,9 +114,9 @@ $ code .
     |       |
     |       +--- views/
     |       |       |
-    |       |       + event.rs
     |       |       + mod.rs
     |       |       + render.rs
+    |       |       + stats.rs
     |       |
     |       + lib.rs
     |       + main.rs
@@ -163,11 +165,13 @@ SDL2 (Simple DirectMedia Layer) is a multimedia library that provides a simple i
 Make sure the SDL2 libraries is intalled on the system. The installation instructions may vary depending on the operating system:
 
 - **On Ubuntu/Debian:**
+
 ```shell
 $ sudo apt-get install libsdl2-dev
 ```
 
 - **On macOS:**
+
 ```shell
 $ brew install sdl2
 ```
@@ -184,6 +188,7 @@ sdl2 = "0.34" // Check for later verions
 ## Usage
 
 ### Initialization
+
 Firstly, the sdl2 needs to be initialized using the **`init()`** function of the **`sdl2`** library to get a subsystem layer context.  
 Then the video subsystem responsible for managing the windows and rendering is retrieved from the resulting context via the **`video()`** method.  
 At this point the program has everything it needs to create windows and canvas.
@@ -196,11 +201,12 @@ And finally, the window needs to be transformed into a canvas for graphical rend
 ### Events
 
 Some events are to be handled to provide a user interaction.  
-To begin with a event pump is initialized from the context using the **`event_pump()`** method. This event pump act like a pipeline transferring the user input events from the sdl context events queue to the program.  
+To begin with a event pump is initialized from the context using the **`event_pump()`** method. This event pump act like a pipeline transferring the user input events from the sdl context events queue to the program.
 
 An infinite loop si then triggered to run the program as long as the user does not close the window.  
 Within the loop, the program can continuously listen to input events and handle them.  
 Some of those input events can be:
+
 - **`Event::Quit`**: Triggered when the user tries to close the window.
 - **`Event::KeyDown`**: Detects if a key is pressed, and here we specifically check if the **Escape** key was pressed to exit the loop.
 
@@ -218,31 +224,60 @@ For more in-depth information, refer to the [official SDL2 documentation](https:
 
 The simulation begin with an empty road intersection with `3` lanes for each road.  
 Then whenever the user press the dedicated keyboard key, a vehicle spawns from a direction to a direction depending on the pressed key as follows:
+
 - `UP`: from **South** (`bottom`) to **North** (`top`).
 - `RIGHT`: from **West** (`left`) to **East** (`right`).
 - `DOWN`: from **North** (`top`) to **South** (`bottom`).
 - `LEFT`: from **East** (`right`) to **West** (`left`).
 - `R`: from a **Random** direction to the opposite direction.
-
-
+- `A`: **auto** generate from random direction.
+- `S`: toggle vehicles **sensors** visibility.
 
 To open a new window, run the program.
 
 ```rust
-$ cargo run
+cargo r
+   Compiling libc v0.2.162
+   Compiling cfg-if v1.0.0
+   Compiling proc-macro2 v1.0.89
+   Compiling unicode-ident v1.0.13
+   Compiling autocfg v1.4.0
+   Compiling version-compare v0.1.1
+   Compiling sdl2-sys v0.37.0
+   Compiling lock_api v0.4.12
+   Compiling byteorder v1.5.0
+   Compiling parking_lot_core v0.9.10
+   Compiling quote v1.0.37
+   Compiling getrandom v0.2.15
+   Compiling syn v2.0.87
+   Compiling scopeguard v1.2.0
+   Compiling smallvec v1.13.2
+   Compiling rand_core v0.6.4
+   Compiling sdl2 v0.37.0
+   Compiling parking_lot v0.12.3
+   Compiling mio v1.0.2
+   Compiling signal-hook-registry v1.4.2
+   Compiling socket2 v0.5.7
    Compiling bitflags v1.3.2
    Compiling lazy_static v1.5.0
-   Compiling libc v0.2.161
-   Compiling sdl2-sys v0.37.0
-   Compiling sdl2 v0.37.0
-   Compiling smart-road v0.1.0 (/home/student/smart-road)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.20s
+   Compiling pin-project-lite v0.2.15
+   Compiling bytes v1.8.0
+   Compiling zerocopy-derive v0.7.35
+   Compiling tokio-macros v2.4.0
+   Compiling zerocopy v0.7.35
+   Compiling tokio v1.41.1
+   Compiling ppv-lite86 v0.2.20
+   Compiling rand_chacha v0.3.1
+   Compiling rand v0.8.5
+   Compiling smart-road v0.1.0 (/Users/ivan/Desktop/smart-road)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 43.77s
      Running `target/debug/smart-road`
 ```
 
 ## Contributors
 
 ### Collaborators
+
 [![jefaye](https://shields.io/badge/jefaye-Zone01-blue)](http://learn.zone01dakar.sn/git/jefaye)
 [![masamba](https://shields.io/badge/masamba-Zone01-blue)](http://learn.zone01dakar.sn/git/masamba)
 [![npouille](https://shields.io/badge/npouille-Zone01-blue)](http://learn.zone01dakar.sn/git/npouille)
