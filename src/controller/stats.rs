@@ -7,9 +7,8 @@ pub struct Stats {
     min_speed: f32,
     max_time: Duration,
     min_time: Duration,
-    pub collisions: u32,
     pub close_calls: u32,
-    pub priority_calls: u32,
+    pub collisions: u32,
 }
 
 impl Stats {
@@ -22,7 +21,6 @@ impl Stats {
             min_time: Duration::from_secs_f32(0.0),
             collisions: 0,
             close_calls: 0,
-            priority_calls: 0,
         }
     }
 
@@ -34,9 +32,8 @@ impl Stats {
             format!("Min Velocity:      {:.2} m/s", self.min_speed / 10.0),
             format!("Max Time:          {:.2} s", self.max_time.as_secs_f32()),
             format!("Min Time:          {:.2} s", self.min_time.as_secs_f32()),
-            format!("Collisions:        {}", self.collisions),
             format!("Close calls:       {}", self.close_calls),
-            format!("Priority calls:    {}", self.priority_calls),
+            format!("Collisions:        {}", self.collisions),
         ]
     }
 

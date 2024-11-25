@@ -22,7 +22,7 @@ impl Vehicle {
         stats: &mut Stats,
     ) {
         if others.iter().any(|other| self.too_close_to(other)) {
-            stats.close_calls += 1;
+            // stats.close_calls += 1;
             self.speed = Speed::Stop;
             return;
         };
@@ -45,7 +45,7 @@ impl Vehicle {
                     self.has_priority_over(other),
                 ) {
                     (true, true) => {
-                        stats.priority_calls += 1; //TODO: Should consider the number of iterations...
+                        stats.close_calls += 1; //TODO: Should consider the number of iterations...
                         self.speed = Speed::Slow;
                     }
                     _ => self.speed = Speed::Stop,

@@ -40,7 +40,11 @@ impl Interface {
 
     /// This method reduces the size of the window
     /// by half, then centers it on the screen.
+    /// It finally clears it.
     fn shrink(&mut self) -> Result<(), String> {
+        self.canvas.set_draw_color(Color::BLACK);
+        self.canvas.clear();
+
         self.canvas
             .window_mut()
             .set_size(WIDTH as u32 / 2, HEIGHT as u32 / 2)
