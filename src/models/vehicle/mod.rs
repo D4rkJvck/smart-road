@@ -50,6 +50,10 @@ impl Vehicle {
     /// translation by
     /// updating the position.
     pub fn drive(&mut self, collision_area: &Rect, others: Vec<&Self>, stats: &mut Stats) {
+        others.iter().for_each(|other| if self.into_area(&other.area) {
+            stats.collisions += 1;
+        });
+        
         self.ajust_speed(collision_area, others, stats);
         self.navigate();
         self.movement();

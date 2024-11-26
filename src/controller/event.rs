@@ -38,17 +38,12 @@ impl App {
                 } => self.intersection.new_vehicle(Direction::West),
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(k::R),
-                    ..
-                } => self.intersection.new_vehicle(Direction::random()),
-                //__________________________________________________
-                KeyDown {
                     keycode: Some(k::S),
                     ..
                 } => self.intersection.sensor_visibility = !self.intersection.sensor_visibility,
                 //__________________________________________________
                 KeyDown {
-                    keycode: Some(k::A),
+                    keycode: Some(k::R),
                     ..
                 } => self.intersection.auto_spawn = !self.intersection.auto_spawn,
                 //__________________________________

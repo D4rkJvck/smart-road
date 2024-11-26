@@ -72,7 +72,9 @@ impl Intersection {
         let shared_sensors = get_shared_sensors(&direction, &route, &self.sensors);
         let turn_sensor = get_turn_sensor(&direction, &route, &self.sensors);
 
-        self.vehicles
+        if self.vehicles.len() < 12 {
+            self.vehicles
             .push(Vehicle::new(direction, route, shared_sensors, turn_sensor));
+        }
     }
 }

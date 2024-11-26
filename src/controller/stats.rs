@@ -32,7 +32,7 @@ impl Stats {
             format!("Min Velocity:      {:.2} m/s", self.min_speed / 10.0),
             format!("Max Time:          {:.2} s", self.max_time.as_secs_f32()),
             format!("Min Time:          {:.2} s", self.min_time.as_secs_f32()),
-            format!("Close calls:       {}", self.close_calls),
+            format!("Close calls:       {}", self.close_calls / 80),
             format!("Collisions:        {}", self.collisions),
         ]
     }

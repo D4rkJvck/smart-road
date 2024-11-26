@@ -45,7 +45,7 @@ impl Vehicle {
                     self.has_priority_over(other),
                 ) {
                     (true, true) => {
-                        stats.close_calls += 1; //TODO: Should consider the number of iterations...
+                        // stats.close_calls += 1; //TODO: Should consider the number of iterations...
                         self.speed = Speed::Slow;
                     }
                     _ => self.speed = Speed::Stop,
