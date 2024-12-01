@@ -1,5 +1,5 @@
-use super::{Direction as dir, Route, Vehicle};
-use crate::VEHICLE_SIZE as size;
+use super::{Direction as dir, Vehicle};
+use crate::{GAP, MID_SIZE, VEHICLE_SIZE};
 use sdl2::rect::{Point, Rect};
 
 impl Vehicle {
@@ -24,17 +24,15 @@ impl Vehicle {
     }
 
     pub fn sensor_range(&self) -> Rect {
-        let range = match self.route {
-            Route::Left => size * 3 + 20,
-            Route::Straight => size * 4 + 30,
-            _ => 0,
-        };
+        let range = GAP as u32 * 4;
+        let shift = MID_SIZE - GAP * 2;
+        let size = VEHICLE_SIZE as u32;
 
         match self.direction {
-            dir::North => Rect::new(self.area.x, self.area.y - range, size as u32, range as u32),
-            dir::East => Rect::new(self.area.x + size, self.area.y, range as u32, size as u32),
-            dir::South => Rect::new(self.area.x, self.area.y + size, size as u32, range as u32),
-            dir::West => Rect::new(self.area.x - range, self.area.y, range as u32, size as u32),
+            dir::North => Rect::new(self.area.x, shift, size, range),
+            dir::East => Rect::new(shift, self.area.y, range, size),
+            dir::South => Rect::new(self.area.x, shift, size, range),
+            dir::West => Rect::new(shift, self.area.y, range, size),
         }
     }
 }

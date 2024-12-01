@@ -22,17 +22,22 @@ impl Vehicle {
         stats: &mut Stats,
     ) {
         if others.iter().any(|other| self.too_close_to(other)) {
-            // stats.close_calls += 1;
-            self.speed = Speed::Stop;
+            if !self.on_close_call {
+                self.speed = Speed::Stop;
+                stats.close_calls += 1;
+                self.on_close_call = true
+            }
+
             return;
         };
+
+        self.on_close_call = false;
 
         match self.turn_sensor {
             None => self.speed = Speed::Fast,
             Some(point) => {
                 self.speed = match self.distance_from(point) {
                     1..=3 => Speed::Slow,
-                    4..=50 => Speed::Normal,
                     _ => Speed::Fast,
                 }
             }
@@ -44,12 +49,13 @@ impl Vehicle {
                     other.detect_vehicle(collision_area, &self),
                     self.has_priority_over(other),
                 ) {
-                    (true, true) => {
-                        // stats.close_calls += 1; //TODO: Should consider the number of iterations...
-                        self.speed = Speed::Slow;
-                    }
+                    (true, true) => self.speed = Speed::Normal,
                     _ => self.speed = Speed::Stop,
                 };
+            }
+
+            if self.collides(&other.area, -5) {
+                stats.collisions += 1;
             }
         });
     }

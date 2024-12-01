@@ -5,29 +5,27 @@ use super::{
     },
     Sensors,
 };
-use crate::{
-    GAP as g, HEIGHT as h, MID_HEIGHT as m_h, MID_WIDTH as m_w, VEHICLE_SIZE as size, WIDTH as w,
-};
+use crate::{GAP, MID_SIZE, SIZE, VEHICLE_SIZE as v_size};
 use sdl2::rect::Point;
 
 pub(super) fn get_initial_position(direction: &Direction, route: &Route) -> (i32, i32, f32) {
     match (&direction, &route) {
         //
-        (North, Right) => (m_w + g * 2 + 5, h, 550.0),
-        (North, Straight) => (m_w + g + 5, h, 800.0),
-        (North, Left) => (m_w + 5, h, 850.0),
+        (North, Right) => (MID_SIZE + GAP * 2 + 5, SIZE, 550.0),
+        (North, Straight) => (MID_SIZE + GAP + 5, SIZE, 800.0),
+        (North, Left) => (MID_SIZE + 5, SIZE, 850.0),
         //
-        (South, Right) => (m_w - g * 2 - 45, -size, 550.0),
-        (South, Straight) => (m_w - g - 45, -size, 800.0),
-        (South, Left) => (m_w - 45, -size, 850.0),
+        (South, Right) => (MID_SIZE - GAP * 2 - 45, -v_size, 550.0),
+        (South, Straight) => (MID_SIZE - GAP - 45, -v_size, 800.0),
+        (South, Left) => (MID_SIZE - 45, -v_size, 850.0),
         //
-        (East, Right) => (-size, m_h + g * 2 + 5, 550.0),
-        (East, Straight) => (-size, m_h + g + 5, 800.0),
-        (East, Left) => (-size, m_h + 5, 850.0),
+        (East, Right) => (-v_size, MID_SIZE + GAP * 2 + 5, 550.0),
+        (East, Straight) => (-v_size, MID_SIZE + GAP + 5, 800.0),
+        (East, Left) => (-v_size, MID_SIZE + 5, 850.0),
         //
-        (West, Right) => (w, m_h - g * 2 - 45, 550.0),
-        (West, Straight) => (w, m_h - g - 45, 800.0),
-        (West, Left) => (w, m_h - 45, 850.0),
+        (West, Right) => (SIZE, MID_SIZE - GAP * 2 - 45, 550.0),
+        (West, Straight) => (SIZE, MID_SIZE - GAP - 45, 800.0),
+        (West, Left) => (SIZE, MID_SIZE - 45, 850.0),
     }
 }
 

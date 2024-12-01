@@ -1,5 +1,5 @@
 use super::Interface;
-use crate::{HEIGHT, WIDTH};
+use crate::SIZE;
 use sdl2::{pixels::Color, rect::Rect, video::WindowPos};
 use std::path::Path;
 
@@ -12,7 +12,7 @@ impl Interface {
             .load_font(Path::new("./assets/fonts/Doto-Bold.ttf"), 16)
             .map_err(|err| format!("Font! -> {}", err))?;
 
-        let mut vertical_offset = 40;
+        let mut vertical_offset = 30;
 
         self.canvas.set_draw_color(Color::WHITE);
 
@@ -47,8 +47,13 @@ impl Interface {
 
         self.canvas
             .window_mut()
-            .set_size(WIDTH as u32 / 2, HEIGHT as u32 / 2)
-            .map_err(|err| format!("Resize! -> {}", err))?;
+            .set_title("STATISTICS")
+            .map_err(|err| format!("Title Change! -> {err}"))?;
+
+        self.canvas
+            .window_mut()
+            .set_size(SIZE as u32 / 2, SIZE as u32 / 2)
+            .map_err(|err| format!("Resize! -> {err}"))?;
 
         self.canvas
             .window_mut()

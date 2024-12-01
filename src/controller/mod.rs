@@ -1,7 +1,9 @@
 mod event;
 mod stats;
 
-use crate::{models::*, view::Interface, HEIGHT, TITLE, WIDTH};
+// use std::{thread, time::Duration};
+
+use crate::{models::*, view::Interface, SIZE, TITLE};
 pub use stats::Stats;
 
 pub struct App {
@@ -13,7 +15,7 @@ pub struct App {
 impl App {
     pub fn new() -> Result<Self, String> {
         Ok(Self {
-            window: Interface::new(TITLE, WIDTH, HEIGHT)?,
+            window: Interface::new(TITLE, SIZE, SIZE)?,
             intersection: Intersection::new(),
             stats: Stats::new(),
         })
@@ -26,6 +28,8 @@ impl App {
             if let Err(_) = self.listen() {
                 break 'simulation;
             }
+
+            // thread::sleep(Duration::from_millis(8));
         }
 
         self.window.display_stats(self.stats.get())?;

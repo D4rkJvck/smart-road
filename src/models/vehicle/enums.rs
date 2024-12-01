@@ -2,7 +2,7 @@ use rand::{thread_rng, Rng};
 
 #[derive(Clone, Copy, PartialEq)]
 
-pub(super) enum Speed {
+pub enum Speed {
     Stop,
     Slow,
     Normal,

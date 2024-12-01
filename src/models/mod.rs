@@ -1,16 +1,16 @@
 mod utils;
 mod vehicle;
 
-use crate::{GAP, MID_HEIGHT, MID_WIDTH};
+use crate::{GAP, MID_SIZE};
 use sdl2::rect::{Point, Rect};
 use utils::{get_shared_sensors, get_turn_sensor};
 use vehicle::Route;
+pub use vehicle::Speed;
 pub use vehicle::{Direction, Vehicle};
 
 pub type Sensors = [[Point; 6]; 6];
 
 pub struct Intersection {
-    // pub center: Rect,
     pub collision_area: Rect,
     pub sensors: Sensors,
     pub vehicles: Vec<Vehicle>,
@@ -21,8 +21,8 @@ pub struct Intersection {
 impl Intersection {
     pub fn new() -> Self {
         let center = Rect::new(
-            MID_WIDTH - GAP * 3,
-            MID_HEIGHT - GAP * 3,
+            MID_SIZE - GAP * 3,
+            MID_SIZE - GAP * 3,
             GAP as u32 * 6,
             GAP as u32 * 6,
         );
@@ -49,7 +49,6 @@ impl Intersection {
         }
 
         Self {
-            // center,
             collision_area,
             sensors,
             vehicles: Vec::new(),
@@ -74,7 +73,7 @@ impl Intersection {
 
         if self.vehicles.len() < 12 {
             self.vehicles
-            .push(Vehicle::new(direction, route, shared_sensors, turn_sensor));
+                .push(Vehicle::new(direction, route, shared_sensors, turn_sensor));
         }
     }
 }
