@@ -284,21 +284,26 @@ cargo r
 
 ### Collaborators
 
-[![jefaye](https://shields.io/badge/jefaye-Zone01-blue)](http://learn.zone01dakar.sn/git/jefaye)
-[![masamba](https://shields.io/badge/masamba-Zone01-blue)](http://learn.zone01dakar.sn/git/masamba)
-[![npouille](https://shields.io/badge/npouille-Zone01-blue)](http://learn.zone01dakar.sn/git/npouille)
-[![papebsow](https://shields.io/badge/papebsow-Zone01-blue)](http://learn.zone01dakar.sn/git/papebsow)
+[![jefaye](https://shields.io/badge/jefaye-Zone01-yellow)](http://learn.zone01dakar.sn/git/jefaye)
+[![masamba](https://shields.io/badge/masamba-Zone01-yellow)](http://learn.zone01dakar.sn/git/masamba)
+[![npouille](https://shields.io/badge/npouille-Zone01-yellow)](http://learn.zone01dakar.sn/git/npouille)
+[![papebsow](https://shields.io/badge/papebsow-Zone01-yellow)](http://learn.zone01dakar.sn/git/papebsow)
 
 ### Peers
 
-[![preydedy](https://shields.io/badge/preydedy-Zone01-green)](http://learn.zone01dakar.sn/git/preydedy)
-[![eibounda](https://shields.io/badge/eibounda-Zone01-green)](http://learn.zone01dakar.sn/git/eibounda)
+[![lodiouf](https://shields.io/badge/lodiouf-Zone01-blue)](http://learn.zone01dakar.sn/git/lodiouf)
+[![preydedy](https://shields.io/badge/preydedy-Zone01-blue)](http://learn.zone01dakar.sn/git/preydedy)
+[![eibounda](https://shields.io/badge/eibounda-Zone01-blue)](http://learn.zone01dakar.sn/git/eibounda)
+[![nnourdin](https://shields.io/badge/nnourdin-Zone01-blue)](http://learn.zone01dakar.sn/git/nnourdin)
 
-### Testers
+### Auditors
 
-[![mandaw](https://shields.io/badge/mandaw-Zone01-red)](http://learn.zone01dakar.sn/git/mandaw)
-[![nmbengue](https://shields.io/badge/nmbengue-Zone01-red)](http://learn.zone01dakar.sn/git/nmbengue)
+[![bcoulibal](https://shields.io/badge/bcoulibal-Zone01-green)](http://learn.zone01dakar.sn/git/bcoulibal)
+[![bsall](https://shields.io/badge/bsall-Zone01-green)](http://learn.zone01dakar.sn/git/bsall)
+[![nnourdin](https://shields.io/badge/nnourdin-Zone01-green)](http://learn.zone01dakar.sn/git/nnourdin)
+[![annndiaye](https://shields.io/badge/annndiaye-Zone01-green)](http://learn.zone01dakar.sn/git/annndiaye)
+[![mandaw](https://shields.io/badge/mandaw-Zone01-green)](http://learn.zone01dakar.sn/git/mandaw)
 
 ## License
 
-[![MIT](https://shields.io/badge/License-MIT-yellow)](LICENSE)
+[![MIT](https://shields.io/badge/License-MIT-black)](LICENSE)

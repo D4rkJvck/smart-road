@@ -53,25 +53,22 @@ impl Vehicle {
         }
     }
 
-    pub fn collides(&self, area: &Rect, margin: i32) -> bool {
-        let expanded_area = Rect::new(
-            self.area.x() - margin,
-            self.area.y() - margin,
-            ((self.area.width() as i32 + 2 * margin).max(0)) as u32,
-            ((self.area.height() as i32 + 2 * margin).max(0)) as u32,
-        );
+    pub fn collides(&self, other: &Self) -> bool {
+        let other = match other.direction {
+            dir::North | dir::South => Rect::new(
+                other.area.x + 5,
+                other.area.y,
+                other.area.width() - 10,
+                other.area.height(),
+            ),
+            _ => Rect::new(
+                other.area.x,
+                other.area.y + 5,
+                other.area.width(),
+                other.area.height() - 10,
+            ),
+        };
 
-        expanded_area.right() > area.left()
-            && expanded_area.left() < area.right()
-            && expanded_area.top() < area.bottom()
-            && expanded_area.bottom() > area.top()
+        self.into_area(&other)
     }
-
-    // pub fn collides(&self, other: &Self) -> bool {
-    //     let area = match self.direction {
-    //         dir::North | dir::South => Rect::new(self.area.x + 10, self.area.y, self.area.width() - 20, self.area.height()),
-    //         _ => Rect::new(self.area.x, self.area.y + 10, self.area.width(), self.area.height() - 20)
-    //     };
-
-    // }
 }

@@ -49,14 +49,17 @@ impl Vehicle {
                     other.detect_vehicle(collision_area, &self),
                     self.has_priority_over(other),
                 ) {
-                    (true, true) => self.speed = Speed::Normal,
+                    (true, true) => {
+                        self.speed = Speed::Normal;
+
+                        if other.collides(&self) {
+                            stats.collisions += 1;
+                        }
+                    }
                     _ => self.speed = Speed::Stop,
                 };
             }
 
-            if self.collides(&other.area, -5) {
-                stats.collisions += 1;
-            }
         });
     }
 
